@@ -723,6 +723,47 @@ function init() {
         // Setup symbology
         esri.config.defaults.map.pointSymbol = configOptions.markerSymbol;
 
+        // If not using AGS Online web map
+        if (configOptions.useAGSOnlineWebMap == "false" || configOptions.useAGSOnlineWebMap == false) {
+            var initialExtent
+            // If parameters provided via URL, use these
+            if (urlParam_xmin >= configOptions.extentBounds.xmin && urlParam_ymin >= configOptions.extentBounds.ymin && urlParam_xmax <= configOptions.extentBounds.xmax && urlParam_ymax <= configOptions.extentBounds.ymax) // TODO - need to update these values so the area is wider     
+            {
+                initialExtent = new esri.geometry.Extent({
+                    "xmin": urlParam_xmin,
+                    "ymin": urlParam_ymin,
+                    "xmax": urlParam_xmax,
+                    "ymax": urlParam_ymax,
+                    "spatialReference": {
+                        "wkid": parseInt(configOptions.spatialReference.WKID)
+                    }
+                });
+            }
+                // Otherwise use config file
+            else {
+                initialExtent = new esri.geometry.Extent({
+                    "xmin": configOptions.initialExtent.xmin,
+                    "ymin": configOptions.initialExtent.ymin,
+                    "xmax": configOptions.initialExtent.xmax,
+                    "ymax": configOptions.initialExtent.ymax,
+                    "spatialReference": {
+                        "wkid": parseInt(configOptions.spatialReference.WKID)
+                    }
+                });
+            }
+        }
+
+        // Setup zoom slider style
+        includeSlider = false;
+        sliderSize = "large";
+        // If compact slider in config options or not using desktop version
+        if (configOptions.usecompactslider === "true" || configOptions.usecompactslider === true || currentPage.indexOf("map") == -1) {
+            includeSlider = true;
+            sliderSize = "small";
+            // Hide full slider
+            $("#zoomSlider").css('display', 'none');
+        }
+
         // If using themes, display the dropdown
         if (configOptions.usethemes === "true" || configOptions.usethemes === true) {
             // Desktop version
@@ -776,47 +817,6 @@ function init() {
 
             // FUNCTION - Load the theme
             themeLoad();
-        }
-
-        // If not using AGS Online web map
-        if (configOptions.useAGSOnlineWebMap == "false" || configOptions.useAGSOnlineWebMap == false) {
-            var initialExtent
-            // If parameters provided via URL, use these
-            if (urlParam_xmin >= configOptions.extentBounds.xmin && urlParam_ymin >= configOptions.extentBounds.ymin && urlParam_xmax <= configOptions.extentBounds.xmax && urlParam_ymax <= configOptions.extentBounds.ymax) // TODO - need to update these values so the area is wider     
-            {
-                initialExtent = new esri.geometry.Extent({
-                    "xmin": urlParam_xmin,
-                    "ymin": urlParam_ymin,
-                    "xmax": urlParam_xmax,
-                    "ymax": urlParam_ymax,
-                    "spatialReference": {
-                        "wkid": parseInt(configOptions.spatialReference.WKID)
-                    }
-                });
-            }
-            // Otherwise use config file
-            else {
-                initialExtent = new esri.geometry.Extent({
-                    "xmin": configOptions.initialExtent.xmin,
-                    "ymin": configOptions.initialExtent.ymin,
-                    "xmax": configOptions.initialExtent.xmax,
-                    "ymax": configOptions.initialExtent.ymax,
-                    "spatialReference": {
-                        "wkid": parseInt(configOptions.spatialReference.WKID)
-                    }
-                });
-            }
-        }
-
-        // Setup zoom slider style
-        includeSlider = false;
-        sliderSize = "large";
-        // If compact slider in config options or not using desktop version
-        if (configOptions.usecompactslider === "true" || configOptions.usecompactslider === true || currentPage.indexOf("map") == -1) {
-            includeSlider = true;
-            sliderSize = "small";
-            // Hide full slider
-            $("#zoomSlider").css('display', 'none');
         }
 
         // If not using AGS Online web map
@@ -1251,8 +1251,10 @@ function loadeventHandlers() {
         $("#btnShareMap").hover(function () {
             $(this).css('cursor', 'pointer');
         });
+    }
 
-
+    // Mobile version
+    if (currentPage.indexOf("mobile") != -1) {
         // When property report button clicked
         $("#btn-propertyreport").bind("click", function () {
             clickmode = 'propertyreport';
@@ -1276,10 +1278,7 @@ function loadeventHandlers() {
             app.map.graphics.clear();
             $('#toolsPopup').popup('close');
         });
-    }
 
-    // Mobile version
-    if (currentPage.indexOf("mobile") != -1) {
         $("#btn-share-map").bind("click", function () {
             var emailURL = 'mailto:?Subject=Shared%20Map%20&body=Click%20this%20link:%20' + (replaceAll(getURL(), '&', '%26'));
             var mobileURL = '<a href="' + emailURL + '">Email link</a><br/><br/><font size="1">' + getURL() + '</font>';
@@ -1706,12 +1705,34 @@ function initFunctionality() {
 
     // Mobile version 
     if (currentPage.indexOf("mobile") != -1) {
-        // Setup the legend widget
-        legend = new esri.dijit.Legend({
-            map: app.map,
-            autoUpdate: true,
-            respectCurrentMapScale: true
-        }, "legend");
+        // If not using AGS Online web map
+        if (configOptions.useAGSOnlineWebMap == "false" || configOptions.useAGSOnlineWebMap == false) {
+            // Setup the legend widget
+            legend = new esri.dijit.Legend({
+                map: app.map,
+                autoUpdate: true,
+                respectCurrentMapScale: true
+            }, "legend");
+        }
+        // Using AGS Online map
+        else {
+            // Get legend layers from ags map
+            var legendLayers = esri.arcgis.utils.getLegendLayers(agsOnlineMap);
+
+            // Delete previous legend widget if necessary
+            var legendWidget = dijit.byId("legend");
+            if (legendWidget) {
+                legendWidget.destroyRecursive(true);
+            }
+
+            // Setup the legend widget
+            legend = new esri.dijit.Legend({
+                map: app.map,
+                layerInfos: legendLayers,
+                autoUpdate: true,
+                respectCurrentMapScale: true
+            }, "legend");
+        }
 
         // If using themes, display the dropdown
         if (configOptions.usethemes === "true" || configOptions.usethemes === true) {
@@ -1886,7 +1907,6 @@ function initFunctionality() {
         loadUI();
         loadeventHandlers();
     }
-
 
     // If not using themes
     if (configOptions.usethemes === "false" || configOptions.usethemes === false) {
@@ -2098,7 +2118,7 @@ function buildLayerGroups() {
 
     // Setup layer groups - Mobile version
     if (currentPage.indexOf("mobile") != -1) {
-        TOChtml += '<fieldset data-role="controlgroup" data-type="vertical"><legend><B>Layer Group:</B></legend>';
+        TOChtml += '<fieldset data-role="controlgroup" data-type="vertical">';
         $.each(layergroups, function () {
             // If layer group is specified in URL
             if (urlParam_layerGroup && replaceAll(this.name, '_', ' ') == urlParam_layerGroup) {
@@ -2735,31 +2755,6 @@ function createBasemapGallery() {
 
     basemapGallery.startup();
 
-    // Setup basemaps - Mobile version
-    if (currentPage.indexOf("mobile") != -1) {
-        TOChtml += '<fieldset data-role="controlgroup" data-type="vertical"><legend><B>Basemap:</B></legend>';
-        $.each(configOptions.basemaps, function () {
-            // If inital basemap then check it
-            if (this.basemap.id == configOptions.initialbasemap) {
-                checked = ' checked="true" ';
-            }
-            else {
-                checked = "";
-            }
-
-            // Add in the layer group radio button
-            TOChtml += '<input type="radio" name="basemap" ' + 'id="' + this.basemap.id + '"' + checked + 'value="' + this.basemap.id + '" /><label for="' + this.basemap.id + '">' + this.basemap.title + '</label>';
-            basemapCount++;
-        });
-
-        TOChtml += '</fieldset>';
-
-        // Assign to mobile layers window
-        $('#basemaps').html(TOChtml);
-        // Initialise jQuery on div
-        $("#basemaps").trigger('create');
-    }
-
     // Set the basemap opacity slider - Desktop version
     if (currentPage.indexOf("map") != -1) {
         // Set the basemap opacity if getting from url, otherwise it will just be 100
@@ -2787,46 +2782,66 @@ function createBasemapGallery() {
 
     // When basemap gallery has loaded 
     basemapGallery.on("load", function () {
-        // Listener for when basemap changed in basemap gallery - Desktop version
-        if (currentPage.indexOf("map") != -1) {
-            // When basemap is changed
-            basemapGallery.on("selection-change", function () {
-                // Set opacity of basemap to slider value
-                app.map.getLayer(app.map.layerIds[0]).setOpacity($("#basemapSlider").slider("value") / 100);
-                // If basemap is imagery, turn on imagery group otherwise hide layers
-                var basemapSelected = basemapGallery.getSelected();
-
-                if (basemapSelected.title.indexOf("Imagery") !== -1) {
-                    addImageryLayers();
-                }
-                else {
-                    removeImageryLayers();
-                }
-                // Minimise basemap window
-                $("#basemapsWrapper").accordion("option", "active", false);
-            });
-        }
         // Listener for when basemap changed in basemap gallery - Mobile version
         if (currentPage.indexOf("mobile") != -1) {
-            // When basemap is changed
+
+            TOChtml += '<fieldset data-role="controlgroup" data-type="vertical">';
+            // If not using AGS Online web map
+            if (configOptions.useAGSOnlineWebMap == "false" || configOptions.useAGSOnlineWebMap == false) {
+                // For each of the basemaps from the config
+                $.each(configOptions.basemaps, function () {
+                    // If inital basemap then check it
+                    if (this.basemap.id == configOptions.initialbasemap) {
+                        checked = ' checked="true" ';
+                    }
+                    else {
+                        checked = "";
+                    }
+
+                    // Add in the layer group radio button
+                    TOChtml += '<input type="radio" name="basemap" id="' + this.basemap.id + '"' + checked + 'value="' + this.basemap.id + '" /><label for="' + this.basemap.id + '">' + this.basemap.title + '</label>';
+                    basemapCount++;
+                });
+            }
+            // Using AGS Online map
+            else {
+                // For each of the basemaps from the basemaps group
+                $.each(basemapGallery.basemaps, function () {
+                    // If the current basemap is in the group
+                    webmapBasemap = agsOnlineMap.itemInfo.itemData.baseMap.title;
+                    basemapGalleryMap = this.title;
+                    if (basemapGalleryMap.indexOf(webmapBasemap) != -1) {
+                        // Check the radio button
+                        checked = ' checked="true" ';
+                    }
+                    else {
+                        checked = "";
+                    }
+
+                    // Add in the layer group radio button
+                    TOChtml += '<input type="radio" name="basemap" id="' + this.id + '"' + checked + 'value="' + this.id + '" /><label for="' + this.id + '">' + this.title + '</label>';
+                    basemapCount++;
+                });
+            }
+
+            TOChtml += '</fieldset>';
+
+            // Assign to mobile layers window
+            $('#basemaps').html(TOChtml);
+            // Initialise jQuery on div
+            $("#basemaps").trigger('create');
+
+            // When basemap radio button clicked
             $("input:radio[name=basemap]").change(function () {
                 // Close the dialog
                 if (currentPage.indexOf("mobile") != -1) {
-                    $('#layerGroupsPopup').popup('close');
+                    $('#basemapsPopup').popup('close');
                 }
 
                 // Get the basemap checked
                 var basemapSelected = $("input:radio[name='basemap']:checked").val()
+                // Set the basemap
                 basemapGallery.select(basemapSelected);
-
-                // If basemap is imagery, turn on imagery theme otherwise hide layers
-                var basemapSelected = basemapGallery.getSelected();
-                if (basemapSelected.title.indexOf("Imagery") !== -1) {
-                    addImageryLayers();
-                }
-                else {
-                    removeImageryLayers();
-                }
             });
         }
 
@@ -2849,6 +2864,27 @@ function createBasemapGallery() {
                 }
             });
         }
+
+        // When basemap is changed
+        basemapGallery.on("selection-change", function () {
+            // If basemap is imagery, turn on imagery group otherwise hide layers
+            var basemapSelected = basemapGallery.getSelected();
+
+            if (basemapSelected.title.indexOf("Imagery") !== -1) {
+                addImageryLayers();
+            }
+            else {
+                removeImageryLayers();
+            }
+
+            if (currentPage.indexOf("map") != -1) {
+                // Set opacity of basemap to slider value
+                app.map.getLayer(app.map.layerIds[0]).setOpacity($("#basemapSlider").slider("value") / 100);
+
+                // Minimise basemap window
+                $("#basemapsWrapper").accordion("option", "active", false);
+            }
+        });
     });
 };
 
@@ -3031,6 +3067,12 @@ function loadArcGISOnlineWebMap(webmapID) {
             webmapBasemap = agsOnlineMap.itemInfo.itemData.baseMap.title;
             basemapGalleryMap = this.title;
             if (basemapGalleryMap.indexOf(webmapBasemap) != -1) {
+
+                // Set the radio button - Mobile version - NOT WORKING FOR SOME REASON!!!
+                if (currentPage.indexOf("mobile") != -1) {
+                    $("#" + this.id).prop("checked", true);
+                }
+
                 // Set the initial basemap
                 basemapGallery.select(this.id);
             }

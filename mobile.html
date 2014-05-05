@@ -32,7 +32,8 @@
         <div id="layerLoadBar" style="display:none;"></div>
 
         <!-- Main page -->
-        <div data-role="page" id="main">
+        <div id="mainWindow" data-role="page" id="main">
+            <!-- Header -->
             <div id="header"  data-role="header" style="display:none;">
                 <div id="search"></div>
                  <div class="buttonbar-div">                                   
@@ -40,9 +41,8 @@
                 </div>        
             </div>    
               
-            <div data-role="content" style="padding: 1px">
-                <div id="map"></div>                     
-            </div>
+            <!-- Map -->
+            <div id="map"></div> 
 
             <!-- Tools -->
             <div data-role="popup" id="toolsPopup" class="popup-div" data-position-to="window"> 
@@ -53,6 +53,7 @@
                         <a data-role="button" id="btn-locate" style="display:none;" data-rel="popup" onclick="gotoLocation()" data-transition="pop">My Location</a>   
                         <a data-role="button" id="btn-closestFeature" style="display:none;">Closest Feature</a> 
                         <a data-role="button" id="btn-theme"  style="display:none;" data-rel="popup" href="#themesPopup" data-transition="pop">Theme</a>
+                        <a data-role="button" id="btn-basemaps" data-rel="popup" href="#basemapsPopup" data-transition="pop">Basemaps</a>                        
                         <a data-role="button" id="btn-layerGroups" data-rel="popup" href="#layerGroupsPopup" data-transition="pop">Layer Groups</a>
                         <a data-role="button" id="btn-layers" data-rel="popup" href="#layersPopup" data-transition="pop">Layers</a>
                         <a data-role="button" id="btn-legend" data-rel="popup" href="#legendPopup" data-transition="pop">Legend</a>
@@ -73,6 +74,14 @@
                 </div>
            </div>
 
+           <!-- Basemaps -->
+           <div data-role="popup" id="basemapsPopup" class="popup-div" data-position-to="window">
+           <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>  
+           <div data-theme="a" data-role="header"><h3>Basemaps</h3></div>
+	            <div data-role="content">   	                                  
+                     <div id="basemaps"></div>
+                </div>
+           </div>
 
           <!-- Layer groups -->
            <div data-role="popup" id="layerGroupsPopup" class="popup-div" data-position-to="window">
@@ -80,7 +89,6 @@
            <div data-theme="a" data-role="header"><h3>Layer Groups</h3></div>
 	            <div data-role="content">   	                                  
                      <div id="layerGroups"></div>   
-                     <div id="basemaps"></div>
                 </div>
            </div>
 
