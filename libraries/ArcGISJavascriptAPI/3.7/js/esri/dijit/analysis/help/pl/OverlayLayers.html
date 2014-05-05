@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpId;
+                helpId = window.location.hash.substring(1);
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription", class="largesize">
+        <h2>Nałóż warstwy</h2><p/>
+        <h2></h2>
+        <hr/>
+    <p>Narzędzie Nał&oacute;ż warstwy łączy co najmniej dwie warstwy w&nbsp;jedną.  Nakładanie można postrzegać jako spojrzenie stos map i&nbsp;utworzenie pojedynczej mapy zawierającej wszystkie informacje z&nbsp;zestawu.   W&nbsp;rzeczywistości przed pojawieniem się system&oacute;w GIS kartografowie kopiowali mapy na czyste arkusze octanowe, nakładali te arkusze na siebie na podświetlonym stole, a&nbsp;następnie ręcznie rysowali nową mapę korzystając z&nbsp;nałożonych na siebie warstw danych. Nakładanie to znacznie więcej niż połączenie ze sobą rysunk&oacute;w, wszystkie atrybuty obiekt&oacute;w biorące udział w&nbsp;operacji nakładania są przenoszone do wynikowego produktu. Nakładanie służy do uzyskania odpowiedzi na jedno z&nbsp;najbardziej podstawowych pytań z&nbsp;dziedziny geografii &rdquo;Jaka jest kolejność poszczeg&oacute;lnych warstw?&rdquo;. Na przykład:
+        <ul>
+            <li>Kt&oacute;re działki znajdują się w&nbsp;obrębie 100-letniej r&oacute;wniny zalewowej? (&rdquo;w&nbsp;obrębie&rdquo; to r&oacute;wnież pytanie o&nbsp;kolejność warstw.)
+                  
+            </li>
+            <li>Kt&oacute;re drogi znajdują się w&nbsp;granicach poszczeg&oacute;lnych państw?
+            </li>
+            <li>Na jakiego rodzaju glebach prowadzi się określone rodzaje upraw?
+                 
+            </li>
+            <li>Kt&oacute;re studnie znajdują się w&nbsp;obrębie opuszczonych jednostek wojskowych?
+            </li>
+        </ul>
+        
+    </p>
+    <p>
+        Jeśli zaznaczono opcję
+        <b>Użyj bieżącego zasięgu</b>, nałożone zostaną jedynie obiekty w&nbsp;warstwie analizy i&nbsp;warstwie nakładanej widoczne w&nbsp;bieżącym zasięgu mapy.  Jeśli opcja ta nie jest zaznaczona, nałożone zostaną wszystkie obiekty zar&oacute;wno w&nbsp;warstwie analizy, jak i&nbsp;warstwie nakładanej, nawet jeśli znajdują się one poza bieżącym zasięgiem mapy.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="OverlayLayer">
+        <div><h2>Wybierz nakładaną warstwę</h2></div>
+        <hr/>
+        <div>
+            <p>Warstwa, kt&oacute;ra ma zostać nałożona na warstwę analizy.  
+            </p>
+            
+        </div>
+    </div>
+    <div id="OverlayType">
+        <div><h2>Wybierz metodę nakładania</h2></div>
+        <hr/>
+        <div>
+            <p>Metoda nałożenia określa spos&oacute;b połączenia warstwy analizy z&nbsp;warstwą nakładaną.  
+                <ul>
+                    <li>
+                        <b>Przetnji</b> &mdash; Uzyskana mapa będzie zawierać tylko te obiekty z&nbsp;warstwy nakładanej lub ich części pokrywające się z&nbsp;obiektami w&nbsp;warstwie analizy.  Jeśli warstwa analizy składa się z&nbsp;obiekt&oacute;w poligonowych, warstwa nakładana może być złożona z&nbsp;obiekt&oacute;w poligonowych, punktowych lub liniowych.  Jeśli warstwa analizy składa się z&nbsp;obiekt&oacute;w liniowych, warstwa nakładana może być złożona tylko z&nbsp;obiekt&oacute;w liniowych lub punktowych.  Jeśli warstwa analizy składa się z&nbsp;obiekt&oacute;w punktowych, warstwa nakładana r&oacute;wnież musi być też warstwą punktową.
+                    </li>
+                    <li>
+                        <b>Sumuj</b> &mdash; Wynikowa mapa będzie zawierać zar&oacute;wno obiekty z&nbsp;warstwy analizy i&nbsp;warstwy nakładanej. Opcja Sumuj jest dostępna, tylko jeśli zar&oacute;wno warstwa analizy jak i&nbsp;warstwa nakładana zawiera obiekty poligonowe.
+                    </li>
+                    <li>
+                        <b>Usuń</b> &mdash; Uzyskana mapa będzie zawierać obiekty lub części obiekt&oacute;w z&nbsp;warstwy nakładanej, kt&oacute;re nie pokrywają się z&nbsp;obszarami z&nbsp;warstwy analizy.  W&nbsp;warstwie nakładanej mogą znajdować się obiekty poligonowe, liniowe i&nbsp;punktowe.
+                    </li>
+                </ul>
+                
+            </p>
+            <p>Jeśli zaznaczono opcję 
+                <b>Użyj bieżącego zasięgu</b>, nałożone zostaną jedynie obiekty w&nbsp;warstwie analizy i&nbsp;warstwie nakładanej widoczne w&nbsp;bieżącym zasięgu mapy.  Jeśli opcja ta nie jest zaznaczona, nałożone zostaną wszystkie obiekty zar&oacute;wno w&nbsp;warstwie analizy, jak i&nbsp;warstwie nakładanej, nawet jeśli znajdują się one poza bieżącym zasięgiem mapy.
+            </p>
+            
+        </div>
+    </div>
+    <div id="OutputLayer">
+        <div><h2>Nazwa warstwy wynikowej</h2></div>
+        <hr/>
+        <div>
+            <p>
+                Nazwa utworzonej warstwy pojawi się w&nbsp;zakładce
+                <b>Moje zasoby</b> i&nbsp;dodana do mapy.  Będzie zawierała te same typy obiekt&oacute;w (poligony, linie lub punkty), kt&oacute;re znajdowały się w&nbsp;warstwie nakładanej.  Nazwa domyślna jest tworzona na podstawie metody nakładania i&nbsp;nazwy warstwy wejściowej. Jeśli warstwa już istnieje, wyświetlony zostanie komunikat z&nbsp;pytaniem o&nbsp;potwierdzenie jej zastąpienia.
+            </p>
+            <p>Opcja 
+                <b>Zapisz wynik w</b> z listą rozwijaną, umożliwia wyb&oacute;r folderu w&nbsp;zakładce
+                <b>Moje zasoby</b>, gdzie zapisany zostanie wynik operacji.
+            </p>
+            
+        </div>
+    </div>
+</div>
+</html>

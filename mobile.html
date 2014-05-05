@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+  <head>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <!-- Cache control --> 
+    <meta http-equiv="Cache-control" content="public"/>
+    <!-- The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices --> 
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, user-scalable=0" />
+                  
+    <!-- JavaScript files -->
+    <script type="text/javascript" src="libraries/jQuery/1.10.2/jquery-1.10.2.min.js"></script>  
+	<script type="text/javascript" src="libraries/jQueryUI/1.10.3/jquery-ui.min.js"></script>    
+	<script type="text/javascript" src="libraries/jQueryMobile/1.3.2/jquery.mobile-1.3.2.min.js"></script> 
+    <script type="text/javascript">
+        <!-- When jQuery has loaded -->
+        $(document).ready(function () {
+            // Show the progress bar
+            $("#appLoadBar").progressbar({
+                value: false
+            });
+        });
+    </script>
+    <script type="text/javascript" src="http://js.arcgis.com/3.7"></script>     
+    <script type="text/javascript" src="config/config.js"></script>           
+    <script type="text/javascript" src="scripts/main.js"></script>            
+  </head>
+
+  <body>
+        <!-- Loading bars -->
+        <div id="appLoadBar"><div class="appLoadBarLabel">Loading...</div></div>
+        <div id="closestFeatureLoadBar" style="display:none;"><div class="closestFeatureLoadBarLabel">Calculating Route...</div></div>
+        <div id="layerLoadBar" style="display:none;"></div>
+
+        <!-- Main page -->
+        <div data-role="page" id="main">
+            <div id="header"  data-role="header" style="display:none;">
+                <div id="search"></div>
+                 <div class="buttonbar-div">                                   
+                    <a data-role="button" id="btn-tools" data-inline="true" data-rel="popup" data-iconpos="notext" data-icon="btn-tools" href="#toolsPopup" data-transition="pop"></a>
+                </div>        
+            </div>    
+              
+            <div data-role="content" style="padding: 1px">
+                <div id="map"></div>                     
+            </div>
+
+            <!-- Tools -->
+            <div data-role="popup" id="toolsPopup" class="popup-div" data-position-to="window"> 
+             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>    
+             <div data-theme="a" data-role="header"><h3>Tools</h3></div>
+                <div data-role="content" style="padding: 15px">
+                    <div data-role="controlgroup">
+                        <a data-role="button" id="btn-locate" style="display:none;" data-rel="popup" onclick="gotoLocation()" data-transition="pop">My Location</a>   
+                        <a data-role="button" id="btn-closestFeature" style="display:none;">Closest Feature</a> 
+                        <a data-role="button" id="btn-theme"  style="display:none;" data-rel="popup" href="#themesPopup" data-transition="pop">Theme</a>
+                        <a data-role="button" id="btn-layerGroups" data-rel="popup" href="#layerGroupsPopup" data-transition="pop">Layer Groups</a>
+                        <a data-role="button" id="btn-layers" data-rel="popup" href="#layersPopup" data-transition="pop">Layers</a>
+                        <a data-role="button" id="btn-legend" data-rel="popup" href="#legendPopup" data-transition="pop">Legend</a>
+                        <a data-role="button" id="btn-propertyreport" style="display:none;" >Property Report</a>
+                        <a data-role="button" id="btn-identify">Identify</a>
+                        <a data-role="button" id="btn-share-map" data-rel="popup" href="#shareMapPopup" data-transition="pop">Share Map</a>
+                        <a data-role="button" id="btn-clear-map">Clear Map</a>
+                    </div>                               
+                </div>
+            </div>
+
+          <!-- Themes -->
+           <div data-role="popup" id="themesPopup" class="popup-div" data-position-to="window">
+           <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>  
+                <div data-theme="a" data-role="header"><h3>Theme</h3></div>
+	            <div data-role="content">                                     
+                     <div id="themes"></div> 
+                </div>
+           </div>
+
+
+          <!-- Layer groups -->
+           <div data-role="popup" id="layerGroupsPopup" class="popup-div" data-position-to="window">
+           <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>  
+           <div data-theme="a" data-role="header"><h3>Layer Groups</h3></div>
+	            <div data-role="content">   	                                  
+                     <div id="layerGroups"></div>   
+                     <div id="basemaps"></div>
+                </div>
+           </div>
+
+          <!-- Individual layers -->
+          <div data-role="popup" id="layersPopup" class="popup-div" data-position-to="window">
+           <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>  
+           <div data-theme="a" data-role="header"><h3>Layers</h3></div>
+	            <div data-role="content">   	                                  
+                     <div id="layers"></div> 
+                </div>
+           </div>      
+
+           <!-- Legend -->
+           <div data-role="popup" id="legendPopup" class="popup-div" data-position-to="window">
+             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>  
+             <div data-theme="a" data-role="header"><h3>Legend</h3></div>
+	             <div data-role="content">
+                     <br/><div id="legend"></div>          
+                 </div>
+           </div>
+       
+            <!-- Identify  -->
+            <div data-role="popup" id="identifyPopup" class="popup-div" data-position-to="window">    
+                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>  
+                <div data-theme="a" data-role="header"><h3>Information</h3></div>
+                    <div data-role="content" style="padding: 15px">
+                        <div id="identificationresults">
+                        </div>                    
+                    </div>
+            </div>
+      
+            <!-- Share Map -->
+            <div data-role="popup" id="shareMapPopup" class="popup-div" data-position-to="window">    
+                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>  
+                <div data-theme="a" data-role="header"><h3>Share Map</h3></div>
+                    <div data-role="content" style="padding: 15px">
+                        <div id="shareMap">
+                        </div>                    
+                    </div>
+            </div>
+        </div>
+    </body>
+
+</html> 

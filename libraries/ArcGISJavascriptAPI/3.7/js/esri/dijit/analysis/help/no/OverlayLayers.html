@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpId;
+                helpId = window.location.hash.substring(1);
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription", class="largesize">
+        <h2>Legg lag oppå</h2><p/>
+        <h2></h2>
+        <hr/>
+    <p>Overlegg sl&aring;r sammen to eller flere lag til ett lag.  Et overlegg blir som om du ser ned gjennom en stabel med kart som ligger opp&aring; hverandre, og oppretter et enkelt kart som inneholder all informasjon som finnes i hele kartstabelen.   F&oslash;r GIS s&aring; dagens lys, var det faktisk slik at kartografene kopierte kart over p&aring; transparente ark som de la opp&aring; hverandre p&aring; et lysbord. Deretter tegnet de et nytt kart basert p&aring; de overlappende dataene. Overlegg er mye mer enn en sammensl&aring;ing av streker. Alle attributtene for geoobjektene som er en del av overlegget, videref&oslash;res til det endelige produktet. Overlegg brukes til &aring; besvare et av det mest grunnleggende geografiske sp&oslash;rsm&aring;lene: &quot;Hva ligger opp&aring; hva?&quot; Eksempel:
+        <ul>
+            <li>Hvilke tomter er innenfor hundre&aring;rsflomsonen? (Innenfor betyr det samme som opp&aring;.)
+                  
+            </li>
+            <li>Hvilke veier er innenfor hvilke fylker?
+            </li>
+            <li>Hvilken arealbruk er det opp&aring; hvilken jordart?
+                 
+            </li>
+            <li>Hvilke br&oslash;nner befinner seg p&aring; nedlagte milit&aelig;rbaser?
+            </li>
+        </ul>
+        
+    </p>
+    <p>
+        Hvis det er merket av for
+        <b>Use current map extent</b>, er det kun geoobjektene i analyselaget og overleggslaget som vises i gjeldende kartutstrekning, som legges over.  Hvis det ikke er merket av for dette alternativet, legges alle geoobjektene i b&aring;de analyselaget og overleggslaget over, selv om de befinner seg utenfor gjeldende kartutstrekning.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="OverlayLayer">
+        <div><h2>Velg overleggslag</h2></div>
+        <hr/>
+        <div>
+            <p>Laget som analyselaget skal legges over.  
+            </p>
+            
+        </div>
+    </div>
+    <div id="OverlayType">
+        <div><h2>Velg overleggsmetode</h2></div>
+        <hr/>
+        <div>
+            <p>Overleggsmetoden definerer hvordan analyselaget og overleggslaget kombineres.  
+                <ul>
+                    <li>
+                        <b>Kryss</b> &ndash; Resultatet inneholder kun de geoobjektene eller delene av geoobjektene i overleggslaget som overlapper med geoobjekter i analyselaget.  Hvis analyselaget er omr&aring;degeoobjekter, kan overleggslaget v&aelig;re omr&aring;de-, punkt- eller linjegeoobjekter.  Hvis analyselaget er linjegeoobjekter, kan overleggslaget v&aelig;re linje- eller punktgeoobjekter.  Hvis analyselaget er punktgeoobjekter, m&aring; overleggslaget ogs&aring; v&aelig;re punktgeoobjekter.
+                    </li>
+                    <li>
+                        <b>Union</b> &ndash; Resultatet inneholder geoobjekter fra b&aring;de analyselaget og overleggslaget. Union-alternativet er kun tilgjengelig n&aring;r b&aring;de analyselaget og overleggslaget inneholder omr&aring;degeoobjekter.
+                    </li>
+                    <li>
+                        <b>Slett</b> &ndash; Resultatet inneholder geoobjekter eller deler av geoobjekter i overleggslaget som ikke overlapper med omr&aring;dene i analyselaget.  Overleggslaget kan inneholde omr&aring;de-, linje- eller punktgeoobjekter.
+                    </li>
+                </ul>
+                
+            </p>
+            <p>Hvis det er merket av for 
+                <b>Use current map extent</b>, er det kun geoobjektene i analyselaget og overleggslaget som vises i gjeldende kartutstrekning, som legges over.  Hvis det ikke er merket av for dette alternativet, legges alle geoobjektene i b&aring;de analyselaget og overleggslaget over, selv om de befinner seg utenfor gjeldende kartutstrekning.
+            </p>
+            
+        </div>
+    </div>
+    <div id="OutputLayer">
+        <div><h2>Navn på resultatlag</h2></div>
+        <hr/>
+        <div>
+            <p>
+                Dette er navnet p&aring; laget som opprettes i
+                <b>Mitt innhold</b> og legges til kartet.  Det har samme geoobjektstype (omr&aring;der, linjer eller punkt) som overleggslaget.  Standardnavnet er basert p&aring; overleggsmetoden og navnet p&aring; inndatalaget. Hvis laget finnes allerede, blir du bedt om &aring; bekrefte at du vil overskrive det.
+            </p>
+            <p>Bruk rullegardinlisten 
+                <b>Save result in</b> til &aring; angi navnet p&aring; en mappe i
+                <b>Mitt innhold</b> som resultatet skal lagres i.
+            </p>
+            
+        </div>
+    </div>
+</div>
+</html>

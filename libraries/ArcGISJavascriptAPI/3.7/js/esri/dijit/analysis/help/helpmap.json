@@ -1,0 +1,21 @@
+{
+    "version": "1.0",
+    "map": {
+        "EnrichLayer": {
+            "toolDescription": "About_the_Enrich_Layer_tool/010q000000wv000000.htm",
+            "DataCollection":"About_the_Enrich_Layer_tool/010q000000wv000000/"
+        },
+        "ExtractData": {
+            "toolDescription": "About_the_Extract_Data_tool/010q000000ww000000.htm",
+            "InputLayers": "About_the_Extract_Data_tool/010q000000ww000000/"
+        },
+        "FindHotSpots": {
+            "toolDescription": "Find_Hot_Spots/010q000000w1000000.htm",
+            "AnalysisFieldPoly": "Find_Hot_Spots/010q000000w1000000#ESRI_SECTION1_7743ED5A2AE3411B83140D82EEB8A41B",
+            "AnalysisFieldPoint": "Find_Hot_Spots/010q000000w1000000#ESRI_SECTION2_1B09039F95004047B30B0B957F2FA893",
+            "BoundingPolygonLayer": "Find_Hot_Spots/010q000000w1000000#ESRI_SECTION3_F9D255E9146E44CF99DCC140A3BB9CBB",
+            "AggregationPolygonLayer": "Find_Hot_Spots/010q000000w1000000#ESRI_SECTION3_4AFB54649EC44003A2DDE65953B54AE3"
+        }
+    }
+}
+

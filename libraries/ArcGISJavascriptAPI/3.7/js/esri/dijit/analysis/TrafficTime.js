@@ -1,0 +1,22 @@
+/*
+ COPYRIGHT 2009 ESRI
+
+ TRADE SECRETS: ESRI PROPRIETARY AND CONFIDENTIAL
+ Unpublished material - all rights reserved under the
+ Copyright Laws of the United States and applicable international
+ laws, treaties, and conventions.
+
+ For additional information, contact:
+ Environmental Systems Research Institute, Inc.
+ Attn: Contracts and Legal Services Department
+ 380 New York Street
+ Redlands, California, 92373
+ USA
+
+ email: contracts@esri.com
+ */
+//>>built
+require({cache:{"url:esri/dijit/analysis/templates/TrafficTime.html":'\x3ctable style\x3d"width:100%" class\x3d"esriFormTable"\x3e\r\n  \x3ctbody\x3e\r\n    \x3ctr\x3e\r\n      \x3ctd class\x3d"shortTextInput" colspan\x3d"3" style\x3d"padding-bottom:0;"\x3e\r\n        \x3cdiv class\x3d"esriLeadingMargin1"\x3e\r\n          \x3clabel\x3e\r\n            \x3cinput type\x3d"checkbox" data-dojo-attach-point\x3d"_useTrafficCheck" data-dojo-type\x3d"dijit/form/CheckBox" data-dojo-attach-event\x3d"onChange:_handleUseTrafficCheckChange" data-dojo-props\x3d"checked:false" style\x3d"margin-bottom:0.25em;"\x3e\r\n            \x3c/input\x3e\r\n            \x3clabel class\x3d"esriLeadingMargin025"\x3e${i18n.trafficLabel}\x3c/label\x3e\r\n         \x3c/label\x3e\r\n        \x3c/div\x3e\r\n      \x3c/td\x3e\r\n    \x3c/tr\x3e\r\n    \x3ctr data-dojo-attach-point\x3d"_driveTimeRow"\x3e\r\n      \x3ctd colspan\x3d"3" style\x3d"padding-top:0;padding-bottom:0"\x3e\r\n        \x3cselect class\x3d"esriLeadingMargin2 mediumInput esriAnalysisSelect" data-dojo-type\x3d"dijit/form/Select"data-dojo-attach-point\x3d"_trafficDay" style\x3d"width:46%;table-layout:fixed;"\x3e\r\n          \x3coption value\x3d"1/1/1990"\x3e${i18n.monday}\x3c/option\x3e\r\n          \x3coption value\x3d"1/2/1990"\x3e${i18n.tuesday}\x3c/option\x3e\r\n          \x3coption value\x3d"1/3/1990"\x3e${i18n.wednesday}\x3c/option\x3e\r\n          \x3coption value\x3d"1/4/1990"\x3e${i18n.thursday}\x3c/option\x3e\r\n          \x3coption value\x3d"1/5/1990"\x3e${i18n.friday}\x3c/option\x3e\r\n          \x3coption value\x3d"1/6/1990"\x3e${i18n.saturday}\x3c/option\x3e\r\n          \x3coption value\x3d"1/7/1990"\x3e${i18n.sunday}\x3c/option\x3e\r\n        \x3c/select\x3e\r\n        \x3cinput  type\x3d"text" data-dojo-type\x3d"dijit/form/TimeTextBox" data-dojo-props\x3d"value:\'T12:00:00\', required:true,intermediateChanges:true,constraints:{formatLength:\'short\',selector:\'time\'}"  data-dojo-attach-point\x3d"_trafficTime" style\x3d"height:24px;width:37%;margin-top:0;"\x3e\r\n        \x3c/input\x3e\r\n      \x3c/td\x3e\r\n    \x3c/tr\x3e\r\n    \x3ctr\x3e\r\n      \x3ctd colspan\x3d"3" style\x3d"padding-top:0;"\x3e\r\n        \x3ca class\x3d"esriLeadingMargin3 esriSmallFont" href\x3d"http://www.arcgis.com/home/item.html?id\x3db7a893e8e1e04311bd925ea25cb8d7c7" target\x3d"_available"\x3e${i18n.seeAvailability}\x3c/a\x3e\r\n      \x3c/td\x3e\r\n    \x3c/tr\x3e\r\n  \x3c/tbody\x3e\r\n\x3c/table\x3e\r\n'}});
+define("esri/dijit/analysis/TrafficTime","require dojo/_base/declare dojo/_base/lang dojo/_base/connect dojo/_base/event dojo/_base/kernel dojo/has dijit/_WidgetBase dijit/_TemplatedMixin dijit/_WidgetsInTemplateMixin dijit/_OnDijitClickMixin dijit/_FocusMixin dijit/form/CheckBox dijit/form/TimeTextBox dijit/form/Select esri/kernel dojo/i18n!esri/nls/jsapi dojo/text!esri/dijit/analysis/templates/TrafficTime.html".split(" "),function(b,e,c,q,r,s,f,g,h,k,l,m,t,u,v,n,d,p){b=e([g,h,k,l,m],{declaredClass:"esri.dijit.analysis.TrafficTime",
+i18n:null,basePath:b.toUrl("esri/dijit/analysis"),templateString:p,widgetsInTemplate:!0,postMixInProperties:function(){this.i18n={};c.mixin(this.i18n,d.common);c.mixin(this.i18n,d.driveTimes)},postCreate:function(){this.inherited(arguments);this._handleUseTrafficCheckChange(this._useTrafficCheck.get("value"))},_handleUseTrafficCheckChange:function(a){this._trafficTime.set("disabled",!a);this._trafficDay.set("disabled",!a)},_setDisabledAttr:function(a){this._useTrafficCheck.set("disabled",a)},_setResetAttr:function(a){a&&
+this._useTrafficCheck.set("checked",!1)},_getCheckedAttr:function(){return this._useTrafficCheck.get("checked")},_setCheckedAttr:function(a){this._useTrafficCheck.set("checked",a)},_getTimeOfDayAttr:function(){var a;a=new Date(this._trafficDay.get("value"));return a.getTime()-6E4*a.getTimezoneOffset()+this._trafficTime.get("value").getTime()-6E4*this._trafficTime.get("value").getTimezoneOffset()}});f("extend-esri")&&c.setObject("dijit.analysis.TrafficTime",b,n);return b});

@@ -1,0 +1,17 @@
+<html>
+<head>
+<title>Map Viewer</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="detectmobilebrowser.js"></script>
+<script type="text/javascript">
+    if (jQuery.browser.mobile) {
+        document.location = "mobile.html";
+    } else {
+        document.location = "map.html";
+    }
+</script>
+</head>
+<body>
+Detecting browser type...
+</body>
+</html> 

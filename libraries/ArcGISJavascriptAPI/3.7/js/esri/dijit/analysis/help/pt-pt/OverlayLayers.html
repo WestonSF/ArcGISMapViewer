@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpId;
+                helpId = window.location.hash.substring(1);
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription", class="largesize">
+        <h2>Sobrepor Camadas</h2><p/>
+        <h2></h2>
+        <hr/>
+    <p>A ferramenta Sobrepor permite combinar uma ou mais camadas numa camada individual.  Pode imaginar a sobreposi&ccedil;&atilde;o como o ato de olhar para uma pilha de mapas e criar um s&oacute; mapa que cont&eacute;m toda a informa&ccedil;&atilde;o encontrada na pilha.   Efetivamente, antes do aparecimento de SIG, os cart&oacute;grafos copiavam (literalmente) os mapas em folhas de acetato transparentes, sobrepunham essas folhas numa mesa iluminada e desenhavam &agrave; m&atilde;o um novo mapa a partir dos dados sobrepostos. A ferramenta Sobrepor &eacute; muito mais do que uma combina&ccedil;&atilde;o de trabalho de linhas; todos os atributos dos elementos inclu&iacute;dos na sobreposi&ccedil;&atilde;o s&atilde;o transportados para o produto final. A ferramenta Sobrepor &eacute; utilizada para responder a uma das perguntas mais b&aacute;sicas da geografia: &quot;O que est&aacute; por cima de qu&ecirc;?&quot; Por exemplo:
+        <ul>
+            <li>Que parcelas se encontram dentro da plan&iacute;cie aluvial de 100 anos? (&quot;Dentro&quot; &eacute; outra forma de dizer &quot;em cima de&quot;.)
+                  
+            </li>
+            <li>Que estradas se encontram dentro de que concelhos?
+            </li>
+            <li>Que utiliza&ccedil;&atilde;o de terreno est&aacute; em cima de que tipo de solo?
+                 
+            </li>
+            <li>Que po&ccedil;os se encontram dentro de bases militares abandonadas?
+            </li>
+        </ul>
+        
+    </p>
+    <p>
+        Se marcar a op&ccedil;&atilde;o
+        <b>Utilizar a extens&atilde;o atual do mapa</b>, ser&atilde;o sobrepostos apenas os elementos inclu&iacute;dos na camada de an&aacute;lise e sobreposi&ccedil;&atilde;o vis&iacute;vel na extens&atilde;o atual do mapa.  Se n&atilde;o marcar a op&ccedil;&atilde;o, ser&atilde;o sobrepostos todos os elementos inclu&iacute;dos na camada de an&aacute;lise e na camada de sobreposi&ccedil;&atilde;o, mesmo que estejam fora da extens&atilde;o atual do mapa.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="OverlayLayer">
+        <div><h2>Selecionar camada de sobreposição</h2></div>
+        <hr/>
+        <div>
+            <p>Camada na qual ser&aacute; sobreposta a camada de an&aacute;lise.  
+            </p>
+            
+        </div>
+    </div>
+    <div id="OverlayType">
+        <div><h2>Selecionar método de sobreposição</h2></div>
+        <hr/>
+        <div>
+            <p>O m&eacute;todo de sobreposi&ccedil;&atilde;o define o modo de combinar a camada de an&aacute;lise e a camada de sobreposi&ccedil;&atilde;o.  
+                <ul>
+                    <li>
+                        <b>Intersetar</b> &ndash; O resultado ir&aacute; conter apenas os elementos ou partes de elementos na camada de sobreposi&ccedil;&atilde;o que coincidem com os elementos na camada de an&aacute;lise.  Se a camada de an&aacute;lise for de elementos de &aacute;rea, a camada de sobreposi&ccedil;&atilde;o pode ser de elementos de &aacute;rea, ponto ou linha.  Se a camada de an&aacute;lise for de elementos de linha, a camada de sobreposi&ccedil;&atilde;o pode ser de elementos de linha ou ponto.  Se a camada de an&aacute;lise for de elementos de ponto, a camada de sobreposi&ccedil;&atilde;o tem de ser tamb&eacute;m de elementos de ponto.
+                    </li>
+                    <li>
+                        <b>Uni&atilde;o</b> &ndash; O resultado ir&aacute; conter elementos da camada de an&aacute;lise e da camada de sobreposi&ccedil;&atilde;o. A op&ccedil;&atilde;o Uni&atilde;o s&oacute; est&aacute; dispon&iacute;vel se a camada de an&aacute;lise e a camada de sobreposi&ccedil;&atilde;o tiverem elementos de &aacute;rea.
+                    </li>
+                    <li>
+                        <b>Apagar</b> &ndash; O resultado ir&aacute; conter elementos ou partes de elementos na camada de sobreposi&ccedil;&atilde;o que n&atilde;o coincidem com &aacute;reas na camada de an&aacute;lise.  A camada de sobreposi&ccedil;&atilde;o pode conter elementos de &aacute;rea, linha ou ponto.
+                    </li>
+                </ul>
+                
+            </p>
+            <p>Se marcar a op&ccedil;&atilde;o 
+                <b>Utilizar a extens&atilde;o atual do mapa</b>, ser&atilde;o sobrepostos apenas os elementos inclu&iacute;dos na camada de an&aacute;lise e sobreposi&ccedil;&atilde;o vis&iacute;vel na extens&atilde;o atual do mapa.  Se n&atilde;o marcar a op&ccedil;&atilde;o, ser&atilde;o sobrepostos todos os elementos inclu&iacute;dos na camada de an&aacute;lise e na camada de sobreposi&ccedil;&atilde;o, mesmo que estejam fora da extens&atilde;o atual do mapa.
+            </p>
+            
+        </div>
+    </div>
+    <div id="OutputLayer">
+        <div><h2>Nome da camada de resultado</h2></div>
+        <hr/>
+        <div>
+            <p>
+                Este &eacute; o nome da camada que ser&aacute; criada em
+                <b>O Meu Conte&uacute;do</b> e adicionada ao mapa.  Ter&aacute; o mesmo tipo de elemento (&aacute;reas, linhas ou pontos) que a camada de sobreposi&ccedil;&atilde;o.  O nome padr&atilde;o &eacute; baseado no m&eacute;todo de sobreposi&ccedil;&atilde;o e no nome da camada de entrada. Se a camada j&aacute; existir, ser-lhe-&aacute; pedido que confirme que pretende substituir a camada.
+            </p>
+            <p>Utilizando a caixa de lista pendente 
+                <b>Guardar resultado em</b>, pode definir o nome de uma pasta em
+                <b>O Meu Conte&uacute;do</b> para guardar o resultado.
+            </p>
+            
+        </div>
+    </div>
+</div>
+</html>

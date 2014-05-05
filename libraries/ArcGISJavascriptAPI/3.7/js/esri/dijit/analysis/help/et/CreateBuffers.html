@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpId;
+                helpId = window.location.hash.substring(1);
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription", class="largesize">
+        <h2>Loo puhvrid</h2><p/>
+        <h2></h2>
+        <hr/>
+    <p>Puhver on ala, mis katab kindla ulatusega tsooni l&auml;htuvalt punktist, joonest v&otilde;i pindobjektist m&auml;&auml;ratud kaugusest. 
+    </p>
+    <p>Puhvreid kasutatakse sageli ka keerukamate geot&ouml;&ouml;tluste (nt &uuml;lekatteanal&uuml;&uuml;sid) tarbeks l&auml;hteandmete loomiseks. Soovides n&auml;iteks saada vastust k&uuml;simusele &ldquo;Mis hooned j&auml;&auml;vad koolimajast &uuml;he kilomeetri kaugusele?&rdquo;, on lahenduseks vastava puhverala tekitamine ning seej&auml;rel saadud tulemuse v&otilde;rdlemine hoonete kihiga.  Viimati nimetatud &uuml;lesande puhul saadakse tulemkiht, mis sisaldab vaid &uuml;he kilomeetri ulatusse j&auml;&auml;vate hoonete objekte.  
+    </p>
+    <p>Kui 
+        <b>Kasuta kaardi ulatust</b> on sisse l&uuml;litatud, kasutatakse anal&uuml;&uuml;sil ainult neid objekte, mis antud hetkel on ekraanil n&auml;htavad.  Kui vastav tingimus on v&auml;lja l&uuml;litatud, kasutatakse puhvri loomisel k&otilde;iki kihis olevaid objekte s&otilde;ltumata asjaolust, kas need on anal&uuml;&uuml;si k&auml;ivitamise hetkel ekraanil n&auml;htavad v&otilde;i mitte.
+    </p>
+    <p>
+        
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="BufferSize">
+        <div><h2>Sisesta puhvri suurus</h2></div>
+        <hr/>
+        <div>
+            <p>Teil on v&otilde;imalik sisestada kas &uuml;ks v&otilde;i mitu vahemaad kirjeldavat parameetrit, mille vastavate vahemaade m&auml;&auml;ramisel eristage v&auml;&auml;rtused t&uuml;hikuga.  Samuti saate m&auml;&auml;rata puhvri loomist, l&auml;htudes atribuutide tabeli v&auml;lja sisus olevatest v&auml;&auml;rtustest, valides selleks 
+                <b>v&auml;lja</b>.
+            </p>
+            
+        </div>
+    </div>
+    <div id="OptionPoint">
+        <div><h2>Valikud</h2></div>
+        <hr/>
+        <div>
+            <p>Otsustage, kuidas soovite &uuml;lekattesse j&auml;&auml;vaid puhverpindu genereerida. Kui m&otilde;ni pind j&auml;&auml;b teisega &uuml;lekattesse, siis on v&otilde;imalik hoida neid kas eraldi pindadena v&otilde;i sulatada kokku.
+            </p>
+            
+            
+            <p>
+                Kui kasutate mitmest osast koosnevat puhverala tekitamist, saate omapoolselt m&auml;&auml;rata, kuidas esitada vahemaid viimasest segmendist; nt kui vahemaad on 10 ja 14:
+                <ul>
+                    <li>Valides 
+                        <b>R&otilde;ngad</b>, tekivad erinevad puhverobjektid, mis on loodud vahemikus 0-10 ja 10-14.
+                    </li>
+                    <li>Valides
+                        <b>Kettad</b>, tekivad erinevad puhverobjektid, mis on loodud vahemikus 0-10 ja 0-14.
+                    </li>
+                </ul>
+                
+            </p>
+        </div>
+    </div>
+    <div id="OptionPoly">
+        <div><h2>Valikud</h2></div>
+        <hr/>
+        <div>
+            <p>Otsustage, kuidas soovite &uuml;lekattesse j&auml;&auml;vaid puhverpindu genereerida. Kui m&otilde;ni pind j&auml;&auml;b teisega &uuml;lekattesse, siis on v&otilde;imalik hoida neid kas eraldi pindadena v&otilde;i sulatada kokku.
+            </p>
+            <p>Kui loote objekti(de)le &uuml;he puhvri (sisestades selleks vastava vahemaa v&auml;&auml;rtuse), saate omapoolselt valida, kas puhverdatav objekt j&auml;&auml;b tulempuhvrisse v&otilde;i mitte.
+            </p>
+            <p>Kui kasutate mitmest osast koosnevat puhverala tekitamist, saate omapoolselt m&auml;&auml;rata, kuidas esitada vahemaid viimasest segmendist; nt kui vahemaad on 10 ja 14:
+                <ul>
+                    <li>Valides 
+                        <b>R&otilde;ngad</b>, tekivad erinevad puhverobjektid, mis on loodud vahemikus 0-10 ja 10-14.
+                    </li>
+                    <li>Valides 
+                        <b>Kettad</b>, tekivad erinevad puhverobjektid, mis on loodud vahemikus 0-10 ja 0-14.
+                    </li>
+                </ul>
+                
+            </p>
+            
+        </div>
+    </div>
+    <div id="OptionLine">
+        <div><h2>Valikud</h2></div>
+        <hr/>
+        <div>
+            <p>Otsustage, kuidas soovite &uuml;lekattesse j&auml;&auml;vaid puhverpindu genereerida. Kui m&otilde;ni pind j&auml;&auml;b teisega &uuml;lekattesse, siis on v&otilde;imalik hoida neid kas eraldi pindadena v&otilde;i sulatada kokku.
+            </p>
+            <p>Kui loote objekti(de)le &uuml;he puhvri (sisestades selleks vastava vahemaa v&auml;&auml;rtuse), saate omapoolselt valida, kummale poole puhver genereeritakse.  Reeglina tekitatakse puhver m&otilde;lemas suunas.  Parem ja vasak suund m&auml;&auml;ratakse joone esimesest x, y algkoordinaadist viimase x, y l&otilde;pukoordinaadi suhtes.  Valides kas parema v&otilde;i vasaku suuna kirjelduse, on taoline eelinfo igati kasulik teada.   Joonte otspunktid on v&otilde;imalik m&auml;&auml;rata kas &uuml;mara v&otilde;i kandilise nurgaga.
+            </p>
+            <p>Kui kasutate mitmest osast koosnevat puhverala tekitamist, saate omapoolselt m&auml;&auml;rata, kuidas esitada vahemaid viimasest segmendist; nt kui vahemaad on 10 ja 14:
+                <ul>
+                    <li>Valides 
+                        <b>R&otilde;ngad</b>, tekivad erinevad puhverobjektid, mis on loodud vahemikus 0-10 ja 10-14.
+                    </li>
+                    <li>Valides
+                        <b>Kettad</b>, tekivad erinevad puhverobjektid, mis on loodud vahemikus 0-10 ja 0-14.
+                    </li>
+                </ul>
+                
+            </p>
+            
+        </div>
+    </div>
+    <div id="BufferLayer">
+        <div><h2>Tulemkihi nimi</h2></div>
+        <hr/>
+        <div>
+            <p>See on kihi nimi, mis luuakse kasutaja 
+                <b>Minu sisu</b> alla ning lisatakse kaardile.  Vaikimisi nimi on tuletatud anal&uuml;&uuml;si t&uuml;&uuml;bi ja sisendkihi nimetuse j&auml;rgi. Kui see kiht juba eksisteerib, saate selle soovi korral &uuml;le kirjutada.
+            </p>
+            <p>Kasutades 
+                <b>Salvesta tulemus</b> kasutaja sisu alla, mille saate valida rippmen&uuml;&uuml;st
+                <b>Minu sisu</b>, kuhu tulemus salvestatakse.
+            </p>
+            
+        </div>
+    </div>
+</div>
+</html>

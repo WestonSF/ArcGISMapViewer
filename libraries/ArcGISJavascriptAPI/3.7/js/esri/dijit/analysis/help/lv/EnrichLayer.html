@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpId;
+                helpId = window.location.hash.substring(1);
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription", class="largesize">
+        <h2>Uzlabot slāni</h2><p/>
+        <h2></h2>
+        <hr/>
+    <p>
+        <img src="../images/GUID-2B1E8F2B-B474-4AC2-AF32-FFFAA1C43B2E-web.png" alt="Uzlabot slāni">
+    </p>
+    <p>&Scaron;is rīks bagātina jūsu datus iegūstot faktus par cilvēkiem, vietām un uzņēmumiem, kas ieskauj jūsu datu izvietojumus.  
+        <b>Uzlabot slāni</b> ļauj atbildēt uz jautājumiem par izvietojumu, ko jūs nevarat atbildēt tikai ar kartēm.  Piemēram:  Kādi cilvēki &scaron;eit dzīvo? Ko cilvēkiem &scaron;eit patīk darīt?  Kādi ir viņu paradumi un dzīvesveids? Kāda veida uzņēmumi pastāv &scaron;inī areālā?
+    </p>
+    <p>Rezultāts būs jauns slānis, kas saturēs visus demogrāfisko un ģeogrāfisko informāciju no dotajām datu kolekcijām.  &Scaron;ī jaunā informācija tiek pievienota tabulai kā lauki.
+    </p>
+    <p>Ja 
+        <b>Izmantot eso&scaron;o kartes pārklājumu</b> ir atzīmēts, elementi tiks analizēti tikai pa&scaron;reizējā redzamā pārklājuma ietvaros.  Ja nav atzīmēts, visi elementi abos slāņos tiks analizēti, arī pa&scaron;reizējā kartes pārklājuma ārpusē.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="DataCollection">
+        <div><h2>rādīt pieejamos datus</h2></div>
+        <hr/>
+        <div>
+            <p>Izvēlieties jūsu reģionu un iegūstiet pieejamo datu kolekciju sarakstu, ko jūs vēlētos izmantot, lai bagātinātu jūsu datus.     Attiecībā uz Amerikas Savienotajām Valstīm, Kanādu un dažādām citām valstīm visā pasaulē, jūs varat uzlabot savus datus, pievienojot dažādas datu kolekcijas ar iepriek&scaron; samontētiem  atribūtu sarakstiem, kas sniedz demogrāfijas informāciju un ģeogrāfisko kontekstu par cilvēkiem, vietām un biznesu ap jūsu datu izvietojumiem.
+            </p>
+            
+            
+        </div>
+    </div>
+    <div id="BufferOption">
+        <div><h2>Definējiet areālus kurus bagātināt</h2></div>
+        <hr/>
+        <div>
+            <p>Tie ir areāli, papildināti ar informāciju no datu kolekcijām. a jūsu analīzes slānis satur punktus vai līnijas, areāli tiek veidoti ap katru punktu vai līniju izmantojot taisnas līnijas distanci vai brauk&scaron;anas laiku.  
+            </p>
+        </div>
+    </div>
+    <div id="OutputName">
+        <div><h2>Rezultāta slāņa nosaukums</h2></div>
+        <hr/>
+        <div>
+            <p>&Scaron;is ir slāņa nosaukums, kas tiks izveidots iek&scaron; jūsu 
+                <b>Mans Saturs</b> un pievienots kartei.  Noklusējuma nosaukums ir balstīts uz analīzes slāņa nosaukumu. Ja slānis jau pastāv, jums tiks lūgts apstiprināt, vai vēlaties to pārrakstīt.
+            </p>
+            <p>Lietojot 
+                <b>Saglabāt rezultātu</b> izvelkamajā lodziņā jūs varat norādīt nosaukumu mapē iek&scaron;
+                <b>Mans Saturs</b> kur rezultāts tiks saglabāts.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpId;
+                helpId = window.location.hash.substring(1);
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription", class="largesize">
+        <h2>Superposer les couches</h2><p/>
+        <h2></h2>
+        <hr/>
+    <p>La superposition permet de regrouper deux ou plusieurs couches en une seule couche. Vous pouvez comparer la superposition au fait de scruter une pile de cartes et de cr&eacute;er une seule carte contenant toutes les informations trouv&eacute;es dans la pile. En fait, avant l'arriv&eacute;e du SIG, les cartographes copiaient litt&eacute;ralement des cartes sur des feuilles transparentes, pla&ccedil;aient ces feuilles sur une table &eacute;clair&eacute;e et dessinaient &agrave; la main une nouvelle carte &agrave; partir des donn&eacute;es superpos&eacute;es. La superposition est beaucoup plus qu'une simple fusion de dessin au trait DAO. Tous les attributs des entit&eacute;s composant la superposition sont conserv&eacute;s dans le produit final. La superposition est utilis&eacute;e pour r&eacute;pondre &agrave; l'une des questions fondamentales de la g&eacute;ographie&nbsp;: &quot;Qu'est-ce qui se trouve sur quoi&nbsp;?&quot; Par exemple :
+        <ul>
+            <li>Quelles parcelles se trouvent dans la plaine inondable vieille de 100&nbsp;ans&nbsp;? (Le terme &quot;dans&quot; est une autre mani&egrave;re de dire &quot;sur&quot;.)
+                  
+            </li>
+            <li>Quelles routes se trouvent dans quels d&eacute;partements&nbsp;?
+            </li>
+            <li>Quelle utilisation du sol se trouve sur quel type de sol&nbsp;?
+                 
+            </li>
+            <li>Quels puits se trouvent dans des bases militaires abandonn&eacute;es&nbsp;?
+            </li>
+        </ul>
+        
+    </p>
+    <p>
+        Si l'option
+        <b>Utiliser l'&eacute;tendue courante de la carte</b> est s&eacute;lectionn&eacute;e, seules les entit&eacute;s de la couche d'analyse et de superposition qui sont visibles au sein de l'&eacute;tendue courante de la carte seront superpos&eacute;es. Si l'option n'est pas s&eacute;lectionn&eacute;e, toutes les entit&eacute;s qui se trouvent &agrave; la fois dans la couche d'analyse et dans la couche de superposition seront superpos&eacute;es, m&ecirc;me si elles se trouvent en dehors de l'&eacute;tendue courante de la carte.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="OverlayLayer">
+        <div><h2>Choisir la couche de superposition</h2></div>
+        <hr/>
+        <div>
+            <p>La couche &agrave; superposer avec la couche d'analyse.  
+            </p>
+            
+        </div>
+    </div>
+    <div id="OverlayType">
+        <div><h2>Choisir la méthode de superposition</h2></div>
+        <hr/>
+        <div>
+            <p>La m&eacute;thode de superposition d&eacute;finit la mani&egrave;re dont la couche d'analyse et la couche de superposition sont fusionn&eacute;es.  
+                <ul>
+                    <li>
+                        <b>Intersecter</b>&nbsp;: le r&eacute;sultat contient uniquement les entit&eacute;s ou parties d'entit&eacute;s dans la couche de superposition qui sont superpos&eacute;es aux entit&eacute;s de la couche d'analyse. Si la couche d'analyse correspond &agrave; des entit&eacute;s surfaciques, la couche de superposition peut correspondre &agrave; des entit&eacute;s surfaciques, ponctuelles ou lin&eacute;aires. Si la couche d'analyse correspond &agrave; des entit&eacute;s lin&eacute;aires, la couche de superposition peut uniquement correspondre &agrave; des entit&eacute;s lin&eacute;aires ou ponctuelles. Si la couche d'analyse correspond &agrave; des entit&eacute;s ponctuelles, la couche de superposition doit &eacute;galement correspondre &agrave; des entit&eacute;s ponctuelles.
+                    </li>
+                    <li>
+                        <b>Agr&eacute;ger</b>&nbsp;: le r&eacute;sultat contient des entit&eacute;s issues &agrave; la fois de la couche d'analyse et de la couche de superposition. L'option Agr&eacute;ger est disponible uniquement si la couche d'analyse et la couche de superposition contiennent toutes les deux des entit&eacute;s surfaciques.
+                    </li>
+                    <li>
+                        <b>Effacer</b>&nbsp;: le r&eacute;sultat contient les entit&eacute;s ou parties d'entit&eacute;s dans la couche de superposition qui ne sont pas superpos&eacute;es aux surfaces de la couche d'analyse. La couche de superposition peut contenir des entit&eacute;s surfaciques, lin&eacute;aires ou ponctuelles.
+                    </li>
+                </ul>
+                
+            </p>
+            <p>Si l'option 
+                <b>Utiliser l'&eacute;tendue courante de la carte</b> est s&eacute;lectionn&eacute;e, seules les entit&eacute;s de la couche d'analyse et de superposition qui sont visibles au sein de l'&eacute;tendue courante de la carte seront superpos&eacute;es. Si l'option n'est pas s&eacute;lectionn&eacute;e, toutes les entit&eacute;s qui se trouvent &agrave; la fois dans la couche d'analyse et dans la couche de superposition seront superpos&eacute;es, m&ecirc;me si elles se trouvent en dehors de l'&eacute;tendue courante de la carte.
+            </p>
+            
+        </div>
+    </div>
+    <div id="OutputLayer">
+        <div><h2>Nom de la couche résultat</h2></div>
+        <hr/>
+        <div>
+            <p>
+                Il s'agit du nom de la couche qui sera cr&eacute;&eacute;e dans votre page
+                <b>Mes contenus</b> et ajout&eacute;e &agrave; la carte. Elle contiendra le m&ecirc;me type d'entit&eacute; (surfaces, lignes ou points) que la couche de superposition. Le nom par d&eacute;faut repose sur la m&eacute;thode de superposition et sur le nom de la couche en entr&eacute;e. Si la couche existe d&eacute;j&agrave;, vous serez amen&eacute; &agrave; confirmer son remplacement.
+            </p>
+            <p>La zone de liste d&eacute;roulante 
+                <b>Enregistrer le r&eacute;sultat dans</b> vous permet de sp&eacute;cifier le nom d'un dossier dans
+                <b>Mes contenus</b> o&ugrave; le r&eacute;sultat sera enregistr&eacute;.
+            </p>
+            
+        </div>
+    </div>
+</div>
+</html>

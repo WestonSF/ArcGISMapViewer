@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpId;
+                helpId = window.location.hash.substring(1);
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription", class="largesize">
+        <h2>Tason lisätiedot</h2><p/>
+        <h2></h2>
+        <hr/>
+    <p>
+        <img src="../images/GUID-2B1E8F2B-B474-4AC2-AF32-FFFAA1C43B2E-web.png" alt="Tason lis&auml;tiedot">
+    </p>
+    <p>Toiminto n&auml;ytt&auml;&auml; lis&auml;tietoja aineistosi sijaintien ymp&auml;rill&auml; olevista ihmisist&auml;, paikoista ja yrityksist&auml;.  
+        <b>Tason lis&auml;tiedot</b> -toiminnon avulla voi vastata sellaisiin sijainteja koskeviin kysymyksiin, joihin ei voi vastata pelkkien karttojen avulla. Esimerkki: Millaisia ihmisi&auml; alueella asuu? Mit&auml; ihmiset haluavat tehd&auml; t&auml;ll&auml; alueella? Mitk&auml; ovat heid&auml;n tapansa ja el&auml;m&auml;ntyylins&auml;? Millaisia yrityksi&auml; alueella on?
+    </p>
+    <p>Tuloksena syntyy uusi karttataso, joka sis&auml;lt&auml;&auml; m&auml;&auml;ritettyjen aineistokokoelmien kaikki v&auml;est&ouml;tiedot ja maantieteelliset tiedot.  Uudet tiedot lis&auml;t&auml;&auml;n kenttin&auml; taulukkoon.
+    </p>
+    <p>Jos vaihtoehto 
+        <b>K&auml;yt&auml; nykyist&auml; karttalaajuutta</b> on valittuna, nykyisess&auml; kartassa n&auml;kyv&auml; analyysi- ja aluetaso analysoidaan.  Jos vaihtoehto ei ole valittuna, analyysi- ja aluetason kaikki kohteet analysoidaan, vaikka ne eiv&auml;t kuuluisi kartan laajuuteen.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="DataCollection">
+        <div><h2>Näytä alueen tiedot</h2></div>
+        <hr/>
+        <div>
+            <p>Valitse alue ja avaa luettelo k&auml;ytett&auml;viss&auml; olevista aineistokokoelmista, joiden avulla voit laajentaa aineistoa.     Yhdysvaltojen, Kanadan ja joidenkin muiden maiden osalta aineistoa voi laajentaa lis&auml;&auml;m&auml;ll&auml; aineistokokoelmia valmiiden ominaisuusluettelojen avulla, jotka sis&auml;lt&auml;v&auml;t v&auml;est&ouml;tietoja ja maantieteellisi&auml; tietoja ihmisist&auml;, paikoista ja yrityksist&auml;.
+            </p>
+            
+            
+        </div>
+    </div>
+    <div id="BufferOption">
+        <div><h2>Määritä lisätietoalueet</h2></div>
+        <hr/>
+        <div>
+            <p>N&auml;m&auml; ovat alueita, joihin liitet&auml;&auml;n aineistokokoelmasta l&ouml;ytyvi&auml; lis&auml;tietoja. Jos analyysitaso sis&auml;lt&auml;&auml; pisteit&auml; tai viivoja, alueet luodaan kunkin pisteen tai viivan ymp&auml;rille suoran et&auml;isyyden tai ajoajan perusteella.  
+            </p>
+        </div>
+    </div>
+    <div id="OutputName">
+        <div><h2>Tulostason nimi</h2></div>
+        <hr/>
+        <div>
+            <p>T&auml;m&auml; on sen karttatason nimi, joka luodaan 
+                <b>Oma sis&auml;lt&ouml;</b> -kohdassa ja lis&auml;t&auml;&auml;n karttaan.  Oletusarvoiset nimet perustuvat analyysikarttatason nimeen. Jos karttataso on jo olemassa, ohjelmisto pyyt&auml;&auml; vahvistusta sen korvaamiselle.
+            </p>
+            <p>Avattavan 
+                <b>Tallenna tulokset kansioon</b> -luetteloruudun avulla voit m&auml;&auml;ritt&auml;&auml;
+                <b>Oma sis&auml;lt&ouml;</b> -kohdassa sen kansion nimen, johon tulokset tallennetaan.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

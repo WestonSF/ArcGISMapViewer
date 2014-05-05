@@ -1,0 +1,302 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+  <head>     
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+    <meta http-equiv="X-UA-Compatible" content="IE=8, IE=9, IE=10"/>
+    <!-- Cache control --> 
+    <meta http-equiv="Cache-control" content="public"/>
+    <!-- The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices --> 
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/> 
+
+    <!-- JavaScript files -->
+    <script type="text/javascript" src="libraries/jQuery/1.10.2/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="libraries/jQueryUI/1.10.3/jquery-ui.min.js"></script>    
+    <script type="text/javascript">
+        <!-- When jQuery has loaded -->
+        $(document).ready(function () {
+            // Show the progress bar
+            $("#appLoadBar").progressbar({
+                value: false
+            });
+
+            // Detect the device
+            $.ajaxSetup({ cache: true });
+            $.getScript('scripts/detectmobilebrowser.js', function () {
+                if (jQuery.browser.mobile && window.location.href.indexOf('desktopmode') == -1) {
+                    document.location = "mobile.html";
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript" src="http://js.arcgis.com/3.7"></script> 
+    <script type="text/javascript" src="config/config.js"></script>       
+    <script type="text/javascript" src="scripts/main.js"></script>
+
+    <!-- IE classes for CSS file -->
+    <!--[if IE 8]><html lang="en" class="ie ie8"><![endif]-->
+    <!--[if IE 9]><html lang="en" class="ie ie9"><![endif]-->
+    <!--[if !IE]><!--><html lang="en"><!--<![endif]-->
+  </head> 
+
+<!-- claro, tundra, soria, nihilo -->
+<body class="soria">
+        <!-- Loading bars -->
+       <div id="appLoadBar"><div class="appLoadBarLabel">Loading...</div></div>
+       <div id="closestFeatureLoadBar" style="display:none;"><div class="closestFeatureLoadBarLabel">Calculating Route...</div></div>
+       <div id="layerLoadBar" style="display:none;"></div>
+
+      <div id="toolbar" style="display:none;">  
+          <div id="search"></div>
+          <input type="button" id="btnTools" title="Tools" name="btnTools" class="button-icons" style="display:none;"/>
+          <input type="button" id="btnLayers" title="Layers/Legend" name="btnLayers" class="button-icons" style="display:none;"/>
+          <input type="button" id="btnPrint" title="Print" name="btnPrint" class="button-icons" style="display:none;"/>
+          <input type="button" id="btnShareMap" title="Email Map" name="btnShareMap" class="button-icons" style="display:none;"/>
+          <input type="button" id="btnBookmark" title="Share Map" name="btnBookmark" class="button-icons" style="display:none;"/>  
+          <input type="button" id="btnHelp" title="Help" name="btnHelp" class="button-icons" style="display:none;"/>
+      </div>
+                  
+    <!-- Basemap and themes selection -->
+    <div id="themesWrapper" style="display:none;">    
+        <h3>Change Theme</h3>
+        <div id="themes">
+            <select id="selectTheme" class="dropdown"></select>
+        </div>
+    </div>
+    <div id="basemapsWrapper" style="display:none;">    
+        <h3>Change Basemap</h3>
+        <div id="basemaps">
+            <div id="basemapGallery"></div>
+        </div>
+    </div>
+
+    <!-- Basemap opacity slider -->
+    <div id="basemapSliderWrapper" style="display:none;" title="Basemap Opacity">
+         Basemap Opacity<div id="basemapSlider"></div>
+    </div> 
+
+    <!-- Navigation controls -->
+    <div id="navigation" style="display:none;">
+        <input type="button" id="btnZoomToFullExtent" name="btnZoomToFullExtent" class="button-icons" title="Zoom to Full Extent"/>
+        <input type="button" id="btnPanNorth" name="btnPanNorth" class="button-icons" title="Pan North"/>
+        <input type="button" id="btnPanSouth" name="btnPanSouth" class="button-icons" title="Pan South"/>
+        <input type="button" id="btnPanWest" name="btnPanWest" class="button-icons" title="Pan West"/>
+        <input type="button" id="btnPanEast" name="btnPanEast" class="button-icons" title="Pan East"/>   
+   
+        <div id="zoomSlider" style="display:block;" title="Zoom In/Out"></div>
+
+        <input type="button" id="btnZoomPrev" name="btnZoomPrev" class="button-icons" title="Previous Extent"/> 
+        <input type="button" id="btnZoomNext" name="btnZoomNext" class="button-icons" title="Next Extent"/> 
+        <input type="button" id="btnZoomInwards" name="btnZoomInwards" class="button-icons" title="Zoom In"/> 
+        <input type="button" id="btnZoomOutwards" name="btnZoomOutwards" class="button-icons" title="Zoom Out"/> 
+        <input type="button" id="btnPanning" name="btnPanning" class="button-icons" title="Pan"/>    
+    </div> 
+
+    <!-- Identify and cursor mode -->
+    <div id="cursorMode" style="display:none;">
+        <input type="button" id="btnIdentify" name="btnIdentify" class="button-icons" title="Identify"/>
+        <div id="cursorModeText">Cursor<br />Mode</div>
+        <input type="button" id="btnMode" name="btnMode" class="button-icons"/>      
+        <input type="button" id="btnStreetview" name="btnStreetview" class="button-icons" style="display:none;" title="Street View"/>
+        <input type="button" id="btnPropertyreport" name="btnPropertyreport" class="button-icons" style="display:none;" title="Property Report"/>
+        <input type="button" id="btnClosestfeature" name="btnClosestfeature" class="button-icons" style="display:none;" title="Closest Feature"/>
+        <input type="button" id="btnMeasuring" name="btnMeasuring" class="button-icons" style="display:none;" title="Measure"/>          
+        <input type="button" id="btnZoomin" name="btnZoomin" class="button-icons" style="display:none;" title="Zoom In"/>
+        <input type="button" id="btnZoomout" name="btnZoomout" class="button-icons" style="display:none;" title="Zoom Out"/>
+        <input type="button" id="btnPan" name="btnPan" class="button-icons" style="display:none;" title="Pan"/> 
+    </div>
+                       
+      <div id="mainWindow">          
+            <!-- Information popups -->
+            <div id="popup"></div>    
+            <!-- Text input for drawing tool -->
+            <div id="textInputWrapper"></div>  
+            <!-- Map information -->
+            <div id="mapInfo" style="display:none;">
+                <div id="mapCoords"></div>
+                <div id="scalezoom"><select id="scalelevels"></select></div>
+            </div>
+            <div id="companyLogo"></div> 
+
+            <div id="StreetView" style="display:none;">  
+                <iframe id="StreetViewIframe" name="StreetViewIframe">Your browser does not support Iframes.</iframe>
+            </div>
+            <!-- Map -->
+            <div id="map"></div> 
+      </div> 
+
+
+    <!-- Tools accordion -->
+    <div id="toolsAccordion" style="display:none;">
+        <input type="button" id="btnCloseAccordion" name="btnCloseAccordion" class="button-icons" title="Close"/>
+        <div id="toolsAccordionPanels">
+          <h3 id="toolsTitle">Tools</h3>
+            <div id="toolsWrapper">  
+                <div id="tools">         
+                    <input type="image" id="btnLocate" name="btnLocate" title="My Location" 
+                        src="images/Mylocation.png" style ="margin:0.4em 0.9em 0 0;float:left;display:none;"/>
+                      <label id="lblLocate" style="line-height:3em;display:none;" onmouseover="this.style.cursor='pointer'" title="My Location">My Location</label>
+
+                    <input type="image" id="btnClosestFeature" name="btnClosestFeature" value="" title="Closest Feature (Click here to activate, then on map to select)"  
+                        src="images/Nearest.png" style ="margin:0.4em 0.9em 0 0;float:left;display:none;"/>
+                      <label id="lblClosestFeature" style="line-height:3em;display:none;" onmouseover="this.style.cursor='pointer'" title="Closest Feature (Click here to activate, then on map to select)">Closest Feature</label>
+
+                     <input type="image" id="btnDraw" value="" name="btnDraw" title="Draw on Map"  
+                        src="images/Drawing.png" style ="margin:0.4em 0.9em 0 0;float:left;display:none;"/>
+                     <label id="lblDraw" style="line-height:3em;display:none;" onmouseover="this.style.cursor='pointer'" title="Draw on Map">Draw on Map</label>
+
+                    <input type="image" id="btnClearMap" value="" name="btnClearMap" title="Clear Map"  
+                        src="images/Clear.png" style ="margin:0.4em 0.9em 0 0;float:left;display:none;"/>
+                      <label id="lblClearMap" style="line-height:3em;display:none;" onmouseover="this.style.cursor='pointer'" title="Clear Map">Clear Map</label>
+
+                    <input type="image" id="btnGoogleStreetView" name="btnGoogleStreetView" title="Google StreetView (Click here to activate, then on map to select)" value="btnGoogleStreetView" 
+                        src="images/Streetview.png" style ="margin-left:0.3em;margin-right:1.4em;float:left;display:none;"/>
+                      <label id="lblGoogleStreetView" style="line-height:3em;display:none;" onmouseover="this.style.cursor='pointer'" title="Google StreetView (Click here to activate, then on map to select)">Google StreetView</label>
+        
+                      <input type="image" id="btnAddShapeFile" name="btnAddShapeFile" value="btnAddShapeFile" title="Add Shapefile"
+                            src="images/Shapefile.png" style ="margin-top:0.4em;margin-left:0.1em;margin-right:0.8em;float:left;display:none;"/>
+                      <label id="lblAddShapeFile" style="line-height:3em;display:none;" onmouseover="this.style.cursor='pointer'" title="Add Shapefile">Add Shapefile to Map</label>
+        
+                      <input type="image" id="btnAddXYdata" name="btnAddXYdata" value="btnAddXYdata" title="Add XY Data to Map"
+                            src="images/AddXY.png" style ="margin-top:0.5em;margin-left:.1em;margin-right:0.8em;float:left;display:none;"/>
+                      <label id="lblAddXYdata" style="line-height:3em;display:none;" onmouseover="this.style.cursor='pointer'" title="Add XY Data to Map">Add XY Data to Map</label>
+        
+                      <input type="image" id="btnPropertyReport" name="btnPropertyReport" value="btnPropertyReport" title="Property Report (Click here to activate, then on map to select)"
+                            src="images/Reports.png" style ="margin-top:0.5em;margin-left:.1em;margin-right:0.8em;float:left;display:none;"/>
+                      <label id="lblPropertyReport" style="line-height:3em;display:none;margin-left:.1em;" onmouseover="this.style.cursor='pointer'" title="Property Report (Click here to activate, then on map to select)">Property Report</label>
+        
+                      <input type="image" id="btnReports" name="btnReports" value="btnReports" title="Reports (Click here to activate, then on map to select)"
+                            src="images/Reports.png" style ="margin-top:0.5em;margin-left:.1em;margin-right:0.8em;float:left;display:none;"/>
+                      <label id="lblReports" style="line-height:3em;display:none;" onmouseover="this.style.cursor='pointer'" title="Reports (Click here to activate, then on map to select)">Reports</label>
+                    <br/> 
+           
+                    <!-- Bookmarks -->
+                    <fieldset id="bookmarkTool"><legend><span style="font-size:0.9em">Bookmarks</span></legend>
+                        <div id="bookmarksTool"></div>
+                    </fieldset>
+
+                    <!-- Measure -->
+                    <fieldset id="measureTool"><legend><span style="font-size:0.9em">Measure</span></legend>
+                        <div id="measurementTool"></div> 
+                    </fieldset>
+               </div>
+          </div>
+
+          <h3 id="layerTabsTitle">Layers & Legend</h3>
+            <div id="layerTabsWrapper">
+                <div id="layerTabs">
+                    <ul></ul> 
+                </div>   
+                <div id="layerMode"></div>
+            </div>
+
+          <h3 id="printTitle">Print</h3>
+            <div id="printWrapper">
+                <div id="print">
+                    <p><label>Layout:</label><select id="printlayout"></select></p>
+                    <div id="printformat"></div>
+                    <div id="printTitle"><p><label>Title: </label><input type="text" value="" id="mapTitle" name="mapTitle" title="Title" style="width:140px;"/></p></div>
+                    <div id="printScaleOption">
+                        <p><label>Scale:</label><br/>
+                        <input type="radio" name="printScale" id="currentScale" value="currentScale"/><label for="currentScale">Current Scale</label>
+                        <input type="radio" name="printScale" id="currentExtent" value="currentExtent"/><label for="currentExtent">Current Extent</label>
+                        </p>
+                    </div>
+                    <div id="printquality"></div>
+                    <input id="btnPrintMap" value=" Print " type="button"/>
+                    <div id="printLoadBar"></div>
+                </div>  
+            </div>
+        </div>
+    </div>
+
+
+           
+    <!-- Splash screen -->
+    <div id="splashscreen" style="display:none; cursor: default"> 
+      <div id="splashLogo"></div>
+      <div id="splashTitle"></div> 
+      <div id="app-version">Map Viewer - Version 2.1</div>
+      <div id="splashText"></div>
+      <input type="button" id="acceptButton" value="Accept"/>
+      <div id="help" style="display:none"></div>
+    </div> 
+
+    <!-- Share map -->
+    <div id="shareDialog"></div>
+
+    <!-- Upload shapefile -->
+    <div id="uploadShapefile" title="Add Shapefile to Map" style="display:none; cursor: default;padding:10px 10px 10px 20px;"> 
+          <form enctype="multipart/form-data" method="post" id="frmUploadShapefile" action="">
+                <div class="field">                                     
+                    <label id="fileUploadText">Browse to a Zip file to upload data. The shapefile can be in any coordinate system.</label><br/><br/>
+                    <span><strong>Add Zip File</strong></span>
+                    <input type="file" name="file" id="inShapefile" style="text-align:right;height:25px"/> 
+                    <p><label>Shapefile Symbol Colour:</label>
+                    <div id="shapeFile-colour-picker">
+                        <select id="shapefileColours"></select>
+                    </div>
+                    Shapefile Symbol Opacity: <input id="shapefileOpacity" type="text" value="0.7" style="width:20px;"></input></p>
+                    <input id="removeShapefiles" value="Remove Shapefiles from Map" type="button" disabled="true"/>
+                    <p style="font-size:0.9em;">Note: The maximum number of features that can be uploaded is 1000. For information and limitations around shapefiles: <br /><br /><a target='_blank' style="color:#0000FF;" href="http://resources.arcgis.com/en/help/arcgisonline/index.html#//010q000000m2000000"/><U>About Shapefiles</U></a></p>  
+                </div>
+          </form>
+        <div id="ShapefileuploadStatus"></div>
+    </div>
+
+    <!-- Upload CSV -->
+     <div id="uploadCSVfile" title="Add XY data to the map" style="display:none; cursor: default;padding:10px 10px 10px 20px;"> 
+         <label>Browse to a CSV file to upload XY data.</label><br/><br/>   
+         <form enctype="multipart/form-data" method="post" id="frmUploadCSV" action="">
+                <div class="field">                                     
+                    <label class="file-upload">
+                        <span><strong>Add CSV File</strong></span>
+                        <input type="file" name="data" id="inCSV" style="text-align:right;height:25px"/>
+                        <p><label>CSV Symbol Colour:</label>
+                        <div id="csv-colour-picker">
+                            <select id="csvColours"></select>
+                        </div>
+                        CSV Symbol Opacity: <input id="csvOpacity" type="text" value="0.7" style="width:20px;"></input></p>
+                        <input id="removeCSV" value="Remove XY data from Map" type="button" disabled="true"/>
+                    </label>
+                        <p style="font-size:0.9em;color:#000000;">Note: The maximum number of features that can be uploaded is 1000. Coordinate system must be the same as the map coordinate system and coordinate column names must be either: <br/> - "Lat" & "Lon/Long" <br />- "Latitude" & "Longitude" <br />- "X" & "Y" <br />- "XCenter" & "YCenter"</p>  
+                </div>
+         </form>
+        <div id="CSVuploadStatus"></div>
+    </div>
+
+    <!-- Drawing Tool -->
+    <div id="drawTool" style="display:none;cursor: default;padding:10px 10px 10px 20px;"> 
+        <label>Click a button below to add that graphic to the map.</label><br/><br/>   
+        <input type="button" id="btnDrawPoint" name="btnDrawPoint" class="button-icons" style="margin:0 0 0.5em 0.5em;" title="Point"/> 
+        <input type="button" id="btnDrawMultiPoint" name="btnDrawMultiPoint" class="button-icons" style="margin:0 0 0.5em 0.5em;" title="Multi Point"/> 
+        <input type="button" id="btnDrawPolyline" name="btnDrawPolyline" class="button-icons" style="margin:0 0 0.5em 0.5em;" title="Polyline"/> 
+        <input type="button" id="btnDrawFreehandPolyline" name="btnDrawFreehandPolyline" class="button-icons" style="margin:0 0 0.5em 0.5em;" title="Freehand Polyline"/> 
+        <input type="button" id="btnDrawPolygon" name="btnDrawPolygon" class="button-icons" style="margin:0 0 0.5em 0.5em;" title="Polygon"/> 
+        <input type="button" id="btnDrawFreehandPolygon" name="btnDrawFreehandPolygon" class="button-icons" style="margin:0 0 0.5em 0.5em;" title="Freehand Polygon"/> 
+        <input type="button" id="btnDrawArrow" name="btnDrawArrow" class="button-icons" style="margin:0 0 0.5em 0.5em;" title="Arrow"/> 
+        <input type="button" id="btnDrawTriangle" name="btnDrawTriangle" class="button-icons" style="margin:0 0 0.5em 0.5em;" title="Triangle"/> 
+        <input type="button" id="btnDrawCircle" name="btnDrawCircle" class="button-icons" style="margin:0 0 0.5em 0.5em;" title="Circle"/> 
+        <input type="button" id="btnDrawEllipse" name="btnDrawEllipse" class="button-icons" style="margin:0 0 0.5em 0.5em;" title="Ellipse"/> 
+        <input type="button" id="btnDrawText" name="btnDrawText" class="button-icons" style="margin:0 0 0.5em 0.5em;" title="Text"/> 
+        <input type="button" id="btnDrawClear" name="btnDrawClear" class="button-icons" style="margin:0 0 0.5em 0.5em;" title="Clear Graphics"/> 
+        <br/><br/> 
+        <label>Colour: </label>
+        <div id="draw-colour-picker"><select id="drawColours"></select></div>
+    </div>
+
+    <!-- Create reports -->
+    <div id="createReports" style="display:none;cursor: default;padding:10px 10px 10px 20px;"> 
+        <label style="font-weight:bold;">Property ID:
+        <input type="text" id="propertyID" title="Enter property ID" style="width:60px;" value=""/></label>
+        <p>
+        <label style="font-weight:bold;">Address Selected: </label><label id="addressSelected"/>
+        </p>
+        <label style="font-weight:bold;">Pages to Include:</label>
+        <div id="reportsList"></div>
+        <p>
+        <input id="reportsButton" value="View Report" type="button" disabled="true"/>
+        </p>
+        <div id="reportsLoadBar"></div>
+    </div>
+  </body> 
+</html> 

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpId;
+                helpId = window.location.hash.substring(1);
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription", class="largesize">
+        <h2>Overlay-lag</h2><p/>
+        <h2></h2>
+        <hr/>
+    <p>Overlay-lag kombinerer to eller flere lag til et enkelt lag.  Du kan t&aelig;nke p&aring; et overlay som at se igennem en stak forskellige kort og oprette et enkelt kort, der indeholder alle oplysningerne i kortstakken.   Inden GIS blev udviklet, kopierede kartografer faktisk kort over p&aring; klare acetatark, lagde disse kort over p&aring; en lys bordplade og tegnede et nyt kort baseret p&aring; de data, der var lagt ovenp&aring;. Overlay er meget mere end fletning af linjearbejde. Alle attributter for de objekter, der er med i overlay'et, kommer med over i det endelige produkt. Overlay benyttes til at besvare et af de mest grundl&aelig;ggende sp&oslash;rgsm&aring;l inden for geografien: &quot;Hvad ligger oven p&aring; hvad?&quot; For eksempel:
+        <ul>
+            <li>Hvilke landomr&aring;der ligger inden for den 100-&aring;rige flodslette? (&quot;inden for&quot; er det samme som at sige &quot;oven p&aring;&quot;).
+                  
+            </li>
+            <li>Hvilke veje ligger i hvilke lande?
+            </li>
+            <li>Hvilken type land ligger der oven p&aring; en bestemt jordtype?
+                 
+            </li>
+            <li>Hvilke kilder ligger der p&aring; forladte milit&aelig;rbaser?
+            </li>
+        </ul>
+        
+    </p>
+    <p>
+        Hvis feltet
+        <b>Brug aktuel kortudstr&aelig;kning</b> er markeret, er det kun objekterne i det analyse- og overlay-lag, der er synligt inden for den aktuelle kortudstr&aelig;kning, der bliver lagt ovenp&aring;.  Hvis feltet ikke er markeret, l&aelig;gges alle objekter i b&aring;de analyse- og overlay-laget p&aring;, ogs&aring; selvom de befinder sig uden for den aktuelle kortudstr&aelig;kning.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="OverlayLayer">
+        <div><h2>Vælg overlay-lag</h2></div>
+        <hr/>
+        <div>
+            <p>Det lag, som analyselaget skal l&aelig;gges over.  
+            </p>
+            
+        </div>
+    </div>
+    <div id="OverlayType">
+        <div><h2>Vælg overlay-metode</h2></div>
+        <hr/>
+        <div>
+            <p>Overlay-metoden definerer, hvordan analyselaget og overlay-laget skal kombineres.  
+                <ul>
+                    <li>
+                        <b>Gennemsk&aelig;r</b>&mdash;Resultatet indeholder kun de objekter eller dele af objekter i overlay-laget, der overlapper med objekter i analyselaget.  Hvis laget best&aring;r af omr&aring;deobjekter, kan overlay-laget best&aring; af omr&aring;de-, punkt- eller linjeobjekter.  Hvis analyselaget best&aring;r af linjeobjekter, kan overlay-laget best&aring; af linje- eller punktobjekter.  Hvis analyselaget best&aring;r af punktobjekter, skal overlay-laget ogs&aring; best&aring; af punktobjekter.
+                    </li>
+                    <li>
+                        <b>Sammenl&aelig;g</b>&mdash;Resultatlaget vil indeholde objekter fra b&aring;de analyselaget og overlay-laget. Valgmuligheden Sammenl&aelig;g er kun tilg&aelig;ngelig, hvis b&aring;de analyse- og overlay-laget indeholder omr&aring;deobjekter.
+                    </li>
+                    <li>
+                        <b>Slet</b>&mdash;Resultatet indeholder kun de objekter eller dele af objekter i overlay-laget, der ikke overlapper med omr&aring;der i analyselaget.  Overlay-laget kan indeholde omr&aring;de-, linje- og punktobjekter.
+                    </li>
+                </ul>
+                
+            </p>
+            <p>Hvis feltet 
+                <b>Brug aktuel kortudstr&aelig;kning</b> er markeret, er det kun objekterne i det analyse- og overlay-lag, der er synligt inden for den aktuelle kortudstr&aelig;kning, der bliver lagt ovenp&aring;.  Hvis feltet ikke er markeret, l&aelig;gges alle objekter i b&aring;de analyse- og overlay-laget p&aring;, ogs&aring; selvom de befinder sig uden for den aktuelle kortudstr&aelig;kning.
+            </p>
+            
+        </div>
+    </div>
+    <div id="OutputLayer">
+        <div><h2>Navn på resultatlag</h2></div>
+        <hr/>
+        <div>
+            <p>
+                Dette er navnet p&aring; det lag, der oprettes i
+                <b>Mit indhold</b>, og som f&oslash;jes til kortet.  Det vil indeholde samme objekttype (omr&aring;der, linjer eller punkter) som overlay-laget.  Standardnavnet er baseret p&aring; overlay-metoden og navnet p&aring; inputlaget. Hvis laget findes allerede, vil du blive bedt om at bekr&aelig;fte, at du vil overskrive det.
+            </p>
+            <p>Ved hj&aelig;lp af rullelisten 
+                <b>Gem resultat i</b> kan du angive navnet p&aring; en mappe i
+                <b>Mit indhold</b>, hvor resultatet skal gemmes.
+            </p>
+            
+        </div>
+    </div>
+</div>
+</html>

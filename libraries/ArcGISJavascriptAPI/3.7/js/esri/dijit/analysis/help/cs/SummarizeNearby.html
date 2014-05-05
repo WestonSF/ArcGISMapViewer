@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpId;
+                helpId = window.location.hash.substring(1);
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription", class="largesize">
+        <h2>Sumarizovat nejbližší</h2><p/>
+        <h2></h2>
+        <hr/>
+    <p>Tento n&aacute;stroj vyhled&aacute; prvky, kter&eacute; se nach&aacute;zej&iacute; v určen&eacute; vzd&aacute;lenosti od prvků ve vrstvě anal&yacute;zy. Vzd&aacute;lenost lze měřit vzdu&scaron;nou čarou, podle doby j&iacute;zdy (např&iacute;klad do 10 minut) nebo podle j&iacute;zdn&iacute; vzd&aacute;lenosti (např&iacute;klad do 5 kilometrů). Pot&eacute; se vypoč&iacute;taj&iacute; statistiky pro nejbliž&scaron;&iacute; prvky. Např&iacute;klad:
+        <ul>
+            <li>Vypoč&iacute;tej celkovou populaci, kter&aacute; se nach&aacute;z&iacute; v pětiminutov&eacute; době j&iacute;zdy od navrhovan&eacute;ho um&iacute;stěn&iacute; nov&eacute;ho obchodu.
+            </li>
+            <li>Změř dostupnost obchodu zji&scaron;těn&iacute;m počtu př&iacute;jezdov&yacute;ch ramp, kter&eacute; se nach&aacute;zej&iacute; do jednoho kilometru j&iacute;zdn&iacute; vzd&aacute;lenosti od navrhovan&eacute;ho um&iacute;stěn&iacute; nov&eacute;ho obchodu.
+            </li>
+        </ul>
+        
+    </p>
+    <p>Pokud je za&scaron;krtnuto 
+        <b>Použ&iacute;vat rozsah aktu&aacute;ln&iacute; mapy</b>, budou analyzov&aacute;ny pouze prvky ve vrstvě anal&yacute;zy a v sumarizovan&eacute; vrstvě viditeln&eacute; v rozsahu aktu&aacute;ln&iacute; mapy. Pokud toto pole za&scaron;krtnuto nen&iacute;, budou analyzov&aacute;ny v&scaron;echny prvky ve vrstvě anal&yacute;zy a v sumarizovan&eacute; vrstvě, včetně těch, kter&eacute; se nach&aacute;z&iacute; mimo rozsah aktu&aacute;ln&iacute; mapy.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="Summarize">
+        <div><h2>Vybrat vrstvu pro sumarizaci</h2></div>
+        <hr/>
+        <div>
+            <p>Sumarizov&aacute;ny budou prvky v t&eacute;to vrstvě spadaj&iacute;c&iacute; do určen&eacute; vzd&aacute;lenosti od prvků ve vrstvě anal&yacute;zy. 
+            </p>
+            
+        </div>
+    </div>
+    <div id="BufferOption">
+        <div><h2>Vyhledat nejbližší prvky s použitím</h2></div>
+        <hr/>
+        <div>
+            <p>Umožňuje definovat, jak&yacute; druh měřen&iacute; vzd&aacute;lenosti chcete použ&iacute;t: vzdu&scaron;nou č&aacute;ru, j&iacute;zdn&iacute; vzd&aacute;lenost nebo dobu j&iacute;zdy. J&iacute;zdn&iacute; vzd&aacute;lenost i doba j&iacute;zdy použ&iacute;vaj&iacute; silničn&iacute; s&iacute;ť a respektuj&iacute; omezen&iacute;, jako jsou např&iacute;klad jednosměrn&eacute; ulice. Doba j&iacute;zdy respektuje aktu&aacute;ln&iacute; vystaven&eacute; rychlostn&iacute; omezen&iacute;. Můžete zadat v&iacute;ce vzd&aacute;lenost&iacute;. Sumarizov&aacute;ny budou prvky spadaj&iacute;c&iacute; do zadan&yacute;ch vzd&aacute;lenost&iacute; (nebo prvky s nimi shodn&eacute;).  
+            </p>
+        </div>
+    </div>
+    <div id="StatisticsPoint">
+        <div><h2>Přidat statistiky z</h2></div>
+        <hr/>
+        <div>
+            <p>Volitelně můžete spoč&iacute;tat statistiky jak&yacute;chkoliv č&iacute;seln&yacute;ch atributů nejbliž&scaron;&iacute;ch bodů. 
+            </p>
+            <p>Pokud za&scaron;krtnete pole 
+                <b>Počet bodů</b>, bude vypoč&iacute;t&aacute;n celkov&yacute; počet nejbliž&scaron;&iacute;ch bodů. Kromě toho můžete tak&eacute; spoč&iacute;tat statistiky č&iacute;seln&yacute;ch pol&iacute; nejbliž&scaron;&iacute;ch bodů.
+            </p>
+            <ul>
+                <li>
+                    <b>Součet</b> &ndash; Celkov&aacute; hodnota určen&eacute;ho pole.
+                </li>
+                <li>
+                    <b>Průměr</b> &ndash; Průměrn&aacute; hodnota určen&eacute;ho pole.
+                </li>
+                <li>
+                    <b>Minimum</b> &ndash; Nejniž&scaron;&iacute; hodnota v určen&eacute;m poli.
+                </li>
+                <li>
+                    <b>Maximum</b> &ndash; Nejvy&scaron;&scaron;&iacute; hodnota v určen&eacute;m poli.
+                </li>
+                <li>
+                    <b>Směrodatn&aacute; odchylka</b> &ndash; Směrodatn&aacute; odchylka hodnot v určen&eacute;m poli.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+    <div id="StatisticsLine">
+        <div><h2>Přidat statistiky z</h2></div>
+        <hr/>
+        <div>
+            <p>Volitelně můžete spoč&iacute;tat statistiky jak&yacute;chkoliv č&iacute;seln&yacute;ch atributů nejbliž&scaron;&iacute;ch lini&iacute;. 
+            </p>
+            <p>Pokud za&scaron;krtnete pole 
+                <b>Celkov&aacute; d&eacute;lka</b>, bude vypoč&iacute;t&aacute;na celkov&aacute; d&eacute;lka nejbliž&scaron;&iacute;ch lini&iacute;. Kromě toho můžete tak&eacute; spoč&iacute;tat statistiky č&iacute;seln&yacute;ch pol&iacute; nejbliž&scaron;&iacute;ch lini&iacute;.
+            </p>
+            <ul>
+                <li>
+                    <b>Součet</b> &ndash; Celkov&aacute; hodnota určen&eacute;ho pole.
+                </li>
+                <li>
+                    <b>Průměr</b> &ndash; Průměrn&aacute; hodnota určen&eacute;ho pole.
+                </li>
+                <li>
+                    <b>Minimum</b> &ndash; Nejniž&scaron;&iacute; hodnota v určen&eacute;m poli.
+                </li>
+                <li>
+                    <b>Maximum</b> &ndash; Nejvy&scaron;&scaron;&iacute; hodnota v určen&eacute;m poli.
+                </li>
+                <li>
+                    <b>Směrodatn&aacute; odchylka</b> &ndash; Směrodatn&aacute; odchylka hodnot v určen&eacute;m poli.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+    <div id="StatisticsPolygon">
+        <div><h2>Přidat statistiky z</h2></div>
+        <hr/>
+        <div>
+            <p>Volitelně můžete spoč&iacute;tat statistiky jak&yacute;chkoliv č&iacute;seln&yacute;ch atributů nejbliž&scaron;&iacute;ch oblast&iacute;. 
+            </p>
+            <p>Pokud za&scaron;krtnete pole 
+                <b>Celkov&aacute; oblast</b>, bude vypoč&iacute;t&aacute;na celkov&aacute; oblast nejbliž&scaron;&iacute;ch prvků. Kromě toho můžete tak&eacute; spoč&iacute;tat statistiky č&iacute;seln&yacute;ch pol&iacute; nejbliž&scaron;&iacute;ch prvků.
+            </p>
+            <ul>
+                <li>
+                    <b>Součet</b> &ndash; Celkov&aacute; hodnota určen&eacute;ho pole.
+                </li>
+                <li>
+                    <b>Průměr</b> &ndash; Průměrn&aacute; hodnota určen&eacute;ho pole.
+                </li>
+                <li>
+                    <b>Minimum</b> &ndash; Nejniž&scaron;&iacute; hodnota v určen&eacute;m poli.
+                </li>
+                <li>
+                    <b>Maximum</b> &ndash; Nejvy&scaron;&scaron;&iacute; hodnota v určen&eacute;m poli.
+                </li>
+                <li>
+                    <b>Směrodatn&aacute; odchylka</b> &ndash; Směrodatn&aacute; odchylka hodnot v určen&eacute;m poli.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+    <div id="GroupBy">
+        <div><h2>Vybrat pole k seskupení</h2></div>
+        <hr/>
+        <div>
+            <p>Toto je atribut nejbliž&scaron;&iacute;ch prvků, kter&eacute; lze použ&iacute;t ke spoč&iacute;t&aacute;n&iacute; statistik odděleně pro každou jedinečnou hodnotu atributu. Předpokl&aacute;dejme např&iacute;klad, že vrstva anal&yacute;zy obsahuje voln&eacute; pozemkov&eacute; parcely a nejbliž&scaron;&iacute; prvky jsou tvořeny obrysy budov. Jeden z atributů obrysů bodů je 
+                <i>UseType</i>, kter&yacute; obsahuje hodnoty, jako jsou OBCHODN&Iacute;, OBYTN&Eacute;, PRŮMYSLOV&Eacute;, VEŘEJN&Eacute; atd. Chcete-li charakterizovat směs &uacute;čelů budov v bl&iacute;zkosti každ&eacute; voln&eacute; parcely, můžete např&iacute;klad vypoč&iacute;tat celkovou oblast v&scaron;ech jedinečn&yacute;ch typů &uacute;čelů budov ve vzd&aacute;lenosti dvou kilometrů s použit&iacute;m atributu
+                <i>UseType</i> jako atributu k seskupen&iacute;.
+            </p>
+            
+            
+            
+            
+        </div>
+    </div>
+    <div id="OutputName">
+        <div><h2>Název výsledné vrstvy</h2></div>
+        <hr/>
+        <div>
+            <p>Jde o n&aacute;zev vrstvy, kter&aacute; se vytvoř&iacute; ve složce 
+                <b>Můj obsah</b> a přid&aacute; na mapu. V&yacute;choz&iacute; n&aacute;zev se ř&iacute;d&iacute; n&aacute;zvem vrstvy anal&yacute;zy. Pokud vrstva již existuje, budete pož&aacute;d&aacute;ni o potvrzen&iacute;, že si přejete ji přepsat.
+            </p>
+            <p>V&nbsp;rozbalovac&iacute;m seznamu 
+                <b>Uložit v&yacute;sledek do</b> můžete zadat n&aacute;zev složky ve složce
+                <b>Můj obsah</b>, do kter&eacute; se m&aacute; v&yacute;sledek uložit.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

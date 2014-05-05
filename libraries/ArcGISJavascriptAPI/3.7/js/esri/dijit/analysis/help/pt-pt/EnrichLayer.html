@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpId;
+                helpId = window.location.hash.substring(1);
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription", class="largesize">
+        <h2>Melhorar Camada</h2><p/>
+        <h2></h2>
+        <hr/>
+    <p>
+        <img src="../images/GUID-2B1E8F2B-B474-4AC2-AF32-FFFAA1C43B2E-web.png" alt="Melhorar Camada">
+    </p>
+    <p>Esta ferramenta melhora os dados, obtendo ainda mais dados sobre pessoas, lugares e empresas que existem em redor dos locais referentes aos dados.  
+        <b>Melhorar Camada</b> permite responder a quest&otilde;es sobre os locais que n&atilde;o s&atilde;o poss&iacute;veis de responder com um mapa. Por exemplo: Que tipo de pessoas vivem aqui? O que &eacute; que as pessoas gostam de fazer nesta &aacute;rea? Quais s&atilde;o os seus h&aacute;bitos e estilos de vida? Que tipo de empresas que existem nesta &aacute;rea?
+    </p>
+    <p>O resultado ser&aacute; uma nova camada que cont&eacute;m todas as informa&ccedil;&otilde;es demogr&aacute;ficas e geogr&aacute;ficas do dados.  Esta nova informa&ccedil;&atilde;o &eacute; adicionada atrav&eacute;s de campos na tabela.
+    </p>
+    <p>Se a op&ccedil;&atilde;o
+        <b>Utilizar a extens&atilde;o atual do mapa</b> estiver ativa, apenas os elementos que est&atilde;o visiv&eacute;is na atual extens&atilde;o do mapa ser&atilde;o analizados.  Se n&atilde;o estiver ativa, todos os elementos da camada de entrada ser&atilde;o analisados.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="DataCollection">
+        <div><h2>Mostrar os dados disponíveis para</h2></div>
+        <hr/>
+        <div>
+            <p>Selecione uma regi&atilde;o e obtenha uma lista de dados dispon&iacute;veis que gostaria de utilizar para melhorar os seus dados.     Para os Estados Unidos, Canad&aacute; e varios paises do mundo &eacute; poss&iacute;vel melhorar os dados, atrav&eacute;s da adi&ccedil;&atilde;o de listas pr&eacute;-elaboradas de atributos que fornecem informa&ccedil;&otilde;es demogr&aacute;ficas e de contexto geogr&aacute;fico sobre as pessoas, lugares e empresas que rodeiam os locais relativos aos dados.
+            </p>
+            
+            
+        </div>
+    </div>
+    <div id="BufferOption">
+        <div><h2>Definir áreas a melhorar</h2></div>
+        <hr/>
+        <div>
+            <p>Estas s&atilde;o as &aacute;reas que pode melhorar com informa&ccedil;&otilde;es adicionais provenientes da colec&ccedil;&atilde;o de dados. Se sua camada de an&aacute;lise cont&eacute;m pontos ou linhas, as &aacute;reas s&atilde;o criadas em torno de cada ponto ou linha, utilizando uma dist&acirc;ncia em linha reta ou um tempo de condu&ccedil;&atilde;o.  
+            </p>
+        </div>
+    </div>
+    <div id="OutputName">
+        <div><h2>Nome da camada de resultados</h2></div>
+        <hr/>
+        <div>
+            <p>Este &eacute; o nome da camada que ser&aacute; criada em
+                <b>O Meu Conte&uacute;do</b> e adicionada ao mapa.  O nome por defeito &eacute; baseado no nome da camada de an&aacute;lise. Se a camada j&aacute; existir, ser&aacute; questionado se pretende substituir a camada existente.
+            </p>
+            <p>Ao utilizar a op&ccedil;&atilde;o 
+                <b>Guardar resultado em</b> pode definir o nome da pasta em
+                <b>O Meu Conte&uacute;do</b> onde o resultado ser&aacute; guardado.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

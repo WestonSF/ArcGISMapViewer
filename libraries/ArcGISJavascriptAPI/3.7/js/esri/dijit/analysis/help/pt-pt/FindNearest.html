@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpId;
+                helpId = window.location.hash.substring(1);
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription", class="largesize">
+        <h2>Localizar Mais Próximos</h2><p/>
+        <h2></h2>
+        <hr/>
+    <p>Esta ferramenta localiza os elementos mais pr&oacute;ximos e, opcionalmente, comunica e classifica a dist&acirc;ncia at&eacute; aos elementos mais pr&oacute;ximos. Para localizar o que est&aacute; mais pr&oacute;ximo, a ferramenta pode medir uma dist&acirc;ncia em linha reta, uma dist&acirc;ncia em estrada ou o tempo de condu&ccedil;&atilde;o. Existem op&ccedil;&otilde;es para limitar o n&uacute;mero de elementos mais pr&oacute;ximos a localizar ou o intervalo de pesquisa no qual devem ser localizados. Os resultados originados por esta ferramenta podem ajudar a responder aos seguintes tipos de perguntas:
+        <ul>
+            <li>Qual &eacute; o parque que se encontra mais pr&oacute;ximo deste local?
+            </li>
+            <li>A que hospital posso chegar com o tempo de condu&ccedil;&atilde;o mais curto? Quanto tempo demoraria a viagem numa ter&ccedil;a-feira &agrave;s 17:30, durante a hora de ponta?
+            </li>
+            <li>Quais s&atilde;o as dist&acirc;ncias em estrada entre estas principais cidades?
+            </li>
+            <li>Quais destes pacientes moram dentro de uma &aacute;rea de duas milhas em rela&ccedil;&atilde;o a estas f&aacute;bricas de produtos qu&iacute;micos?
+            </li>
+        </ul>
+        
+    </p>
+    <p>A ferramenta Localizar Mais Pr&oacute;ximos devolve uma camada que cont&eacute;m os elementos mais pr&oacute;ximos e, opcionalmente, uma camada de linhas que liga as localiza&ccedil;&otilde;es iniciais &agrave;s localiza&ccedil;&otilde;es mais pr&oacute;ximas. A camada de linhas opcional cont&eacute;m informa&ccedil;&otilde;es sobre as localiza&ccedil;&otilde;es iniciais e as localiza&ccedil;&otilde;es mais pr&oacute;ximas, e as dist&acirc;ncias entre elas.
+    </p>
+    <p>Se marcar a op&ccedil;&atilde;o 
+        <b>Utilizar a extens&atilde;o atual do mapa</b>, apenas os elementos vis&iacute;veis na extens&atilde;o atual do mapa ser&atilde;o considerados elementos iniciais e, possivelmente, elementos mais pr&oacute;ximos.  Se n&atilde;o marcar a op&ccedil;&atilde;o, ser&atilde;o considerados todos os elementos na camada de entrada, mesmo que estejam fora da extens&atilde;o atual do mapa.
+        
+        
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="NearbyLocationsLayer">
+        <div><h2>Encontrar as localizações mais próximas em</h2></div>
+        <hr/>
+        <div>
+            <p>A ferramenta Localizar Mais Pr&oacute;ximos faz a medi&ccedil;&atilde;o a partir de cada uma das localiza&ccedil;&otilde;es na camada de entrada at&eacute; &agrave;s localiza&ccedil;&otilde;es nesta camada. A ferramenta suporta at&eacute; 1000 localiza&ccedil;&otilde;es em cada camada.
+            </p>
+        </div>
+    </div>
+    <div id="MeasurementMethod">
+        <div><h2>Medir</h2></div>
+        <hr/>
+        <div>
+            <p>Selecione se pretende encontrar as localiza&ccedil;&otilde;es mais pr&oacute;ximas com base em dist&acirc;ncia em linha reta, dist&acirc;ncia de condu&ccedil;&atilde;o ou tempo de condu&ccedil;&atilde;o. Em ambos os casos de condu&ccedil;&atilde;o, as medi&ccedil;&otilde;es s&atilde;o feitas ao longo de estradas e respeitam vias de sentido &uacute;nico, mudan&ccedil;as de dire&ccedil;&atilde;o ilegais, etc. 
+            </p>
+            <p>A localiza&ccedil;&atilde;o de elementos mais pr&oacute;ximos atrav&eacute;s de dist&acirc;ncia em linha reta permite utilizar pontos, linhas ou &aacute;reas como dados de entrada. Para medir o tempo de condu&ccedil;&atilde;o ou a dist&acirc;ncia de condu&ccedil;&atilde;o, as duas camadas de entrada (localiza&ccedil;&otilde;es de entrada e localiza&ccedil;&otilde;es mais pr&oacute;ximas) t&ecirc;m de conter pontos. 
+            </p>
+            <p>Quando faz a medi&ccedil;&atilde;o entre linhas ou &aacute;reas, &eacute; encontrada a dist&acirc;ncia de ou para o ponto mais pr&oacute;ximo ao longo da linha ou do limite da &aacute;rea. 
+            </p>
+        </div>
+    </div>
+    <div id="Cutoffs">
+        <div><h2>Para cada localização em</h2></div>
+        <hr/>
+        <div>
+            
+            <p>Existem duas op&ccedil;&otilde;es para limitar a pesquisa de localiza&ccedil;&otilde;es mais pr&oacute;ximas. Uma op&ccedil;&atilde;o consiste em limitar o n&uacute;mero m&aacute;ximo de localiza&ccedil;&otilde;es mais pr&oacute;ximas a encontrar por cada localiza&ccedil;&atilde;o inicial. Pode localizar o parque mais pr&oacute;ximo, os dois parques mais pr&oacute;ximos, etc. A outra op&ccedil;&atilde;o consiste em definir um valor m&aacute;ximo para a dist&acirc;ncia de pesquisa ou para o tempo de condu&ccedil;&atilde;o.
+            </p>
+            <p>Se desmarcar as op&ccedil;&otilde;es, o n&uacute;mero m&aacute;ximo de localiza&ccedil;&otilde;es mais pr&oacute;ximas a encontrar &eacute; de 100 (o limite da ferramenta) e o intervalo de pesquisa m&aacute;ximo &eacute; ilimitado.
+            </p>
+            <p>O tempo de processamento depende do n&uacute;mero de localiza&ccedil;&otilde;es iniciais, do n&uacute;mero de localiza&ccedil;&otilde;es pr&oacute;ximas e do intervalo de pesquisa m&aacute;ximo.   O processamento demora mais tempo se existirem mais localiza&ccedil;&otilde;es ou intervalos de pesquisa maiores.
+                
+            </p>
+            <p>Tenha em aten&ccedil;&atilde;o que, se for definido um limite no intervalo de pesquisa, &eacute; poss&iacute;vel que a ferramenta n&atilde;o encontre quaisquer localiza&ccedil;&otilde;es mais pr&oacute;ximas dentro desse intervalo. Tamb&eacute;m &eacute; poss&iacute;vel encontrar menos localiza&ccedil;&otilde;es do que o n&uacute;mero m&aacute;ximo de localiza&ccedil;&otilde;es mais pr&oacute;ximas definido por si.
+            </p>
+            
+        </div>
+    </div>
+    <div id="UseTypicalTraffic">
+        <div><h2>Utilizar condições de trânsito típicas para</h2></div>
+        <hr/>
+        <div>
+            <p>
+                Ao medir o tempo de condu&ccedil;&atilde;o, o que est&aacute; mais pr&oacute;ximo pode depender do tr&acirc;nsito e da altura do dia. Imagine que pretende localizar o servi&ccedil;o de urg&ecirc;ncia mais pr&oacute;ximo no tr&acirc;nsito em hora de ponta. Durante a hora de ponta matinal, os ve&iacute;culos que est&atilde;o a entrar na dire&ccedil;&atilde;o do centro da cidade tendem a deslocar-se mais lentamente do que os ve&iacute;culos que est&atilde;o a sair da cidade. O estabelecimento mais pr&oacute;ximo nessa altura do dia poder&aacute; encontrar-se na dire&ccedil;&atilde;o de sa&iacute;da. Ao fim da tarde, o tr&acirc;nsito de entrada desloca-se mais rapidamente, por isso &eacute; poss&iacute;vel que um estabelecimento diferente na dire&ccedil;&atilde;o de entrada seja o mais pr&oacute;ximo.
+            </p>
+            <p>Se marcar 
+                <b>Utilizar condi&ccedil;&otilde;es de tr&acirc;nsito t&iacute;picas para</b> e definir um dia e uma hora, a ferramenta localiza os elementos mais pr&oacute;ximos com base em m&eacute;dias de velocidades hist&oacute;ricas para cada intervalo de cinco minutos ao longo de uma semana normal. Os elementos mais pr&oacute;ximos podem variar consoante as flutua&ccedil;&otilde;es de tr&acirc;nsito e tempos de viagem ao longo da semana.
+            </p>
+            <p>Tenha em aten&ccedil;&atilde;o que, &agrave; medida que um ve&iacute;culo se desloca para fora a partir de um ponto, o tempo passa e as condi&ccedil;&otilde;es de tr&acirc;nsito mudam. Esta ferramenta tem em conta essas varia&ccedil;&otilde;es quando opta por utilizar tr&acirc;nsito; no entanto, nem todas as regi&otilde;es suportam tr&acirc;nsito. Clique na liga&ccedil;&atilde;o 
+                <b>Ver disponibilidade</b> na ferramenta para verificar se &eacute; disponibilizada na sua &aacute;rea de estudo.
+            </p>
+            <p>Desmarque a op&ccedil;&atilde;o 
+                <b>Utilizar condi&ccedil;&otilde;es de tr&acirc;nsito t&iacute;picas para</b> para localizar os elementos mais pr&oacute;ximos com base em velocidades est&aacute;ticas de desloca&ccedil;&atilde;o, como limites de velocidade. Esta &eacute; a op&ccedil;&atilde;o que deve selecionar se pretender saber o que est&aacute; mais pr&oacute;ximo de um modo geral, mas n&atilde;o necessariamente o mais pr&oacute;ximo dadas as condi&ccedil;&otilde;es de tr&acirc;nsito para uma hora e um dia espec&iacute;ficos.
+            </p>
+        </div>
+    </div>
+    <div id="UseTraffic">
+        <div><h2>Utilizar tráfego</h2></div>
+        <hr/>
+        <div>
+            <p>Quando seleciona 
+                <b>Tempo de condu&ccedil;&atilde;o</b>, disp&otilde;e de op&ccedil;&otilde;es relativas ao modo de medir o tempo de condu&ccedil;&atilde;o.
+                <ul>
+                    <li>
+                        <p>Desmarque a op&ccedil;&atilde;o 
+                            <b>Utilizar Tr&acirc;nsito</b> para localizar os elementos mais pr&oacute;ximos com base em velocidades est&aacute;ticas de desloca&ccedil;&atilde;o (por exemplo, limites de velocidade) e n&atilde;o em velocidades flutuantes causadas por condi&ccedil;&otilde;es de tr&acirc;nsito em mudan&ccedil;a. Esta &eacute; a op&ccedil;&atilde;o que deve selecionar se pretender saber o que est&aacute; mais pr&oacute;ximo de um modo geral, mas n&atilde;o necessariamente o mais pr&oacute;ximo dadas as condi&ccedil;&otilde;es de tr&acirc;nsito para uma hora e um dia espec&iacute;ficos.
+                        </p>
+                    </li>
+                    <li>
+                        <p>Marque a op&ccedil;&atilde;o 
+                            <b>Utilizar Tr&acirc;nsito</b> para localizar os elementos mais pr&oacute;ximos com base numa hora de partida espec&iacute;fica e em condi&ccedil;&otilde;es de tr&acirc;nsito em mudan&ccedil;a. Se selecionar tamb&eacute;m a op&ccedil;&atilde;o
+                            <b>Tr&acirc;nsito real</b>, a hora de partida das localiza&ccedil;&otilde;es iniciais &eacute; definida para a hora atual e as velocidades de tr&acirc;nsito atuais e previstas s&atilde;o referenciadas a partir de sensores e feeds para determinar que elementos est&atilde;o mais pr&oacute;ximos. As velocidades de tr&acirc;nsito previstas s&atilde;o calculadas referenciando velocidades de tr&acirc;nsito real, velocidades hist&oacute;ricas e eventos atuais, como a meteorologia. As velocidades de tr&acirc;nsito s&atilde;o previstas para um per&iacute;odo de 12 horas no futuro, por isso pode mover o cursor deslizante para definir a hora de partida com anteced&ecirc;ncia de at&eacute; 12 horas.
+                        </p>
+                        <p>Utilize estas defini&ccedil;&otilde;es de tr&acirc;nsito real para descobrir que elementos podem ser alcan&ccedil;ados em menos tempo partindo no momento, partindo ap&oacute;s uma hora, etc.
+                        </p>
+                    </li>
+                    <li>
+                        <p>Se marcar 
+                            <b>Utilizar Tr&acirc;nsito</b> e selecionar
+                            <b>Tr&acirc;nsito baseado em condi&ccedil;&otilde;es t&iacute;picas para</b> um dia e uma hora, a ferramenta localiza os elementos mais pr&oacute;ximos com base em m&eacute;dias de velocidades hist&oacute;ricas para cada intervalo de cinco minutos ao longo de uma semana normal. Os resultados incluem tr&acirc;nsito, mas removem a influ&ecirc;ncia de condi&ccedil;&otilde;es de tr&acirc;nsito e eventos atuais, que podem variar significativamente em rela&ccedil;&atilde;o ao normal.
+                        </p>
+                        <p>
+                            Pode utilizar as defini&ccedil;&otilde;es de tr&acirc;nsito hist&oacute;rico para perguntar, por exemplo: &quot;Que elementos &eacute; poss&iacute;vel alcan&ccedil;ar mais rapidamente partindo dos elementos iniciais &agrave;s 11:30 numa quarta-feira?&quot;
+                        </p>
+                        <p>A hora definida refere-se ao fuso hor&aacute;rio no qual est&atilde;o localizados os elementos iniciais. Assim, se definir a hora para 8:00 e tiver dois elementos iniciais, um na cidade de Nova Iorque e outro em Los Angeles, as localiza&ccedil;&otilde;es mais pr&oacute;ximas ser&atilde;o encontradas pressupondo uma hora de partida de 8:00 (Hora da Costa Leste) e 8:00 (Hora do Pac&iacute;fico), respetivamente.
+                        </p>
+                    </li>
+                </ul>
+                Tenha em aten&ccedil;&atilde;o que, &agrave; medida que um ve&iacute;culo se desloca para fora a partir de um ponto, o tempo passa e as condi&ccedil;&otilde;es de tr&acirc;nsito mudam. Esta ferramenta tem em conta essas varia&ccedil;&otilde;es quando &eacute; marcada a op&ccedil;&atilde;o
+                <b>Utilizar tr&acirc;nsito</b>; no entanto, nem todas as regi&otilde;es suportam tr&acirc;nsito. Clique na liga&ccedil;&atilde;o
+                <b>Ver disponibilidade</b> na ferramenta para verificar se &eacute; disponibilizada na sua &aacute;rea de estudo.
+                
+            </p>
+        </div>
+    </div>
+    <div id="OutputNearestLocationsLayer">
+        <div><h2>Nome da camada de resultado</h2></div>
+        <hr/>
+        <div>
+            <p>Esta camada de resultado ir&aacute; conter duas camadas: uma com as localiza&ccedil;&otilde;es mais pr&oacute;ximas e outra com as linhas que ligam as localiza&ccedil;&otilde;es de entrada &agrave;s localiza&ccedil;&otilde;es mais pr&oacute;ximas.
+            </p>
+            <p>Uma vez que as linhas mostram os percursos medidos, seguem percursos direitos quando s&atilde;o medidas dist&acirc;ncias em linha reta, percursos mais curtos ao longo de estradas quando s&atilde;o medidas dist&acirc;ncias de condu&ccedil;&atilde;o ou percursos mais r&aacute;pidos ao longo de estradas quando s&atilde;o medidos tempos de condu&ccedil;&atilde;o. A tabela que faz parte da camada de linhas opcional cont&eacute;m as seguintes informa&ccedil;&otilde;es: as medi&ccedil;&otilde;es de dist&acirc;ncia ou tempo de condu&ccedil;&atilde;o representadas pelas linhas, informa&ccedil;&atilde;o de identifica&ccedil;&atilde;o relativa &agrave;s localiza&ccedil;&otilde;es de in&iacute;cio e fim ligadas, e classifica&ccedil;&otilde;es de proximidade divididas por localiza&ccedil;&atilde;o inicial, que permite ver qual &eacute; a localiza&ccedil;&atilde;o mais pr&oacute;xima, a segunda localiza&ccedil;&atilde;o mais pr&oacute;xima, etc. Na medi&ccedil;&atilde;o de tempo de condu&ccedil;&atilde;o com tr&acirc;nsito, a tabela inclui tamb&eacute;m as horas de partida e chegada.
+            </p>
+            <p>Pode utilizar os nomes padr&atilde;o ou definir nomes novos para estas camadas, que ser&atilde;o criadas em 
+                <b>O Meu Conte&uacute;do</b> e adicionadas ao mapa.  Os nomes padr&atilde;o s&atilde;o baseados no nome da camada de an&aacute;lise. Se a camada j&aacute; existir, ser-lhe-&aacute; pedido que confirme se pretende substituir a camada.
+            </p>
+            <p>Utilizando a caixa de lista pendente 
+                <b>Guardar resultado em</b>, pode definir o nome de uma pasta em
+                <b>O Meu Conte&uacute;do</b> para guardar os resultados.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

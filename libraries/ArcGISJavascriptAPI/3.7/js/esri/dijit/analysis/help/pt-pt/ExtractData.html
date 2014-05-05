@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpId;
+                helpId = window.location.hash.substring(1);
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription", class="largesize">
+        <h2>Extrair dados</h2><p/>
+        <h2></h2>
+        <hr/>
+    <p>Com esta ferramenta, &eacute; possivel selecionar e transferir dados de uma &aacute;rea espec&iacute;fica de interesse. As camadas ser&atilde;o adicionadas a um ficheiro zip ou a um pacote de camadas.
+
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="InputLayers">
+        <div><h2>Camadas a extrair</h2></div>
+        <hr/>
+        <div>
+            <p>As camadas na tabela de conte&uacute;dos a partir das quais pode extrair elementos.  Camadas seleccionadas e inclu&iacute;das num ficheiro zip ou resultante de um pacote de camadas.
+
+            </p>
+            <p>Para que uma camada apare&ccedil;a na lista de camadas a extrair, deve possuir os dados ou o propriet&aacute;rio dos dados deve permitir exporta&ccedil;&atilde;o dos mesmos.     Para permitir a exporta&ccedil;&atilde;o dos seus dados:
+                <ul>
+                    <li>Abra a descri&ccedil;&atilde;o do item dos dados.
+                    </li>
+                    <li>Clique em EDITAR para alterar a descri&ccedil;&atilde;o do item.
+                    </li>
+                    <li>Navegue at&eacute; 
+                        <b>Propriedades</b>.
+                    </li>
+                    <li>Ative 
+                        <b>Exportar Dados</b>.
+                    </li>
+                </ul>
+                
+            </p>
+            
+        </div>
+    </div>
+    <div id="AreaOfInterest">
+        <div><h2>Área de estudo</h2></div>
+        <hr/>
+        <div>
+            <p>&Aacute;rea que define quais os elementos que ser&atilde;o inclu&iacute;dos no ficheiro zip ou no pacote de camadas. Pode escolher entre os seguintes:
+                <ul>
+                    <li>Extens&atilde;o atual do mapa (
+                        <b>Igual &agrave; exibida</b>).
+                    </li>
+                    <li>Uma das camadas da tabela de conte&uacute;dos.
+                    </li>
+                    <li>Desenhar uma &aacute;rea de forma a definir a &aacute;rea de estudo.
+                    </li>
+                </ul>
+                 Todos os elementos que se encontram inseridos na extens&atilde;o do mapa ser&atilde;o extra&iacute;dos.  Para os casos em que os elementos se cruzam ou intersetam com os limites da extens&atilde;o do mapa mas que n&atilde;o est&atilde;o completamente inseridos na extens&atilde;o, tem duas op&ccedil;&otilde;es:
+                <ul>
+                    <li>
+                        <b>Selecionar os elementos</b>-Os elementos que cruzam com os limites da &aacute;rea de estudo ser&atilde;o extra&iacute;dos.
+                    </li>
+                    <li>
+                        <b>Recortar elementos</b>-S&oacute; as por&ccedil;&otilde;es dos elementos que est&atilde;o dentro da &aacute;rea de trabalho v&atilde;o ser extra&iacute;dos.
+                    </li>
+                </ul>
+                
+            </p>
+        </div>
+    </div>
+    <div id="OutputFormat">
+        <div><h2>Formato dos dados de saída</h2></div>
+        <hr/>
+        <div>
+            <p>Formato dos dados que ser&atilde;o extra&iacute;dos e descarregados.  Os pacotes de camadas incluem sempre geodatabases.
+            </p>
+        </div>
+    </div>
+    <div id="OutputName">
+        <div><h2>Nome do ficheiro de saída</h2></div>
+        <hr/>
+        <div>
+            <p>
+                Este &eacute; o nome do item que ser&aacute; adicionado ao
+                <b>O Meu Conte&uacute;do</b>.  O nome do item &eacute; baseado no
+                <b>Formato dos dados de sa&iacute;da</b>.     Se o item j&aacute; existir, ser&aacute; questionado se pretende substituir o item existente.
+            </p>
+            <p>Ao utilizar a op&ccedil;&atilde;o
+                <b>Guardar resultado em</b> pode definir o nome da pasta em
+                <b>O Meu Conte&uacute;do</b> onde o resultado ser&aacute; guardado.
+            </p>
+            
+        </div>
+    </div>
+</div>
+</html>

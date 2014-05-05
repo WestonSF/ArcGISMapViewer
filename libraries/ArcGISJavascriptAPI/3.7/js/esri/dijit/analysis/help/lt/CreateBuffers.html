@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpId;
+                helpId = window.location.hash.substring(1);
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription", class="largesize">
+        <h2>Kurti buferius</h2><p/>
+        <h2></h2>
+        <hr/>
+    <p>Buferis - tai zona aplink ta&scaron;ką, liniją ar poligoną tam tikru atstumu. 
+    </p>
+    <p>Buferiai dažnai kuriami tam, kad būtų galima atlikti tolesnę analizę naudojant kitus įrankius, pavyzdžiui, Perdengti sluoksnius. Tarkime, jei domina, kurie pastatai yra vieno km. atstumu nuo mokyklos, atsakymas gali būti gautas pirmiausia sukūrus vieno kilometro buferį apie mokyklą ir perdengus buferį pastatų sluoksniu.  Rezultatas bus sluoksnis i&scaron; pastatų, nutolusių nuo mokyklos nedidesniu nei vieno kilometro atstumu.  
+    </p>
+    <p>Jei 
+        <b>Naudoti esamą žemėlapio aprėptį</b> pažymėtas, buferiai bus sudaromi tik apie aprėptyje matomus elementus.  Jei nepažymėtas, buferiai bus sudaromi apie visus sluoksnio elementus.
+    </p>
+    <p>
+        
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="BufferSize">
+        <div><h2>Nurodykite buferio dydį</h2></div>
+        <hr/>
+        <div>
+            <p>Galite įvesti vieną arba keletą tarpais atskirtų atstumo reik&scaron;mių.  Taip pat galite nurodyti sluoksnio atributą, jei norite panaudoti jo reik&scaron;mę, paspausdami 
+                <b>Laukas</b>.
+            </p>
+            
+        </div>
+    </div>
+    <div id="OptionPoint">
+        <div><h2>Parinktys</h2></div>
+        <hr/>
+        <div>
+            <p>Nurodykite, kaip turi būti pasielgta su besikertančiais buferiais. Besikertantys buferiai gali būti palikti kaip atskiri elementai arba apjungti.
+            </p>
+            
+            
+            <p>
+                Jei naudojate keletą buferių atstumų, galite pasirinkti, kaip jie bus atidėti;   pavyzdžiui, jei atstumai yra 10 ir 14:
+                <ul>
+                    <li>Pasirinkus 
+                        <b>Žiedai</b> rezultatas bus zonos tarp 0 ir 10 bei 10 ir 14.
+                    </li>
+                    <li>Pasirinkus
+                        <b>Diskai</b> rezultatas bus beferiai tarp 0 ir 10 bei 0 ir 14.
+                    </li>
+                </ul>
+                
+            </p>
+        </div>
+    </div>
+    <div id="OptionPoly">
+        <div><h2>Parinktys</h2></div>
+        <hr/>
+        <div>
+            <p>Nurodykite, kaip turi būti pasielgta su besikertančiais buferiais. 
+            </p>
+            <p>Jei kuriate buferį aplink plotinį objektą (įvestas vienas atstumas), galite nurodyti, ar elemento plotas turi būti įtrauktas į buferio zoną.
+            </p>
+            <p>Jei naudojate keletą buferių atstumų galite pasirinkti, kaip jie bus atidėti;   pavyzdžiui, jei atstumai yra 10 ir 14:
+                <ul>
+                    <li>Pasirinkus 
+                        <b>Žiedai</b> rezultatas bus zonos tarp 0 ir 10 bei 10 ir 14.
+                    </li>
+                    <li>Pasirinkus 
+                        <b>Plok&scaron;tės</b> rezultatas bus beferiai tarp 0 ir 10 bei 0 ir 14.
+                    </li>
+                </ul>
+                
+            </p>
+            
+        </div>
+    </div>
+    <div id="OptionLine">
+        <div><h2>Parinktys</h2></div>
+        <hr/>
+        <div>
+            <p>Nurodykite, kaip turi būti pasielgta su besikertančiais buferiais. Besikertantys buferiai gali būti palikti kaip atskiri elementai arba apjungti.
+            </p>
+            <p>Jei buferis kuriamas apie liniją (įvestas vienas atstumas), galite pasirinkti, kurioje linijos pusėje buferis turi būti sukurtas.  Pagal nutylėjimą, buferis bus kuriamas abiejose pusėse.  Kairė ir de&scaron;inė pusės suprantamos pagal kryptį i&scaron; liniją sudarančios pirmos x,y koordinačių poros iki paskutinės.  Rinkitės kairę arba de&scaron;inę pusę, jei žinote linijų koordinačių i&scaron;sidėstymo tvarką (pavyzdžiui, auk&scaron;tyn ar žemyn upių tinkle).   Buferis linijos gali gale būti arba suapvalintas, arba tiesus.
+            </p>
+            <p>Jei naudojate keletą buferių atstumų, galite pasirinkti, kaip jie bus atidėti;   pavyzdžiui, jei atstumai yra 10 ir 14:
+                <ul>
+                    <li>Pasirinkus 
+                        <b>Žiedai</b>, rezultatas bus zonos tarp 0 ir 10 bei 10 ir 14.
+                    </li>
+                    <li>Pasirinkus
+                        <b>Plok&scaron;tės</b>, rezultatas bus beferiai tarp 0 ir 10 bei 0 ir 14.
+                    </li>
+                </ul>
+                
+            </p>
+            
+        </div>
+    </div>
+    <div id="BufferLayer">
+        <div><h2>Rezultatų sluoksnio vardas</h2></div>
+        <hr/>
+        <div>
+            <p>Tai sluoksnio, kuris bus sukurtas ir patalpintas 
+                <b>Mano Turinyje</b> ir pridėtas į žemėlapį, pavadinimas.  Pagal nutylėjimą pavadinimas sudaromas pagal analizės tipą ir analizuojamo sluoksnio pavadinimą. Jei sluoksnis jau egzistuoja, galėsite pasirinkti jį perra&scaron;yti.
+            </p>
+            <p>Naudodami 
+                <b>Rezultatą įra&scaron;yti į</b> sąra&scaron;ą, galite nurodyti
+                <b>Mano Turinyje</b> esančio aplanko pavadinimą.
+            </p>
+            
+        </div>
+    </div>
+</div>
+</html>

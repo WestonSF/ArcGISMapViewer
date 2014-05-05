@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpId;
+                helpId = window.location.hash.substring(1);
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription", class="largesize">
+        <h2>Karttatasokerrokset</h2><p/>
+        <h2></h2>
+        <hr/>
+    <p>Kerros yhdist&auml;&auml; kaksi tai useampia karttatasoja yhteen karttatasoon.  Karttatasokerros on tavallaan kuin karttapino, jonka alimmassa kartassa n&auml;kyv&auml;t kaikkien pinon karttojen yhdistetyt tiedot.   Itse asiassa ennen GIS:n kehitt&auml;mist&auml; kartantekij&auml;t kopioivatkin kartat kirkkaille asetaattilevyille, asettivat levyt valop&ouml;yd&auml;lle ja piirsiv&auml;t sitten k&auml;sin uuden kartan, jolle tulivat kaikkien p&auml;&auml;llekk&auml;in asetettujen karttojen tiedot. Karttatasokerros on kuitenkin paljon muutakin kuin vain eri karttojen yhteinen kuva, sill&auml; kaikki kerrokseen tulevien kohteiden attribuutit n&auml;kyv&auml;t karttatasokerroksen lopullisessa versiossa. Karttatasokerroksen avulla voit saada vastauksen paikkatietojen perustarkoitukseen: &rdquo;Mik&auml; on mink&auml;kin p&auml;&auml;ll&auml;?&rdquo; Esimerkki:
+        <ul>
+            <li>Mitk&auml; kiinteist&ouml;t ovat edellisten 100 vuoden aikana tulvineen alueen sis&auml;ll&auml; (eli vastaavassa karttatasossa)?
+                  
+            </li>
+            <li>Mit&auml; teit&auml; on kussakin piirikunnassa?
+            </li>
+            <li>Mihin tarkoitukseen tietyn maaper&auml;tyypin maa-alueita k&auml;ytet&auml;&auml;n?
+                 
+            </li>
+            <li>Mit&auml; kaivoja on hyl&auml;ttyjen armeijan tukikohtien alueilla?
+            </li>
+        </ul>
+        
+    </p>
+    <p>
+        Jos
+        <b>K&auml;yt&auml; nykyist&auml; karttalaajuutta</b> -toiminto on valittuna, vain analyysikarttatasossa ja karttatasokerroksessa olevat, nykyisess&auml; karttalaajuudessa n&auml;kyv&auml;t kohteet asetetaan p&auml;&auml;llekk&auml;in.  Jos toimintoa ei ole valittu, analyysiin sis&auml;llytet&auml;&auml;n kaikki analyysikarttatason ja karttatasokerroksen kohteet, vaikka ne eiv&auml;t sijaitsisikaan nykyisen karttalaajuuden alueella.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="OverlayLayer">
+        <div><h2>Valitse karttatasokerros</h2></div>
+        <hr/>
+        <div>
+            <p>Valitse karttataso, jonka p&auml;&auml;lle analyysikarttataso asetetaan.  
+            </p>
+            
+        </div>
+    </div>
+    <div id="OverlayType">
+        <div><h2>Valitse peittotapa</h2></div>
+        <hr/>
+        <div>
+            <p>Peittotapa m&auml;&auml;ritt&auml;&auml;, miten analyysikarttataso ja karttatasokerros yhdistet&auml;&auml;n.  
+                <ul>
+                    <li>
+                        <b>Leikkauskohta</b>: Tulos sis&auml;lt&auml;&auml; vain ne karttatasokerroksen kohteet tai osat, jotka osuvat p&auml;&auml;llekk&auml;in analyysikarttatason kohteiden kanssa.  Jos analyysikarttataso on alueen kohteiden karttataso, karttatasokerroksessa voi olla alue-, piste- tai viivakohteita.  Jos analyysikarttataso on viivakohteiden karttataso, karttatasokerros voi olla vain viiva- tai pistekohteita sis&auml;lt&auml;v&auml; karttataso.  Jos analyysikarttatasossa k&auml;ytet&auml;&auml;n pistekohteita, karttatasokerroksessa on oltava my&ouml;s pistekohteita.
+                    </li>
+                    <li>
+                        <b>Liitos</b>: Tuloksissa n&auml;kyv&auml;t sek&auml; analyysikarttatason ett&auml; karttatasokerroksen kohteet. Liitos-valinta on k&auml;ytett&auml;viss&auml; vain, jos sek&auml; analyysikarttataso ett&auml; karttatasokerros sis&auml;lt&auml;v&auml;t aluekohteita.
+                    </li>
+                    <li>
+                        <b>Pyyhi</b>: tulos sis&auml;lt&auml;&auml; karttatasokerroksessa sellaiset kohteet tai kohteiden osat, jotka eiv&auml;t mene p&auml;&auml;llekk&auml;in analyysikarttatason alueiden kanssa.  Karttatasokerros voi sis&auml;lt&auml;&auml; alue-, viiva- tai pistekohteita.
+                    </li>
+                </ul>
+                
+            </p>
+            <p>Jos 
+                <b>K&auml;yt&auml; nykyist&auml; karttalaajuutta</b> -toiminto on valittuna, vain analyysikarttatasossa ja karttatasokerroksessa olevat, nykyisess&auml; karttalaajuudessa n&auml;kyv&auml;t kohteet asetetaan p&auml;&auml;llekk&auml;in.  Jos toimintoa ei ole valittu, analyysiin sis&auml;llytet&auml;&auml;n kaikki analyysikarttatason ja karttatasokerroksen kohteet, vaikka ne eiv&auml;t sijaitsisikaan nykyisen karttalaajuuden alueella.
+            </p>
+            
+        </div>
+    </div>
+    <div id="OutputLayer">
+        <div><h2>Tuloskarttatason nimi</h2></div>
+        <hr/>
+        <div>
+            <p>
+                T&auml;m&auml; on sen karttatason nimi, joka luodaan
+                <b>Oma sis&auml;lt&ouml;</b> -kohdassa ja lis&auml;t&auml;&auml;n karttaan.  Sen kohdetyyppi (alue, viiva tai piste) on sama kuin karttatasokerroksessa.  Oletusarvoinen nimi perustuu peittotapaan ja sy&ouml;tekarttatason nimeen. Jos karttataso on jo olemassa, ohjelmisto pyyt&auml;&auml; vahvistusta sen korvaamiselle.
+            </p>
+            <p>Avattavan 
+                <b>Tallenna tulokset kansioon</b> -luetteloruudun avulla voit m&auml;&auml;ritt&auml;&auml;
+                <b>Oma sis&auml;lt&ouml;</b> -kohdassa sen kansion nimen, johon tulokset tallennetaan.
+            </p>
+            
+        </div>
+    </div>
+</div>
+</html>

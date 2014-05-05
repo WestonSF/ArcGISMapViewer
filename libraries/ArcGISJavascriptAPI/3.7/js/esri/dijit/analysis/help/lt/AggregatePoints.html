@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpId;
+                helpId = window.location.hash.substring(1);
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription", class="largesize">
+        <h2>Agreguoti taškus</h2><p/>
+        <h2></h2>
+        <hr/>
+    <p>&Scaron;is įrankis veikia su analizuojamu ta&scaron;kų sluoksniu bei sluoksniu, sudarytu i&scaron; plotinių objektų. Jis aptinka, į kurias teritorijas patenka ta&scaron;kai. Apskaičiavus &scaron;į erdvinį ry&scaron;į, apskaičiuojama ir plotui priskiriama jo ta&scaron;kų statistika. Pats paprasčiausias apskaičiuojamas rodiklis - ta&scaron;kų skaičius. 
+    </p>
+    <p>
+        Pavyzdžiui, jei turite kavinių ir seniūnijų sluoksnius, galite sužinoti, kiek kavinių yra kiekvienoje seniūnijoje, bei apskaičiuoti apyvartą kiekvienoje seniūnijoje.  Jei kavinių duomenyse yra
+        <i>TOTAL_SALES</i> atributas, galite gauti
+        <i>TOTAL_SALES</i> sumą kiekvienoje seniūnijoje, mažiausią ar didžiausią
+        <i>TOTAL_SALES</i>
+ reik&scaron;mę kiekvienoje seniūnijoje, arba standartinį pardavimų nuokrypį.
+    </p>
+    <p>Analizės rezultatas - žemėlapis, kuriame kiekvienos teritorijos spalva priklauso nuo bendro ta&scaron;kų skaičiaus ir teritorijos ploto santykio.  Elementų skaičiaus dalinimas i&scaron; ploto vadinamas normalizavimu.  Normalizavimas leidžia geriau vizualiai atskleisti geografinį pasiskirstymą, nes įvertinamas skirtingas teritorijų plotas.
+    </p>
+    <p>Jei 
+        <b>Naudoti esamą žemėlapio aprėptį</b> pažymėtas, analizuojami bus tik aprėptyje matomi elementai.  Jei nepažymėtas, analizuojami visi abiejų sluoksnių elementai.
+    </p>
+    <p>
+        
+        
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="PolygonLayer">
+        <div><h2>Nurodykite plotą</h2></div>
+        <hr/>
+        <div>
+            <p>
+                Pasirinkite plotinių elementų sluoksnį internetiniame žemėlapyje, kuriame bus agreguoti ta&scaron;kai. Jei internetiniame žemėlapyje nėra teritorijų sluoksnio, galite jį surasti naudodami ArcGIS Online. Bus apskaičiuotas ta&scaron;kų, patenkančių į &scaron;io sluoksnio teritorijas, skaičius bei kiti pasirinkti statistiniai rodikliai.
+            </p>
+            
+        </div>
+    </div>
+    <div id="KeepBoundaryNoPoints">
+        <div><h2>Palikti plotus be taškų</h2></div>
+        <hr/>
+        <div>
+            <p>Nurodo, ar plotai, į kuriuos nepatenka nė vienas ta&scaron;kas, bus įtraukti į rezultato sluoksnį.  Jei nepažymėta, plotai be ta&scaron;kų nebus įtraukti į rezultatą.  Jei pažymėta, plotai be ta&scaron;kų bus įtraukti į rezultatą.  
+            </p>
+            
+        </div>
+    </div>
+    <div id="SummaryFields">
+        <div><h2>Pridėti statistiką</h2></div>
+        <hr/>
+        <div>
+            <p>Galite apskaičiuoti tokius ta&scaron;kų atributų statistinius rodiklius, kaip sumą, vidurkį, minimumą, maksimumą bei standartinį nuokrypį. Rezultato sluoksnis turės naujus atributus kiekvienam apskaičiuotam statistiniam rodikliui. Pasirinktiems atributams gali būti apskaičiuotas norimas statistinių rodiklių skaičius (pasirinkite i&scaron; sąra&scaron;o).
+
+ 
+            </p>
+        </div>
+    </div>
+    <div id="GroupByField">
+        <div><h2>Pasirinkite grupavimo lauką</h2></div>
+        <hr/>
+        <div>
+            <p>Nurodydami atributą galite sukurti statistines analizuojamo sluoksnio grupes.    Pavyzdžiui, jei nusikaltimų ta&scaron;kai agreguojami pagal seniūnijų ribas, gali būti atributas 
+                <i>Crime_type</i> su penkiomis nusikaltimų rū&scaron;imis.  Kiekviena nusikatimo rū&scaron;is naudojama grupavimui, todėl statistiniai rodikliai apskaičiuojami kiekvienai reik&scaron;mei i&scaron;
+                <i>Crime_type</i>.  Kai nurodote grupavimo atributą, sukuriami du rezultatai: rezultato sluoksnis ir lentelė su statistinių rodiklių įverčiais kiekvienai grupei.
+            </p>
+            <p>
+                
+                
+            </p>
+            
+        </div>
+    </div>
+    <div id="OutputLayer">
+        <div><h2>Rezultato sluoksnio pavadinimas</h2></div>
+        <hr/>
+        <div>
+            <p>Tai sluoksnio, kuris bus sukurtas ir patalpintas 
+                <b>Mano Turinyje</b> bei pridėtas į žemėlapį, pavadinimas.  Pagal nutylėjimą pavadinimas sudaromas pagal analizės tipą ir analizuojamo sluoksnio pavadinimą. Jei sluoksnis jau egzistuoja, galėsite pasirinkti jį perra&scaron;yti.
+            </p>
+            <p>Naudodami 
+                <b>Rezultatą įra&scaron;yti į</b> sąra&scaron;ą, galite nurodyti
+                <b>Mano Turinyje</b> esančio aplanko pavadinimą.
+            </p>
+            
+            
+        </div>
+    </div>
+</div>
+</html>

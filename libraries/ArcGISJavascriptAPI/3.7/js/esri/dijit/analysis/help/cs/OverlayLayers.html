@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpId;
+                helpId = window.location.hash.substring(1);
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription", class="largesize">
+        <h2>Překrýt vrstvy</h2><p/>
+        <h2></h2>
+        <hr/>
+    <p>N&aacute;stroj Překr&yacute;t vrstvy kombinuje dvě nebo v&iacute;ce vrstev do jedn&eacute; vrstvy. Překryv si můžete představit jako situaci, kdy prohl&eacute;dnete hromadu map a z těch pak vytvoř&iacute;te jedinou, ve kter&eacute; budou obsaženy v&scaron;echny informace. Před n&aacute;stupem GIS syst&eacute;mů kartografov&eacute; běžně kop&iacute;rovali mapy na čist&eacute; acet&aacute;tov&eacute; listy, kter&eacute; překryli na světeln&eacute; desce, a ručně nakreslili novou mapu na z&aacute;kladě překryt&yacute;ch dat. Překryv je mnohem v&iacute;ce než pouh&eacute; spojen&iacute; nakreslen&yacute;ch lini&iacute;. V&scaron;echny atributy prvků, kter&eacute; jsou souč&aacute;st&iacute; překryvu, jsou přeneseny do v&yacute;sledn&eacute;ho produktu. Překryv slož&iacute; k zodpovězen&iacute; jedn&eacute; z nejz&aacute;kladněj&scaron;&iacute;ch ot&aacute;zek geografie, &bdquo;Kter&eacute; prvky se nach&aacute;zej&iacute; nad kter&yacute;mi prvky?&ldquo; Např&iacute;klad:
+        <ul>
+            <li>Kter&eacute; parcely se nach&aacute;zej&iacute; v oblasti stolet&yacute;ch z&aacute;plav? (&bdquo;Nach&aacute;zet se v&ldquo; znamen&aacute; tot&eacute;ž co &bdquo;nach&aacute;zet se nad&ldquo;.)
+                  
+            </li>
+            <li>Jak&eacute; silnice se nach&aacute;zej&iacute; v jak&yacute;ch kraj&iacute;ch?
+            </li>
+            <li>Jak se zemědělsky využ&iacute;vaj&iacute; různ&eacute; typy půdy?
+                 
+            </li>
+            <li>Kter&eacute; studně se nach&aacute;zej&iacute; v m&iacute;stech opu&scaron;těn&yacute;ch vojensk&yacute;ch z&aacute;kladen?
+            </li>
+        </ul>
+        
+    </p>
+    <p>
+        Pokud je za&scaron;krtnuto
+        <b>Použ&iacute;vat rozsah aktu&aacute;ln&iacute; mapy</b>, budou překryty pouze prvky ve vrstvě anal&yacute;zy a v překryvn&eacute; vrstvě viditeln&eacute; v rozsahu aktu&aacute;ln&iacute; mapy. Pokud toto pole za&scaron;krtnuto nen&iacute;, budou překryty v&scaron;echny prvky ve vrstvě anal&yacute;zy a v překryvn&eacute; vrstvě, včetně těch, kter&eacute; se nach&aacute;z&iacute; mimo rozsah aktu&aacute;ln&iacute; mapy.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="OverlayLayer">
+        <div><h2>Vybrat překryvnou vrstvu</h2></div>
+        <hr/>
+        <div>
+            <p>Vrstva, kter&aacute; m&aacute; b&yacute;t překryta vrstvou anal&yacute;zy.  
+            </p>
+            
+        </div>
+    </div>
+    <div id="OverlayType">
+        <div><h2>Vybrat metodu překryvu</h2></div>
+        <hr/>
+        <div>
+            <p>Metoda překryvu definuje způsob, jak&yacute;m je vrstva anal&yacute;zy zkombinov&aacute;na s překryvnou vrstvou.  
+                <ul>
+                    <li>
+                        <b>Průnik</b> &ndash; V&yacute;sledn&aacute; vrstva bude obsahovat pouze prvky nebo č&aacute;sti prvků v překryvn&eacute; vrstvě, kter&eacute; se překr&yacute;vaj&iacute; s prvky ve vrstvě anal&yacute;zy. Pokud je vrstva anal&yacute;zy tvořena prvky oblasti, může b&yacute;t překryvn&aacute; vrstva tvořena prvky oblasti, bodů nebo lini&iacute;. Pokud je vrstva anal&yacute;zy tvořena prvky lini&iacute;, může b&yacute;t překryvn&aacute; vrstva tvořena pouze prvky lini&iacute; nebo bodů. Pokud je vrstva anal&yacute;zy tvořena bodov&yacute;mi prvky, mus&iacute; b&yacute;t překryvn&aacute; vrstva tvořena tak&eacute; bodov&yacute;mi prvky.
+                    </li>
+                    <li>
+                        <b>Sjednocen&iacute;</b> &ndash; V&yacute;sledn&aacute; vrstva bude obsahovat prvky vrstvy anal&yacute;zy i překryvn&eacute; vrstvy. Možnost Sjednocen&iacute; je k dispozici pouze v př&iacute;padě, že vrstva anal&yacute;zy i překryvn&aacute; vrstva obsahuj&iacute; prvky oblasti.
+                    </li>
+                    <li>
+                        <b>Mazat</b> &ndash; V&yacute;sledn&aacute; vrstva bude obsahovat prvky nebo č&aacute;sti prvků v překryvn&eacute; vrstvě, kter&eacute; se nepřekr&yacute;vaj&iacute; s oblastmi ve vrstvě anal&yacute;zy. Překryvn&aacute; vrstva může obsahovat prvky oblast&iacute;, lini&iacute; nebo bodů.
+                    </li>
+                </ul>
+                
+            </p>
+            <p>Pokud je za&scaron;krtnuto 
+                <b>Použ&iacute;vat rozsah aktu&aacute;ln&iacute; mapy</b>, budou překryty pouze prvky ve vrstvě anal&yacute;zy a v překryvn&eacute; vrstvě viditeln&eacute; v rozsahu aktu&aacute;ln&iacute; mapy. Pokud toto pole za&scaron;krtnuto nen&iacute;, budou překryty v&scaron;echny prvky ve vrstvě anal&yacute;zy a v překryvn&eacute; vrstvě, včetně těch, kter&eacute; se nach&aacute;z&iacute; mimo rozsah aktu&aacute;ln&iacute; mapy.
+            </p>
+            
+        </div>
+    </div>
+    <div id="OutputLayer">
+        <div><h2>Název výsledné vrstvy</h2></div>
+        <hr/>
+        <div>
+            <p>
+                Jde o n&aacute;zev vrstvy, kter&aacute; se vytvoř&iacute; ve složce
+                <b>Můj obsah</b> a přid&aacute; na mapu. Bude obsahovat stejn&yacute; typ prvků (oblasti, linie nebo body) jako překryvn&aacute; vrstva. V&yacute;choz&iacute; n&aacute;zev se ř&iacute;d&iacute; metodou překryvu a n&aacute;zvem vstupn&iacute; vrstvy. Pokud vrstva již existuje, budete pož&aacute;d&aacute;ni o potvrzen&iacute;, že si přejete ji přepsat.
+            </p>
+            <p>V&nbsp;rozbalovac&iacute;m seznamu 
+                <b>Uložit v&yacute;sledek do</b> můžete zadat n&aacute;zev složky ve složce
+                <b>Můj obsah</b>, do kter&eacute; se m&aacute; v&yacute;sledek uložit.
+            </p>
+            
+        </div>
+    </div>
+</div>
+</html>

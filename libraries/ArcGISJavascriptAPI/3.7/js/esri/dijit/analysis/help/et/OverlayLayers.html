@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpId;
+                helpId = window.location.hash.substring(1);
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription", class="largesize">
+        <h2>Kattuvad kihid</h2><p/>
+        <h2></h2>
+        <hr/>
+    <p>&Uuml;lekate &uuml;hendab kahe v&otilde;i enama sisendkihi sisu &uuml;heks terviklikuks kihiks.  See on t&otilde;lgendatav kihtide ladumisega &uuml;ksteise kohale ning selle tulemusena tekkiv v&auml;ljund sisaldab vastava virna kogu sisu.   Enne GIS-i tulekut kopeerisid kartograafid vastavad kihid paberkujul &uuml;ksteise kohale ja said tulemusi selliselt, et anal&uuml;&uuml;sisid neid kihte l&auml;bi valguslaua ja joonistasid k&auml;sitsi kattuvad osad nn puhtale paberile. &Uuml;lekate on m&auml;rksa enamat kui vaid lihtne liitmine; k&otilde;ik objektiga seotud ja anal&uuml;&uuml;sis osalevad atribuudid kantakse samuti tulemkihti &uuml;le. Taolist meetodit kasutatakse geograafias tihti, saamaks vastust k&uuml;simusele &ldquo;Mis on mille kohal?&rdquo; N&auml;iteks:
+        <ul>
+            <li>Millised krundid j&auml;&auml;vad 100 aasta jooksul toimunud &uuml;leujutusalade piirkonda? (mitme kihi omavaheline v&otilde;rdlemine) 
+                  
+            </li>
+            <li>Millist t&uuml;&uuml;pi teed &uuml;hes v&otilde;is teises maakonnas asuvad?
+            </li>
+            <li>Milline maakasutus on &uuml;he v&otilde;i teise mullat&uuml;&uuml;bi levialas?
+                 
+            </li>
+            <li>Millised kaevikud esinevad mahaj&auml;etud s&otilde;jav&auml;eosades?
+            </li>
+        </ul>
+        
+    </p>
+    <p>
+        Kui
+        <b>Kasuta kaardi ulatust</b> on sisse l&uuml;litatud, kasutatakse anal&uuml;&uuml;sil ja kattuvuse leidmisel ainult neid objekte, mis antud hetkel on ekraanil n&auml;htavad.  Kui vastav tingimus on v&auml;lja l&uuml;litatud, kasutatakse anal&uuml;&uuml;sil ja kattuvuse genereerimisel m&otilde;lema kihi k&otilde;iki objekte s&otilde;ltumata asjaolust, kas need on anal&uuml;&uuml;si k&auml;ivitamise hetkel ekraanil n&auml;htavad v&otilde;i mitte.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="OverlayLayer">
+        <div><h2>Vali kattuv kiht</h2></div>
+        <hr/>
+        <div>
+            <p>Kiht, mis kaetakse anal&uuml;&uuml;sikihiga.  
+            </p>
+            
+        </div>
+    </div>
+    <div id="OverlayType">
+        <div><h2>Vali ülekatte meetod</h2></div>
+        <hr/>
+        <div>
+            <p>&Uuml;lekatte meetod m&auml;&auml;ratleb, kuidas anal&uuml;&uuml;sikihti ja sellega kattuvat kihti omavahel kombineeritakse.  
+                <ul>
+                    <li>
+                        <b>&Uuml;hisosa</b>&mdash;Tulemus sisaldab vaid neid objekte v&otilde;i osasid tervikust kihis, mis tekib anal&uuml;&uuml;sil osalevate sisendkihtides olevate objektide geomeetria osa kokkulangemisel.  Kui anal&uuml;&uuml;sikihis on pindobjektid, saab &uuml;lekattekihiks olla pind-, joon-, ja/v&otilde;i punktobjektid.  Kui anal&uuml;&uuml;sikiht sisaldab joonobjekte, saavad &uuml;lekattekihiks olla joon-, ja/v&otilde;i punktobjektid.  Kui anal&uuml;&uuml;sikiht sisaldab punktobjekte, peab &uuml;lekattekiht samuti sisaldama punkte.
+                    </li>
+                    <li>
+                        <b>&Uuml;hend</b>&mdash;Tulemus sisaldab objekte nii anal&uuml;&uuml;sikihist kui ka &uuml;lekattekihist. See valik on rakendatav vaid juhul, kui m&otilde;lemad kihid sisaldavad pol&uuml;goone.
+                    </li>
+                    <li>
+                        <b>Kihi sisu eemaldamine</b>&mdash;Tulemus sisaldab objekte v&otilde;i osasid tervikust &uuml;lekattekihis, mis ei kattu m&otilde;ne pindobjektiga anal&uuml;&uuml;sikihis.  &Uuml;lekattekiht v&otilde;ib sisaldada pind-, joon-, ja/v&otilde;i punktobjekte.
+                    </li>
+                </ul>
+                
+            </p>
+            <p>Kui 
+                <b>Kasuta kaardi ulatust</b> on sisse l&uuml;litatud, kasutatakse anal&uuml;&uuml;sil ja kattuvuse leidmisel ainult neid objekte, mis antud hetkel on ekraanil n&auml;htavad.  Kui vastav tingimus on v&auml;lja l&uuml;litatud, kasutatakse anal&uuml;&uuml;sil ja kattuvuse genereerimisel m&otilde;lema kihi k&otilde;iki objekte s&otilde;ltumata asjaolust, kas need on anal&uuml;&uuml;si k&auml;ivitamise hetkel ekraanil n&auml;htavad v&otilde;i mitte.
+            </p>
+            
+        </div>
+    </div>
+    <div id="OutputLayer">
+        <div><h2>Tulemkihi nimi</h2></div>
+        <hr/>
+        <div>
+            <p>
+                See on kihi nimi, mis luuakse kasutaja
+                <b>Minu sisu</b> alla ning lisatakse kaardile.  See peab olema sama geomeetriat&uuml;&uuml;biga (punktid, jooned, pinnad) nagu &uuml;lekatte kiht.  Vaikimisi nimi on tuletatud &uuml;lekatte meetodi ja sisendkihi nimetuse j&auml;rgi. Kui see kiht juba eksisteerib, saate selle soovi korral &uuml;le kirjutada.
+            </p>
+            <p>Kasutades 
+                <b>Salvesta tulemus</b> kasutaja sisu alla, mille saate valida rippmen&uuml;&uuml;st
+                <b>Minu sisu</b>, kuhu tulemus salvestatakse.
+            </p>
+            
+        </div>
+    </div>
+</div>
+</html>

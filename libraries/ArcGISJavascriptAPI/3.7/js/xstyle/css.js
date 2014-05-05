@@ -1,0 +1,2 @@
+//>>built
+define("xstyle/css",["require"],function(h){var e=window.cssCache||(window.cssCache={});return{load:function(a,f,g,b){var d=f.toUrl(a);if(e[d])return createStyleSheet(e[d]);b=document.documentElement;var c=b.insertBefore(document.createElement("div"),b.firstChild);c.id=f.toAbsMid(a).replace(/\//g,"-").replace(/\..*/,"")+"-loaded";a=(c.currentStyle||getComputedStyle(c,null)).display;b.removeChild(c);if("none"==a)return g();h(["./load-css"],function(a){a(d,g)})},pluginBuilder:"xstyle/css-builder"}});

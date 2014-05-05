@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpId;
+                helpId = window.location.hash.substring(1);
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription", class="largesize">
+        <h2>Overlay lagen</h2><p/>
+        <h2></h2>
+        <hr/>
+    <p>Overlay combineert twee of meer lagen in &eacute;&eacute;n enkele laag.  Bij overlay lijkt het alsof u door een stapel kaarten kijkt en &eacute;&eacute;n kaart maakt die alle informatie bevat die in de stapel is gevonden.   V&oacute;&oacute;r GIS bestond, was dit eigenlijk precies wat cartografen deden. Ze kopieerden letterlijk kaarten op transparanten, plaatsten deze op een lichttafel en tekenden met de hand een nieuwe kaart met de bovenop geplaatste gegevens. Overlay is meer dan het samenvoegen van lijnwerk. Alle attributen van de objecten die deel uitmaken van de overlay, worden overgedragen naar het definitieve product. Overlay wordt gebruikt om een antwoord te bieden op een van de basisvragen in de geografie: &quot;Wat ligt boven op wat?&quot; Bijvoorbeeld:
+        <ul>
+            <li>Welke percelen bevinden zich binnen het 100-jarige overstromingsgebied? (Binnen betekent hierbij hetzelfde als boven op.)
+                  
+            </li>
+            <li>Welke wegen bevinden zich binnen welke provincies?
+            </li>
+            <li>Welk bodemgebruik ligt boven op welk bodemtype?
+                 
+            </li>
+            <li>Welke bronnen bevinden zich binnen verlaten militaire basissen?
+            </li>
+        </ul>
+        
+    </p>
+    <p>
+        Als
+        <b>Huidig extent van de kaart gebruiken</b> is aangevinkt, worden alleen de objecten in de analyse- en overlaylaag die binnen het huidige extent van de kaart zichtbaar zijn, bovenop geplaatst.  Als deze optie niet is aangevinkt, worden alle objecten in zowel de analyselaag als de overlaylaag bovenop geplaatst, zelfs als deze zich buiten het huidige extent van de kaart bevinden.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="OverlayLayer">
+        <div><h2>Kies overlay laag</h2></div>
+        <hr/>
+        <div>
+            <p>De laag waarop de analyselaag moet worden geplaatst.  
+            </p>
+            
+        </div>
+    </div>
+    <div id="OverlayType">
+        <div><h2>Kies overlay methode</h2></div>
+        <hr/>
+        <div>
+            <p>De overlaymethode bepaalt hoe de analyselaag en de overlaylaag worden gecombineerd.  
+                <ul>
+                    <li>
+                        <b>Kruisen</b>&mdash;Het resultaat bevat alleen die objecten of delen van objecten in de overlaylaag die overlappen met objecten in de analyselaag.  Als de analyselaag uit oppervlakobjecten bestaat, kan de overlaylaag oppervlak-, punt- of lijnobjecten bevatten.  Als analyselaag uit lijnobjecten bestaat, kan de overlaylaag alleen lijn- of puntobjecten bevatten.  Als de analyselaag uit puntobjecten bestaat, moet de overlaylaag ook puntobjecten bevatten.
+                    </li>
+                    <li>
+                        <b>Verenigen</b>&mdash;Het resultaat bevat objecten zowel van de analyselaag als van de overlaylaag. De optie Verenigen is alleen beschikbaar als zowel de analyselaag als de overlaylaag oppervlakobjecten bevat.
+                    </li>
+                    <li>
+                        <b>Wissen</b>&mdash;Het resultaat bevat objecten of delen van objecten in de overlaylaag die niet overlappen met de gebieden in de analyselaag.  De overlaylaag kan oppervlak-, lijn- of puntobjecten bevatten.
+                    </li>
+                </ul>
+                
+            </p>
+            <p>Als 
+                <b>Huidig extent van de kaart gebruiken</b> is aangevinkt, worden alleen de objecten in de analyse- en overlaylaag die binnen het huidige extent van de kaart zichtbaar zijn, bovenop geplaatst.  Als deze optie niet is aangevinkt, worden alle objecten in zowel de analyselaag als de overlaylaag bovenop geplaatst, zelfs als deze zich buiten het huidige extent van de kaart bevinden.
+            </p>
+            
+        </div>
+    </div>
+    <div id="OutputLayer">
+        <div><h2>Resultaat laagnaam</h2></div>
+        <hr/>
+        <div>
+            <p>
+                Dit is de naam van de laag die in
+                <b>Mijn Content</b> zal worden gemaakt en aan de kaart zal worden toegevoegd.  Deze zal hetzelfde objecttype (oppervlakken, lijnen of punten) hebben als de overlaylaag.  De standaardnaam is gebaseerd op de overlaymethode en de naam van de invoerlaag. Als de laag al bestaat, wordt u gevraagd om te bevestigen of u deze wilt overschrijven.
+            </p>
+            <p>Gebruik de vervolgkeuzelijst 
+                <b>Resultaat opslaan in</b> om de naam van een map in
+                <b>Mijn Content</b> op te geven waar het resultaat zal worden opgeslagen.
+            </p>
+            
+        </div>
+    </div>
+</div>
+</html>

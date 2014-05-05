@@ -1,0 +1,1382 @@
+html, body { 
+   height: 100%;  
+   width: 100%; 
+   margin: 0; 
+   padding: 0px 0px;  
+} 
+
+/* All fieldsets style - Bookmark and measurement tools */
+fieldset {
+    border: 1px solid #818181;
+    font-family: arial, verdana, tahoma;
+    color: #000000;
+    padding: 3px 5px;
+    margin: 5px;
+    line-height:1.5em;
+    background-color: transparent;
+    text-align : left;
+}
+
+/* All dropdowns style */
+select { 
+    font-size:1.0em; 
+    border-style:solid;
+    border: 1px solid #A3A3A3 ;
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 0px;
+}
+
+/* Font size for identify table */
+table {
+    font-size:14px;
+}
+
+/* Dropdowns style class */
+.dropdown { 
+    font-size:1.2em; 
+    border-style:solid;
+    border: 1px solid #A3A3A3 ;
+    border-radius: 5px;
+    width: auto;
+    font-weight: bold;
+    padding: 0px;
+}
+
+.displaynone
+{
+    display:none !important;    
+}
+
+.displayblock
+{
+    display:block !important;    
+}
+
+#mainWindow {
+  width: 100%; 
+  height: 100%; 
+  margin: 0;
+  padding:0;
+}
+
+#map {
+  width:100%;
+  height:100%;
+  border:none;
+  padding:0;
+}
+
+/* Application loading bar  */
+#appLoadBar { 
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    margin-left:-150px;
+    margin-top:-25px;
+    width: 300px; 
+    height: 50px; 
+    z-index:1000;
+}
+
+/* Application loading bar label  */
+.appLoadBarLabel {
+    position: absolute;
+    left: 0;
+    line-height: 200px;
+    margin: auto;
+    margin-top: -100px;
+    top: 50%;
+    width: 300px; 
+    text-align : center;
+    font-family: arial, verdana, tahoma;
+    font-size: 2.0em;
+    font-weight: bold;
+    color: #FFF;
+    text-shadow: 2px 2px 0 #000;
+    z-index:2000;
+  }
+
+/* Layers loading bar  */
+#layerLoadBar { 
+    position: fixed; 
+    bottom: 10px; 
+    left: 50%; 
+    margin-left:-75px;
+    margin-top:-10px;
+    width: 150px; 
+    height: 20px; 
+    z-index:1000;
+}
+
+/* Print loading bar  */
+#printLoadBar { 
+    position: relative; 
+    top:5px;
+    width: 100px; 
+    height: 15px; 
+}
+
+/* Property report loading bar  */
+#propertyReportLoadBar { 
+    position: relative; 
+    top:5px;
+    width: 100px; 
+    height: 15px; 
+}
+
+/* Reports loading bar  */
+#reportsLoadBar { 
+    position: relative; 
+    top:5px;
+    width: 100px; 
+    height: 15px; 
+}
+
+/* Shape file loading bar  */
+#shapefileLoadBar { 
+    position: relative; 
+    top:5px;
+    width: 100px; 
+    height: 15px; 
+}
+
+/* CSV loading bar  */
+#csvLoadBar { 
+    position: relative; 
+    top:5px;
+    width: 100px; 
+    height: 15px; 
+}
+
+/* Closest feature loading bar  */
+#closestFeatureLoadBar { 
+    position: fixed; 
+    top: 70px;  
+    left: 50%; 
+    margin-left:-75px;
+    margin-top:-10px;
+    width: 150px; 
+    height: 20px; 
+    z-index:1000;
+}
+
+/* Closest feature loading bar label  */
+.closestFeatureLoadBarLabel {
+    position: absolute;
+    top: 10px; 
+    left: 0px;
+    line-height: 200px;
+    margin: auto;
+    margin-top: -100px;
+    width: 150px; 
+    text-align : center;
+    font-family: arial, verdana, tahoma;
+    font-size: 1.0em;
+    font-weight: bold;
+    color: #FFF;
+    text-shadow: 2px 2px 0 #000;
+    z-index:2000;
+  }
+
+/* Legend style  */
+.soria .esriLegendServiceLabel {
+  font-size: 0.0em;
+}
+
+.soria .esriLegendLayerLabel {
+  font-family: arial, verdana, tahoma;
+  font-size: 1.2em;
+  font-weight:bold;
+  color:#000000;
+}
+
+.soria .esriLegendService {
+  font-family: arial, verdana, tahoma;
+  font-size: 1.0em;
+  color:#000000;
+}
+
+#companyLogo {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    height: auto;
+    width: auto;
+    bottom: 5px;
+    right: 5px;
+    position: absolute;
+    z-index: 9999;
+    -moz-box-shadow: 2px 2px 5px #888;
+    -webkit-box-shadow: 2px 2px 5px #888;
+    box-shadow: 2px 2px 5px #888;
+}
+
+/* Splash screen logo */
+#splashLogo  
+{
+  background-color:transparent;
+  background-repeat:no-repeat;
+  position:absolute;
+  top:5px;
+  left:5px;
+  height:38px;
+  width:100px;
+  float:left;
+}  
+
+/* Splash screen popup box */
+.blockUI {
+   position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    margin-left:-25%; 
+    margin-top:-210px; 
+    width: 50%; 
+    height: 420px;
+    z-index:1000;
+
+    padding :5px 5px 5px 5px;
+    text-align:	center;
+	color:		#000;
+	border:		2px solid #000;
+	background-color:#fff;
+	cursor:		wait;
+
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -moz-box-shadow: 5px 5px 10px #888;
+    -webkit-box-shadow: 5px 5px 10px #888;
+    box-shadow: 5px 5px 10px #888;
+}
+
+/* Splash screen text */
+#splashText {
+  color: #000000;  
+  font-family: arial, verdana, tahoma;
+  font-size: 0.85em;
+  line-height:1.5em;
+  height: 300px;
+  text-align:justify;
+
+  padding :5px 5px 5px 5px;
+  overflow-y:auto;
+}
+
+/* Splash screen text */
+#splashTitle {
+  color: #000000;  
+  font-family: arial, verdana, tahoma;
+  font-size: 0.85em;
+  line-height:1.5em;
+}
+
+/* Splash screen application version */
+#app-version {
+  position:absolute;
+  top:5px;
+  right:5px;
+  font-size:0.6em; 
+  color: #000000;  
+  font-family: arial, verdana, tahoma;
+}   
+
+/* Splash screen accept button */
+#acceptButton {
+  bottom:5px;
+}   
+
+/* Splash screen help link */
+#help {
+  position:absolute;
+  bottom:5px;
+  right:5px;
+  font-weight: bold;
+  font-size:0.7em; 
+  color: #000000;  
+  font-family: arial, verdana, tahoma;
+}       
+
+/* Tooltip style for draw tool */
+.map .tooltip {
+    background-color: #E3E3E3;
+    border: 2px solid #B2B2B2;
+    font-family: arial, verdana, tahoma;
+    border-radius: 4px 4px 4px 4px;
+    font-size: 9pt;
+    padding: 10px;
+    width: 120px;
+    z-index: 9999;
+}
+
+/* Map information - Coordinates and scale */
+#mapInfo {
+  height:15px;
+  width:auto;
+  position:absolute;
+  padding-top:2px;
+  padding-bottom:8px;
+  padding-left:5px;
+  padding-right:5px;  
+  left:5px; 
+  bottom:5px; 
+  z-index:9999;
+  white-space: nowrap;
+  -moz-border-radius: 8px; /* Firefox */
+  border-radius: 8px; /* IE9 + major browsers */
+  background-color:transparent;
+  background-repeat:repeat-x;
+  background-image:url('../images/blacktheme/Top_Nav_Background.gif');
+  -moz-box-shadow: 2px 2px 5px #888;
+  -webkit-box-shadow: 2px 2px 5px #888;
+  box-shadow: 2px 2px 5px #888;
+}        
+
+#scalelevels {
+  font-size:0.7em; 
+  font-family: arial, verdana, tahoma;
+  background-color:#fff;
+  font-weight: bold;
+  color:#000000;  
+} 
+
+#mapCoords {
+  font-size:0.7em; 
+  font-family: arial, verdana, tahoma;
+  font-weight: bold;
+  padding:2px 4px 1px 4px;
+  background-color:rgba(0, 0, 0, 0.0);
+  color:#FFFFFF;  
+  display: none;
+} 
+
+#scalezoom {
+  display: none;
+} 
+
+/* Scale bar style */
+.esriScalebar {
+    bottom: 5px !important;
+    left: 240px !important;
+    position: absolute !important;
+    z-index: 30 !important;
+    -moz-box-shadow: 2px 2px 5px #888;
+    -webkit-box-shadow: 2px 2px 5px #888;
+    box-shadow: 2px 2px 5px #888;
+}
+
+.esriScalebarLabel
+{
+    color:black !important;
+    font-family: arial, verdana, tahoma;
+    text-shadow: 1px 1px 2px #FFF, 0 0 1em #FFF, 0 0 0.2em #FFF;
+}   
+
+/* Secure services login popup */
+.soria .esriSignInDialog {
+  background:#FFFFFF;
+  color: #000000; 
+  border:1px solid #bfbfbf;
+  font-family: arial, verdana, tahoma;
+  font-size: 0.8em;
+  padding: 3px 3px;
+}
+
+/* Dialog - title bar */
+.soria .dijitDialogTitleBar { 
+    border: 1px solid #000000;
+    background:#FFFFFF;
+}
+
+
+/* Dialog - underlay background */
+.soria .dijitDialogUnderlay {
+     background: #000000;
+}
+
+      
+.ui-widget {font-size: 0.75em;}
+
+ /* Sliders */
+.ui-slider .ui-slider-handle {
+    cursor: pointer;
+}
+
+
+  /* Dialogs */
+ .ui-dialog .ui-dialog-content {
+    background: none repeat 0 0 transparent;
+    border: 0 none;
+    padding: 0;
+    position: relative;
+}
+
+ .ui-dialog-titlebar-close {
+  height: 19px; 
+  width: 19px; 
+  background: url("../images/Close.png")!important;
+  position:absolute!important;
+  top:12px!important;
+  right:2px!important;
+  outline: none!important;
+}
+
+ /* Accordian menu with tools etc. */
+ #toolsAccordion {
+    background-color: transparent;
+    border-color: transparent;
+    position:absolute !important; 
+    width: 280px;
+    height:60%;
+    font-family: Sans-Serif, Arial, Verdana;
+    font-size:0.9em;
+    left:80px; 
+    top:50px; 
+    z-Index:4;
+  }
+
+  /* Layers accordion section - Stops Overflow in IE8 */
+  #layerTabs {
+  }
+
+  /* Disabled tabs are not visible */ 
+  .ui-tabs .ui-state-disabled { 
+    display: none; 
+  } 
+
+ /* Close button on accordion */
+#btnCloseAccordion {
+  background-image: url("../images/Close.png");
+  height:19px;
+  width:19px;
+  position:absolute;
+  top:5px;
+  right:2px;
+  outline: none;
+}
+
+#measureTool {
+    border:1px solid #cccccc;
+    padding:5px;
+}
+
+
+div.clear { 
+    clear:both; 
+} 
+
+/* toolbar */
+#toolbar {
+  position:absolute; 
+  height:40px;
+  width:100%;
+  padding:0px;
+  top:0px;
+  left:0px;
+  z-index:200;
+  white-space: nowrap;
+  background-color:transparent;
+  background-repeat:repeat-x;
+  background-image:url('../images/blacktheme/Top_Nav_Background.gif');
+  -moz-box-shadow: 2px 2px 5px #888;
+  -webkit-box-shadow: 2px 2px 5px #888;
+  box-shadow: 2px 2px 5px #888;
+  -webkit-box-sizing: border-box; 
+  -moz-box-sizing: border-box;   
+  box-sizing: border-box;   
+}
+
+/* Button icons */
+.button-icons {
+  top:8px;
+  border:none;
+  background-color:transparent;
+  background-repeat:no-repeat;
+  cursor: pointer;
+  z-index:10;
+}
+
+/* Toolbar buttons */
+#btnTools {
+  position:relative; 
+  left:290px;  
+  background-image: url("../images/Tools.png");
+  height:19px;
+  width:19px;
+  padding-bottom:4px;
+  padding-right:15px;
+}
+
+#btnLayers {
+  position:relative; 
+  left:290px; 
+  background-image: url("../images/Layers.png");
+  height:19px;
+  width:19px;
+  padding-bottom:4px;
+  padding-right:15px;
+}
+
+#btnPrint {
+  position:relative; 
+  left:290px; 
+  background-image: url("../images/Print.png");
+  height:19px;
+  width:19px;
+  padding-bottom:4px;
+  padding-right:15px;
+}
+
+#btnShareMap {
+  position:relative; 
+  left:290px; 
+  background-image: url("../images/Email.png");
+  height:19px;
+  width:19px;
+  padding-bottom:4px;
+  padding-right:15px;
+}
+
+#btnBookmark {
+  position:relative; 
+  left:290px;  
+  background-image: url("../images/Link.png");
+  height:19px;
+  width:19px;
+  padding-bottom:4px;
+  padding-right:15px;
+}
+
+#btnAdmin {
+  position:relative; 
+  left:290px;  
+  background-image: url("../images/Tools.png");
+  height:19px;
+  width:19px;
+  padding-bottom:4px;
+  padding-right:15px;
+}
+
+#btnHelp {
+  position:relative; 
+  left:290px;  
+  background-image: url("../images/Help.png");
+  height:20px;
+  width:20px;
+  padding-bottom:4px;
+  padding-right:15px;
+}
+
+/* Navigation - Panning, zoom, full extent, next extent, previous extent */   
+/* Zoom in and out slider */
+#zoomSlider {
+  height:150px!important;
+  position:absolute!important;
+  top:95px!important;
+  left:22px!important;
+  z-index:9999!important;
+  color:black !important;
+  font-family: arial, verdana, tahoma;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+/* Compact Zoom in and out slider */
+#map_zoom_slider {
+  height:60px!important;
+  width:30px!important;
+  position:absolute!important;
+  top:70px!important;
+  left:17px!important;
+  z-index:9999!important;
+  font-family: arial, verdana, tahoma;
+  font-size: 0.5em;
+  font-weight: bold;
+  border: 0px solid #2e2e2e!important;
+  background-color: #2e2e2e!important;
+  color: #FFFFFF!important;
+  border-radius: 2px!important;
+}
+
+#navigation {
+  position:absolute;
+  top:50px;
+  left:5px; 
+  z-index:10;
+  background-image:url('../images/blacktheme/Leftbar_Background.png');
+  height:450px;
+  width:59px;
+  border:none;
+  background-color:transparent;
+  background-repeat:repeat;
+}
+
+/* Navigation buttons */
+#btnZoomToFullExtent {
+  width:27px; 
+  height:25px; 
+  background-image:url('../images/Pan_Globe.png');
+  position:absolute;
+  left:15px;
+  top:17px;
+}
+ 
+#btnPanNorth {
+  width:16px; 
+  height:12px; 
+  background-image:url('../images/Pan_North_Arrow.png');
+  position:absolute;
+  left:21px;
+  top:2px;
+  padding:0;
+}
+
+#btnPanSouth {
+  width:16px; 
+  height:12px; 
+  background-image:url('../images/Pan_South_Arrow.png');
+  position:absolute;
+  left:21px;
+  top:45px;
+  padding:0;
+}
+
+#btnPanWest {
+  width:16px; 
+  height:12px; 
+  background-image:url('../images/Pan_West_Arrow.png');
+  position:absolute;
+  left:-1px;
+  top:23px;
+  padding:0;
+}
+
+#btnPanEast {
+  width:16px; 
+  height:12px; 
+  background-image:url('../images/Pan_East_Arrow.png');
+  position:absolute;
+  left:44px;
+  top:23px;
+  padding:0;
+}
+
+#btnZoomPrev {
+  position:absolute;
+  left:6px;
+  top:61px;
+  height:19px;
+  width:19px;
+  background-image:url('../images/Leftbar_Left_Arrow.png');
+  outline:none!important;
+} 
+
+#btnZoomNext { 
+  position:absolute;
+  left:28px;
+  top:61px;
+  height:19px;
+  width:19px;
+  background-image:url('../images/Leftbar_Right_Arrow.png');
+  outline:none!important;
+} 
+
+#btnZoomInwards { 
+  background-image:url('../images/Magnify_In.png');
+  width:20px;
+  height:19px;
+  left: 17px;
+  position: absolute;
+  top: 260px;
+  outline:none!important;
+}
+
+#btnZoomOutwards { 
+  background-image:url('../images/Magnify_Out.png');
+  width:20px;
+  height:19px;
+  left: 17px;
+  position: absolute;
+  top: 290px;
+  outline:none!important;
+} 
+
+#btnPanning { 
+  background-image:url('../images/Move.png');
+  width:20px;
+  height:19px;
+  left: 17px;
+  position: absolute;
+  top: 320px;
+  outline:none!important;
+}  
+
+/* Selection buttons */
+#btnMode {
+  background-image:url('../images/Info.png');
+  width:20px;
+  height:19px;
+  position:relative;
+  top:25px;
+  left:0px;
+  cursor:default;
+}
+
+#btnIdentify {
+  background-image:url('../images/Info.png');
+  width:20px;
+  height:19px;
+  position:relative;
+  top:0px;
+  left:0px;
+}
+
+#btnZoomin { 
+  background-image:url('../images/Magnify_In.png');
+}
+
+#btnZoomout { 
+  background-image:url('../images/Magnify_Out.png');
+} 
+
+#btnPan { 
+  background-image:url('../images/Move.png');
+}  
+
+#btnStreetview { 
+  background-image:url('../images/Streetview.png');
+} 
+
+#btnPropertyreport { 
+  background-image:url('../images/Reports.png');
+} 
+
+#btnReports { 
+  background-image:url('../images/Reports.png');
+} 
+
+#btnClosestfeature { 
+  background-image:url('../images/Nearest.png');
+} 
+
+#btnMeasuring { 
+  background-image:url('../images/Ruler.png');
+} 
+
+#btnDraw { 
+  background-image:url('../images/Drawing.png');
+} 
+
+/* Cursor mode text */
+ #cursorMode {
+  position:absolute; 
+  top:400px;
+  left:24px;
+  z-index:10;
+  color:#FFF !important;
+  font-family: arial, verdana, tahoma;
+  font-size: 0.6em;
+  font-style: italic;
+  text-align: left;
+  text-shadow: 1px 1px 2px #000, 0 0 1em #000, 0 0 0.2em #000;
+ }   
+
+#cursorModeText {
+  position:relative;
+  top:20px;
+  left:-4px;
+  text-align: center;
+}
+
+/* Drawing tool buttons */
+#btnDrawPoint { 
+  background-image:url('../images/Point.png');
+  background-repeat:no-repeat;
+  border:2px solid black;
+  width:30px;
+  height:29px;
+  outline:none!important;
+}
+
+#btnDrawMultiPoint { 
+  background-image:url('../images/Multipoint.png');
+  background-repeat:no-repeat;
+  border:2px solid black;
+  width:30px;
+  height:29px;
+  outline:none!important;
+}
+
+#btnDrawPolyline { 
+  background-image:url('../images/Polyline.png');
+  background-repeat:no-repeat;
+  border:2px solid black;
+  width:30px;
+  height:29px;
+  outline:none!important;
+}
+
+#btnDrawFreehandPolyline { 
+  background-image:url('../images/Freehand_Polyline.png');
+  background-repeat:no-repeat;
+  border:2px solid black;
+  width:30px;
+  height:29px;
+  outline:none!important;
+}
+
+#btnDrawPolygon { 
+  background-image:url('../images/Polygon.png');
+  background-repeat:no-repeat;
+  border:2px solid black;
+  width:30px;
+  height:29px;
+  outline:none!important;
+}
+
+#btnDrawFreehandPolygon { 
+  background-image:url('../images/Freehand_Polygon.png');
+  background-repeat:no-repeat;
+  border:2px solid black;
+  width:30px;
+  height:29px;
+  outline:none!important;
+}
+
+#btnDrawArrow { 
+  background-image:url('../images/Arrow.png');
+  background-repeat:no-repeat;
+  border:2px solid black;
+  width:30px;
+  height:29px;
+  outline:none!important;
+}
+
+#btnDrawTriangle { 
+  background-image:url('../images/Triangle.png');
+  background-repeat:no-repeat;
+  border:2px solid black;
+  width:30px;
+  height:29px;
+  outline:none!important;
+}
+
+#btnDrawCircle { 
+  background-image:url('../images/Circle.png');
+  background-repeat:no-repeat;
+  border:2px solid black;
+  width:30px;
+  height:29px;
+  outline:none!important;
+}
+
+#btnDrawEllipse { 
+  background-image:url('../images/Ellipse.png');
+  background-repeat:no-repeat;
+  border:2px solid black;
+  width:30px;
+  height:29px;
+  outline:none!important;
+}
+
+#btnDrawText { 
+  background-image:url('../images/Text.png');
+  background-repeat:no-repeat;
+  border:2px solid black;
+  width:30px;
+  height:29px;
+  outline:none!important;
+}
+
+#btnDrawClear { 
+  background-image:url('../images/Clear.png');
+  background-repeat:no-repeat;
+  border:2px solid black;
+  width:30px;
+  height:29px;
+  outline:none!important;
+}
+
+/* Text input for drawing tool */
+#textInputWrapper {
+  position:absolute;
+  z-index:100;
+}
+
+/* Search widget */
+#search{
+  position:absolute;
+  z-index:3;
+  top:5px;
+  left:5px;
+  height:26px;
+  width:280px;  
+}
+
+.soria .simpleGeocoder  .esriGeocoder {
+    border: 1px solid #000;
+    -moz-border-radius: 0px; /* Firefox */
+    border-radius: 0px; /* IE9 + major browsers */
+    height:26px;
+    width:280px;
+}
+
+.soria .simpleGeocoder  .esriGeocoder input {
+    position:relative;
+    top:0px;
+    left:-36px;
+    width:210px;
+}
+
+.simpleGeocoder .esriGeocoderResult {
+    cursor: pointer;
+    display: block;
+    padding: 5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #000;
+    font-style:normal;
+    font-weight:normal;
+}
+
+.soria .simpleGeocoder .esriGeocoder .esriGeocoderSearch {
+   background-image: url("../images/Search.gif");
+   height:26px;
+   width:26px;
+   position:relative;
+   top:-6px;
+   left:248px;
+   cursor: pointer;
+}
+
+.soria .simpleGeocoder .esriGeocoder .esriGeocoderMenuArrow {
+    position:relative;
+    left:-35px;
+    cursor: pointer;
+}
+
+.soria .simpleGeocoder .esriGeocoderHasValue .esriGeocoderReset {
+   position:relative;
+   top:-28px;
+   right:25px;
+}
+
+/* measure tool */
+.esriToggleButton .dijitButtonNode {
+    color: black !important;
+    font-size: small !important;
+}
+
+#zoomin {
+  width:22px;
+}
+
+#zoomout {
+  width:22px;
+}
+
+#zoomfullext {
+  width:25px;
+}
+
+#zoomprev {
+  width:17px;
+}
+
+#zoomnext {
+  width:17px;
+}
+
+#pan {
+  width:22px;
+}
+
+
+/* Basemap and themes */
+#themesWrapper {
+  position:absolute; 
+  right:5px; 
+  top:5px; 
+  z-Index:250;
+  text-align:center;  
+  font-family: arial,verdana,tahoma;
+  font-size: 0.75em !important;
+  font-weight: normal;
+}
+
+#basemapsWrapper {
+  position:absolute; 
+  right:140px; 
+  top:5px; 
+  z-Index:240;
+  text-align:center;  
+  font-family: arial,verdana,tahoma;
+  font-size: 0.75em !important;
+  font-weight: normal;
+}
+
+/* themes */
+#themes {
+ overflow:hidden;
+}
+
+/* basemap opacity slider */
+ #basemapSliderWrapper {
+  position:absolute; 
+  right: 295px; 
+  top:10px; 
+  width: 130px;
+  z-index:230;
+  color:#FFF !important;
+  font-family: arial, verdana, tahoma;
+  font-size: 0.6em;
+  font-style: italic;
+  text-align: center;
+  text-shadow: 1px 1px 2px #000, 0 0 1em #000, 0 0 0.2em #000;
+ }   
+   
+
+#StreetView {
+ overflow:hidden;
+ }
+ 
+#StreetViewIframe {
+   overflow: hidden;  
+   margin-top:3px;
+   margin-left:3px;
+   width:705px; 
+   height:400px;
+   border: 0px;
+ }
+ 
+/* Share link dialog */
+#dialog 
+{
+    padding:0px 0px 0px 0px;    
+}
+
+A:link {text-decoration: none}
+A:visited {text-decoration: none}
+A:active {text-decoration: none}
+A:hover {text-decoration: underline}
+
+/* Basemap selector border */
+.esriBasemapGallerySelectedNode .esriBasemapGalleryThumbnail
+{ 
+   border-color: #ffff00 !important; 
+}
+
+/* Esri buttons - Measure tool */
+.soria .esriButton .dijitButtonNode {
+    color: #666666 !important;
+    height: 30px;
+    width: 32px;
+    vertical-align: middle;
+    font-size: medium !important;
+    border-color: none !important;
+    border: none !important;
+    background: none;
+}
+
+.soria .esriButtonHover .dijitButtonNode {
+    background: transparent !important;
+}
+
+.soria .esriButtonActive .dijitButtonNode {
+    background: #ededed !important;
+}
+
+.soria .esriButtonChecked .dijitButtonNode {
+    background: #ededed !important;
+}
+
+
+/* Measurement tools */
+.soria .esriMeasurement {
+    padding: 5px;
+    color: black;
+    font-family: arial,verdana,tahoma;
+    font-size: 12px;
+    border: 1px solid #818181;
+}
+
+.soria .distanceIcon {
+    background-image: url("../images/Ruler.png");
+    width: 20px;
+    height: 19px;
+}
+
+.soria .areaIcon {
+    background-image: url("../images/Area.png");
+    width: 20px;
+    height: 19px;
+}
+
+.soria .locationIcon {
+    background-image: url("../images/Location.png");
+    width: 20px;
+    height: 19px;
+}
+
+.soria .esriToggleButton .dijitButtonNode {
+    color: #000000 !important;
+    height: 30px;
+    width: 80px;
+    vertical-align: middle;
+    font-family: arial,verdana,tahoma;
+    font-size: 12px !important;
+    border: #000000;
+    background: transparent;
+}
+
+.soria .unitDropDown {
+    color: black;
+    font-family: arial,verdana,tahoma;
+    font-size: 12px;
+}
+
+
+/* Bookmarks dropdown */
+.soria .dijitButtonNode{
+    color: #000000 !important;
+    vertical-align: middle;
+    font-family: arial,verdana,tahoma;
+    font-size: 12px !important;
+    border: #000000;
+    background: transparent;
+       }
+.soria .dijitButtonNode:hover{
+        background: #F2F2F2;
+       }
+      
+.soria .dijitButtonText {
+        font-family: arial,verdana,tahoma;
+        }
+        
+.soria .esriBookmarkHighlight{
+        background: #F2F2F2;
+        }
+
+.soria .esriBookmarks {
+    border: 0px;
+    background: #E3E3E3;
+}
+
+.soria .esriBookmarkTable {
+    background: #E3E3E3;
+}
+
+.soria .esriBookmarkRemoveImage {
+    background-image: url("../images/Clear.png");
+    width: 20px;
+    height: 19px;
+    padding-right: 2px;
+}
+
+.soria .esriBookmarkEditImage {
+    background-image: url("../images/Drawing.png");
+    width: 20px;
+    height: 19px;
+    padding-right: 8px;
+}
+
+.soria .esriBookmarkLabel {
+    position: relative;
+    float: left;
+    width: 100px;
+    overflow: hidden;
+    line-height: 20px;
+    height: 20px;
+    white-space: nowrap;
+    margin-left: 5px;
+    font-size: 12px;
+    text-align: left;
+    vertical-align: middle;
+    color: black;
+    font-family: arial,verdana,tahoma;
+    cursor: pointer;
+}
+
+.soria .esriAddBookmark {
+    position: relative;
+    float: left;
+    width: 100px;
+    overflow: hidden;
+    line-height: 20px;
+    height: 20px;
+    white-space: nowrap;
+    margin-left: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
+    vertical-align: middle;
+    color: black;
+    font-family: arial,verdana,tahoma;
+    cursor: pointer;
+}
+
+
+/* Popup style */
+#identifyDiv {
+   z-index:9999;
+}
+#directionsDiv {
+   z-index:9999;
+}
+
+.esriPopup.customTheme .titlePane,
+.dj_ie7 .esriPopup.customTheme .titlePane .title {
+  background-color:#404040;
+  color:#FFF;
+  font-weight:700;
+}
+
+.esriPopup.customTheme .titlePane {
+  border-bottom:1px solid #121310;
+}
+
+.esriPopup.customTheme a {
+  color: #FFF;
+}
+
+.esriPopup.customTheme .titleButton, 
+.esriPopup.customTheme .pointer,
+.esriPopup.customTheme .outerPointer,
+.esriPopup.customTheme .esriViewPopup .gallery .mediaHandle,
+.esriPopup.customTheme .esriViewPopup .gallery .mediaIcon {
+  background-image:url("../images/popup_sprite.png");
+}
+
+.esriPopup.customTheme .titleButton.close {
+    right: 3px;
+    background-position: 0 -172px;
+    width: 19px;
+    height: 19px;
+}
+
+.esriPopup.customTheme .titleButton.restore {
+    right: 25px;
+    background-position: 0 -785px;
+    width: 11px;
+    height: 11px;
+    top: 5px;
+}
+
+.esriPopup.customTheme .titleButton.maximize {
+    right: 25px;
+    background-position: 0 -249px;
+    width: 11px;
+    height: 11px;
+    top: 5px;
+}
+
+.esriPopup.customTheme .pointer.top {
+    display: none;
+}
+
+.esriPopup.customTheme .pointer.bottom {
+    display: none;
+}
+
+.esriPopup.customTheme .pointer.right {
+    display: none;
+}
+
+.esriPopup.customTheme .pointer.left {
+    display: none;
+}
+
+.esriPopup.customTheme .outerPointer.right {
+    display: none;
+}
+
+.esriPopup.customTheme .outerPointer.left {
+    display: none;
+}
+
+.esriPopup.customTheme .pointer.topLeft {
+    display: none;
+}
+
+.esriPopup.customTheme .pointer.topRight {
+    display: none;
+}
+
+.esriPopup.customTheme .pointer.bottomRight {
+    display: none;
+}
+
+.esriPopup.customTheme .pointer.bottomLeft {
+    display: none;
+}
+
+.esriPopup.customTheme .contentPane,
+.esriPopup.customTheme .actionsPane {
+  background-color:#E3E3E3;
+  color:#000;
+  border-color:0 solid #121310;
+}
+
+/* jQuery colour picker */
+#jquery-colour-picker {
+	background: #000000;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));
+	/* opacity:0.9; */
+	width: 185px;
+	padding: 10px 5px 5px 10px;
+
+	border: 1px solid #222222;
+
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+
+	-moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+
+	z-index: 9999;
+}
+
+	#jquery-colour-picker h2 {
+		margin: 0 0 5px 0;
+		font-size: 14px;
+	}
+
+	#jquery-colour-picker ul {
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+
+		+zoom: 1;
+	}
+
+	#jquery-colour-picker ul:after {
+		content: ".";
+		display: block;
+		height: 0;
+		visibility: hidden;
+		clear: both;
+	}
+
+		#jquery-colour-picker ul li {
+			float: left;
+			margin: 0 5px 5px 0;
+		}
+
+			#jquery-colour-picker ul li a {
+				display: block;
+
+				width: 13px;
+				height: 13px;
+
+				text-decoration: none;
+				text-indent: -100000px;
+				outline: 0;
+
+				border: 1px solid #aaa;
+			}
+
+			#jquery-colour-picker ul li a:hover {
+				border-color: #000;
+			}

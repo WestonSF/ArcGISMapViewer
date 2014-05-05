@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpId;
+                helpId = window.location.hash.substring(1);
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription", class="largesize">
+        <h2>叠加图层</h2><p/>
+        <h2></h2>
+        <hr/>
+    <p>叠加操作将两个或多个图层合并成一个图层。您可以认为叠加就是通过地图堆栈查看并创建包含在堆栈中找到的所有信息的单个地图。事实上，在 GIS 出现之前，制图人员就将地图复制到透明的醋酸板上，将这些醋酸板叠加在看版台上，并且根据叠加数据手绘一张新地图。叠加操作不仅仅合并线要素，还将参与叠加的要素的所有属性传递到最终产品。叠加用于回答一个最基本的地理问题，&ldquo;什么在什么上？&rdquo;例如：
+        <ul>
+            <li>什么宗地在百年一遇的洪泛区中？（&ldquo;在...中&rdquo;只是&ldquo;在...上&rdquo;的另一种表达方式。）
+            </li>
+            <li>什么道路在什么国家中？
+            </li>
+            <li>什么土地利用在什么土壤类型上？
+                 
+            </li>
+            <li>什么井在废弃的军事基地中？
+            </li>
+        </ul>
+        
+    </p>
+    <p>
+        如果选中
+        <b>使用当前地图范围</b>，仅叠加当前地图范围中可见的分析和叠加图层的要素。如果尚未选中，则叠加分析图层和叠加图层中的所有要素，即使它们处于当前地图范围外。
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="OverlayLayer">
+        <div><h2>选择叠加图层</h2></div>
+        <hr/>
+        <div>
+            <p>与分析图层叠加的图层。  
+            </p>
+            
+        </div>
+    </div>
+    <div id="OverlayType">
+        <div><h2>选择叠加方法</h2></div>
+        <hr/>
+        <div>
+            <p>叠加方法定义了如何合并分析图层和叠加图层。
+                <ul>
+                    <li>
+                        <b>相交</b> - 结果仅包括叠加图层中与分析图层中的要素相重叠的要素或部分要素。如果分析图层是区域要素，则叠加图层可以是区域要素、点要素或线要素。如果分析图层是线要素，则叠加图层只能是线要素或点要素。如果分析图层是点要素，则叠加图层也必须是点要素。
+                    </li>
+                    <li>
+                        <b>联合</b> - 结果仅包括分析图层和叠加图层的要素。只有分析图层和叠加图层都包含区域要素时，&ldquo;联合&rdquo;选项才可用。
+                    </li>
+                    <li>
+                        <b>擦除</b> - 结果包含叠加图层中与分析图层中的区域不重叠的要素或部分要素。叠加图层可以包含区域要素、线要素或点要素。
+                    </li>
+                </ul>
+                
+            </p>
+            <p>如果选中
+                <b>使用当前地图范围</b>，仅叠加当前地图范围中可见的分析和叠加图层的要素。如果尚未选中，则叠加分析图层和叠加图层中的所有要素，即使它们处于当前地图范围外。
+            </p>
+            
+        </div>
+    </div>
+    <div id="OutputLayer">
+        <div><h2>结果图层名称</h2></div>
+        <hr/>
+        <div>
+            <p>
+                在
+                <b>我的内容</b>中创建并添加到地图中的图层名称。它的要素类型与叠加图层相同（区域、线或点）。默认名称基于叠加方法以及输入图层名称。如果图层已经存在，则系统会要求您确认是否要覆盖它。
+            </p>
+            <p>通过使用
+                <b>将结果保存到</b>下拉框，可以在
+                <b>我的内容</b>中指定文件夹的名称，结果将保存到该文件夹中。
+            </p>
+            
+        </div>
+    </div>
+</div>
+</html>

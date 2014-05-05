@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+  <head>     
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+    <meta http-equiv="X-UA-Compatible" content="IE=8, IE=9, IE=10"/>
+    <!-- Cache control --> 
+    <meta http-equiv="Cache-control" content="public"/>
+    <!-- The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices --> 
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/> 
+  
+    <title>Google StreetView</title>
+
+    <!-- JavaScript files -->
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="libraries/jQuery/1.10.1/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="libraries/jQueryUI/1.10.3/jquery-ui.min.js"></script>
+
+    <!-- Styling files -->
+    <link rel="stylesheet" href="css/desktop.css"/>
+            
+    <script>
+      function initialize() {
+        
+       var xcoord = urlParams["x"];
+       var ycoord = urlParams["y"];
+           
+       var location = new google.maps.LatLng(xcoord, ycoord);
+       var panoramaOptions = {
+          position:location,
+          pov: {
+            heading: 0,
+            pitch:0,
+            zoom:1
+          } 
+        }; 
+        var myPano = new google.maps.StreetViewPanorama(document.getElementById("pano"), panoramaOptions);
+        myPano.setVisible(true); 
+      }
+      
+      var urlParams = {}; 
+      
+      (function () { 
+      var e, 
+        a = /\+/g,  // Regex for replacing addition symbol with a space 
+        r = /([^&=]+)=?([^&]*)/g, 
+        d = function (s) { return decodeURIComponent(s.replace(a, " ")); }, 
+        q = window.location.search.substring(1); 
+ 
+      while (e = r.exec(q)) 
+       urlParams[d(e[1])] = d(e[2]); 
+      })(); 
+
+    $(document).ready(function () {
+         $('#pano').css({margin:"0",position:"absolute",top:"0",left:"0",width:"700",height:"400"}); 
+       });
+      
+    </script>
+  </head>
+  <body onload="initialize()"> 
+    <div id="pano"></div>
+  </body>
+</html>
