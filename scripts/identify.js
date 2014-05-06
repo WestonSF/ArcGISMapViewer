@@ -56,7 +56,7 @@ function doIdentifySearch(searchPoint, screenPoint) {
         var layer = app.map.getLayer(this.id);
         if (configOptions.identifynotvisible === "true" || configOptions.identifynotvisible === true || (layer && layer.visible)) {
             // Change cursor to loading - Desktop or embed version
-            if ((currentPage.indexOf("map") != -1) || (currentPage.indexOf("embed") != -1)) {
+            if ((currentPage.indexOf("desktop") != -1) || (currentPage.indexOf("embed") != -1)) {
                 changeCursor('loading');
             }
 
@@ -114,7 +114,7 @@ function doIdentify(evt, report) {
             identifyTask = new esri.tasks.IdentifyTask(configOptions.reportMapServiceIdentify.identifyTask);
 
             // Change cursor to loading - Desktop or embed version
-            if ((currentPage.indexOf("map") != -1) || (currentPage.indexOf("embed") != -1)) {
+            if ((currentPage.indexOf("desktop") != -1) || (currentPage.indexOf("embed") != -1)) {
                 changeCursor('loading');
             }
 
@@ -158,7 +158,7 @@ function doIdentify(evt, report) {
                 if (layer) {
                     if (configOptions.identifynotvisible === "true" || configOptions.identifynotvisible === true || (layer.visible)) {
                         // Change cursor to loading - Desktop or embed version
-                        if ((currentPage.indexOf("map") != -1) || (currentPage.indexOf("embed") != -1)) {
+                        if ((currentPage.indexOf("desktop") != -1) || (currentPage.indexOf("embed") != -1)) {
                             changeCursor('loading');
                         }
 
@@ -194,7 +194,7 @@ function addToMap(idResults, layerAliases, screenPoint, report, showChart, chart
     // If some results are returned show infoWindow
     if (idResults.length > 0) {
         // Show popup if in desktop and not identify search in mobile or embed versions
-        if ((!identifySearch) || (currentPage.indexOf("map") != -1)) {
+        if ((!identifySearch) || (currentPage.indexOf("desktop") != -1)) {
             // Show popup - Different versions
             if (currentPage.indexOf("mobile") != -1) {
                 // Show the mobile window
@@ -409,7 +409,7 @@ function addToMap(idResults, layerAliases, screenPoint, report, showChart, chart
     }
       
     // Change back to identify - Desktop or embed version
-    if ((currentPage.indexOf("map") != -1) || (currentPage.indexOf("embed") != -1)) {
+    if ((currentPage.indexOf("desktop") != -1) || (currentPage.indexOf("embed") != -1)) {
         changeCursor('identify');
     }
     // Mobile version
@@ -469,7 +469,7 @@ function changeCursor(cursorMode) {
     $("#btnMode").css('background-image', $("#btn" + cursorMode.charAt(0).toUpperCase() + cursorMode.substring(1)).css('background-image'));
 
     // Change icon - Desktop version
-    if (currentPage.indexOf("map") != -1) {
+    if (currentPage.indexOf("desktop") != -1) {
         if (cursorMode != "loading" && cursorMode != "inactive") {
             // If button title available use that for tooltip otherwise just use the cursor mode
             if (document.getElementById('btn' + cursorMode.charAt(0).toUpperCase() + cursorMode.substring(1)).title) {

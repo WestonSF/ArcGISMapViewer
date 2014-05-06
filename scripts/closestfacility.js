@@ -139,7 +139,7 @@ function getClosestFeature(evt) {
         });
 
         // // Populate and show info window - Desktop version
-        if (currentPage.indexOf("map") != -1) {
+        if (currentPage.indexOf("desktop") != -1) {
             app.map.infoWindow.hide();
             // Size of infoWindow
             app.map.infoWindow.resize(configOptions.infowWindowSize[0], configOptions.infowWindowSize[1]);

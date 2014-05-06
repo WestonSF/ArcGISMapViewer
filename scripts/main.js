@@ -51,8 +51,8 @@ var legend;
 var bookmarks;
 // Shape file layers
 var shapefileLayers = [];
-// CSV layers
-var csvLayers = [];
+// CSV layer
+var csvLayer;
 var latFieldStrings, longFieldStrings;
 // Measure tool
 var measureTool
@@ -98,7 +98,7 @@ if ((jQuery.browser.msie == true) && (jQuery.browser.version <= 8)) {
 }
 
 // Desktop version
-if (currentPage.indexOf("map") != -1) {
+if (currentPage.indexOf("desktop") != -1) {
     // Load the application funtionality
     var functionality = [
         'scripts/plugins/blockUI.js',
@@ -634,7 +634,7 @@ function init() {
         $('#toolsAccordion').draggable({ handle: '#tools, #toolsTitle, #layerTabs, #layerTabsTitle, #print, #printTitle' });
 
         // If desktop version
-        if (currentPage.indexOf("map") != -1) {
+        if (currentPage.indexOf("desktop") != -1) {
             // Initialise layers and legend tabs
             $("#layerTabs").tabs();
             // Create new tab and reference
@@ -680,7 +680,7 @@ function init() {
         }
 
         // Set the logos - Desktop version
-        if (currentPage.indexOf("map") != -1) {
+        if (currentPage.indexOf("desktop") != -1) {
             // Splash screen logo
             var logo = document.createElement("div");
             logo.innerHTML = configOptions.logo;
@@ -757,7 +757,7 @@ function init() {
         includeSlider = false;
         sliderSize = "large";
         // If compact slider in config options or not using desktop version
-        if (configOptions.usecompactslider === "true" || configOptions.usecompactslider === true || currentPage.indexOf("map") == -1) {
+        if (configOptions.usecompactslider === "true" || configOptions.usecompactslider === true || currentPage.indexOf("desktop") == -1) {
             includeSlider = true;
             sliderSize = "small";
             // Hide full slider
@@ -767,7 +767,7 @@ function init() {
         // If using themes, display the dropdown
         if (configOptions.usethemes === "true" || configOptions.usethemes === true) {
             // Desktop version
-            if (currentPage.indexOf("map") != -1) {
+            if (currentPage.indexOf("desktop") != -1) {
                 // Load themes into dropdown
                 for (var j = 0; configOptions.themes.length > j; j++) {
                     $("#selectTheme").append($("<option></option>").attr("value", configOptions.themes[j].theme).text(configOptions.themes[j].theme));
@@ -822,7 +822,7 @@ function init() {
         // If not using AGS Online web map
         if (configOptions.useAGSOnlineWebMap == "false" || configOptions.useAGSOnlineWebMap == false) {
             // Setup popups - Desktop and embed version
-            if ((currentPage.indexOf("map") != -1) || (currentPage.indexOf("embed") != -1)) {
+            if ((currentPage.indexOf("desktop") != -1) || (currentPage.indexOf("embed") != -1)) {
                 // Setup popup and make draggable
                 $("#popup").resizable({
                     minHeight: configOptions.infowWindowSize[0],
@@ -900,7 +900,7 @@ function init() {
 // --------------------------------------------------------------------------- Setup UI ---------------------------------------------------------------------------  
 function loadUI() {
     // Desktop version
-    if (currentPage.indexOf("map") != -1) {
+    if (currentPage.indexOf("desktop") != -1) {
         // Show tools if in config file
         if (configOptions.onloadTool === "tools") {
             $("#toolsAccordionPanels").accordion("option", "active", 0);
@@ -1101,7 +1101,7 @@ function loadeventHandlers() {
     setupIdentityManager();
 
     // Desktop version
-    if (currentPage.indexOf("map") != -1) {
+    if (currentPage.indexOf("desktop") != -1) {
         // If the layer button is clicked
         $("#btnLayers").bind("click", function () {
             // Open accordion at layers section
@@ -1318,7 +1318,7 @@ function themeLoad() {
     for (var a = 0; configOptions.themes.length > a; a++) {
         // Get the theme details
         // Desktop version
-        if (currentPage.indexOf("map") != -1) {
+        if (currentPage.indexOf("desktop") != -1) {
             if (configOptions.themes[a].theme == document.getElementById("selectTheme").value) {
                 // Assign the searches to the array
                 searchesArray = configOptions.themes[a].searches;
@@ -1427,7 +1427,7 @@ function initFunctionality() {
     createBasemapGallery();
 
     // Desktop version
-    if (currentPage.indexOf("map") != -1) {
+    if (currentPage.indexOf("desktop") != -1) {
         // If display layer mode button
         if (configOptions.displayLayerMode == "true" || configOptions.displayLayerMode == true) {
             // When layer change button clicked
@@ -1574,7 +1574,7 @@ function initFunctionality() {
         // Setup the navigation bar
         navToolbar = new esri.toolbars.Navigation(app.map);
         // Set the full navigation if desktop version
-        if (currentPage.indexOf("map") != -1) {
+        if (currentPage.indexOf("desktop") != -1) {
             // On extent change, update history
             dojo.connect(navToolbar, "onExtentHistoryChange", extentHistoryChangeHandler);
         }
@@ -1859,7 +1859,7 @@ function initFunctionality() {
     // Listen to mouse move & drag events - if we want to show coordinates on the map
     if (configOptions.displaycoordinates === "true" || configOptions.displaycoordinates === true) {
         // Show coordinates - Desktop version
-        if (currentPage.indexOf("map") != -1) {
+        if (currentPage.indexOf("desktop") != -1) {
             // On mouse move
             app.map.on("mouse-move", showCoordinates);
             app.map.on("mouse-drag", showCoordinates);
@@ -1870,7 +1870,7 @@ function initFunctionality() {
     if (urlParam_baseMap) {
         basemapGallery.select(urlParam_baseMap);
         // Minimise basemap window - Desktop version
-        if (currentPage.indexOf("map") != -1) {
+        if (currentPage.indexOf("desktop") != -1) {
             $("#basemapsWrapper").accordion("option", "active", false);
         }
     }
@@ -1892,7 +1892,7 @@ function initFunctionality() {
 
     // Set the default click/cursor mode
     // Desktop version
-    if (currentPage.indexOf("map") != -1) {
+    if (currentPage.indexOf("desktop") != -1) {
         changeCursor(configOptions.clickDefault);
     }
     // Mobile and embed versions
@@ -2021,7 +2021,7 @@ function buildLayerGroups() {
     // Remove all operational layers
     removeOperationalLayers();
     // Clear layers tab - Desktop
-    if (currentPage.indexOf("map") != -1) {
+    if (currentPage.indexOf("desktop") != -1) {
         $('#layersTab').html("");
     }
     // Clear layers tab - Mobile
@@ -2040,7 +2040,7 @@ function buildLayerGroups() {
         for (var a = 0; configOptions.themes.length > a; a++) {
             // Get the theme
             // Desktop version
-            if (currentPage.indexOf("map") != -1) {
+            if (currentPage.indexOf("desktop") != -1) {
                 if (configOptions.themes[a].theme == document.getElementById("selectTheme").value) {
                     // Assign layer groups and initial layer
                     layergroups = configOptions.themes[a].layergroups;
@@ -2086,7 +2086,7 @@ function buildLayerGroups() {
     var id = "";
 
     // Setup layer groups - Desktop version
-    if (currentPage.indexOf("map") != -1) {
+    if (currentPage.indexOf("desktop") != -1) {
         TOChtml += '<span style="font-size:1em;">';
         // For each of the layer groupings
         $.each(layergroups, function () {
@@ -2151,7 +2151,7 @@ function buildLayerGroups() {
     // If nothing is checked then use initial layer group from config e.g. URL layer group not checking any layers
     var currentCheckedValue = $("input:radio[name='tocgroup']:checked").val();
     // Desktop version
-    if (currentPage.indexOf("map") != -1) {
+    if (currentPage.indexOf("desktop") != -1) {
         if (!currentCheckedValue) {
             // Get the initial layer group from the config or URL
             // If using themes
@@ -2225,7 +2225,7 @@ function layerGroupChanged(layerGroupSelected) {
     // Remove all operational layers
     removeOperationalLayers();
     // Clear layers tabs - Desktop
-    if (currentPage.indexOf("map") != -1) {
+    if (currentPage.indexOf("desktop") != -1) {
         $('#layersTab').html("");
         $('#layersTabAll').html("");
     }
@@ -2366,7 +2366,7 @@ function buildLayerList(layer, layerMode) {
     $(layersTab).append("<input type='checkbox' class='layers'" + checked + "' id='layer" + layer.id + "' title='" + layer.id + " ' onclick='updateLayerVisibility(this);' /><B><font size=\"2\">" + layerName + "</font></B>");
 
     // Setup the opacity slider and event handler - Desktop version
-    if (currentPage.indexOf("map") != -1) {
+    if (currentPage.indexOf("desktop") != -1) {
         $(layersTab).append("<br\><I>Opacity</I><br/>");
 
         var slider = $('<div style="width:50%;" id="layerSlider' + layer.id + '"></div>');
@@ -2505,7 +2505,7 @@ function updateEnabledLayers() {
                     var layerminScale = subLayer.minScale;
 
                     // Enable/disable check boxes based on visible at current scale - Desktop version
-                    if (currentPage.indexOf("map") != -1) {
+                    if (currentPage.indexOf("desktop") != -1) {
                         // If layer is dynamic
                         if (!layer.tileInfo) {
                             var sublayerCheckbox = document.getElementById("subLayer" + layer.id + subLayer.id);
@@ -2578,7 +2578,7 @@ function updateEnabledLayers() {
                     var layerminScale = subLayer.minScale;
 
                     // Enable/disable check boxes based on visible at current scale - Desktop version
-                    if (currentPage.indexOf("map") != -1) {
+                    if (currentPage.indexOf("desktop") != -1) {
                         // If layer is dynamic
                         if (!layer.tileInfo) {
                             var sublayerCheckbox = document.getElementById("subLayer" + layer.id + subLayer.id);
@@ -2756,7 +2756,7 @@ function createBasemapGallery() {
     basemapGallery.startup();
 
     // Set the basemap opacity slider - Desktop version
-    if (currentPage.indexOf("map") != -1) {
+    if (currentPage.indexOf("desktop") != -1) {
         // Set the basemap opacity if getting from url, otherwise it will just be 100
         if (urlParam_basemapOpacity >= 0 && urlParam_basemapOpacity <= 100) {
             basemapOpacity = urlParam_basemapOpacity;
@@ -2877,7 +2877,7 @@ function createBasemapGallery() {
                 removeImageryLayers();
             }
 
-            if (currentPage.indexOf("map") != -1) {
+            if (currentPage.indexOf("desktop") != -1) {
                 // Set opacity of basemap to slider value
                 app.map.getLayer(app.map.layerIds[0]).setOpacity($("#basemapSlider").slider("value") / 100);
 
@@ -2965,7 +2965,7 @@ function loadArcGISOnlineWebMap(webmapID) {
     $('#mainWindow').append($('<div id="map"></div>'));
 
     // Setup popups - Desktop and embed version
-    if ((currentPage.indexOf("map") != -1) || (currentPage.indexOf("embed") != -1)) {
+    if ((currentPage.indexOf("desktop") != -1) || (currentPage.indexOf("embed") != -1)) {
         // Clear previous popup
         $('#popup').remove();
         $('#mainWindow').append($('<div id="popup"></div>'));
@@ -3002,7 +3002,7 @@ function loadArcGISOnlineWebMap(webmapID) {
             logo: false,
             showAttribution: false
         },
-        ignorePopups: false,
+        ignorePopups: true,
         geometryServiceURL: configOptions.geometryserviceurl
     }
     // When ArcGIS Online map has been received
@@ -3108,13 +3108,13 @@ function getURL() {
 
 
     // If desktop version add in basemap opacity
-    if (currentPage.indexOf("map") != -1) {
+    if (currentPage.indexOf("desktop") != -1) {
         queryString = queryString.concat("&basemapOpacity=" + parseInt(basemapOpacity));
     }
     // If themes being used then add this on to the URL query string
     if (configOptions.usethemes === "true" || configOptions.usethemes === true) {
         // Desktop version
-        if (currentPage.indexOf("map") != -1) {
+        if (currentPage.indexOf("desktop") != -1) {
             queryString = queryString.concat("&theme=" + replaceAll(document.getElementById("selectTheme").value, ' ', '_'));
         }
         // Mobile version
@@ -3237,7 +3237,7 @@ function setupIdentityManager() {
         // If themes enabled, switch back to previous theme
         if (configOptions.usethemes === "true" || configOptions.usethemes === true) {
             // Desktop version
-            if (currentPage.indexOf("map") != -1) {
+            if (currentPage.indexOf("desktop") != -1) {
                 // Get the layer group selected
                 var selectedlayerGroup = $("input:radio[name='tocgroup']:checked").val();
 
@@ -3284,7 +3284,7 @@ function setupIdentityManager() {
             // Otherwise switch back to previous layer group
         else {
             // Desktop version
-            if (currentPage.indexOf("map") != -1) {
+            if (currentPage.indexOf("desktop") != -1) {
                 // Get the layer group selected
                 var selectedlayerGroup = $("input:radio[name='tocgroup']:checked").val();
 

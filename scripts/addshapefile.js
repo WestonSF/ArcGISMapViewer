@@ -78,7 +78,7 @@ function generateFeatureCollection(fileName) {
     };
     // Use the rest generate operation to generate a feature collection from the zipped shapefile
     esri.request({
-        url: configOptions.portalUrl + '/sharing/rest/content/features/generate',
+        url: 'http://www.arcgis.com/sharing/rest/content/features/generate',
         content: myContent,
         form: dojo.byId('frmUploadShapefile'),
         handleAs: 'json',

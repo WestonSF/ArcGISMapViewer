@@ -284,12 +284,12 @@ function processCsvData(data) {
                     featureCollection.featureSet.features.push(feature);
                 });
 
-                var layer = new esri.layers.FeatureLayer(featureCollection, {
+                csvLayer = new esri.layers.FeatureLayer(featureCollection, {
                     infoTemplate: new esri.InfoTemplate(buildInfoTemplate(popupInfo)),
                     showAttribution: false,
                     outFields: ["*"]
                 });
-                layer.__popupInfo = popupInfo
+                csvLayer.__popupInfo = popupInfo;
 
                 // Set the layer symbology
                 var symbolColour = hexToRgb('#' + $('#csvColours').val());
@@ -300,12 +300,12 @@ function processCsvData(data) {
                 new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,
                 new dojo.Color(symbolColourArr), 1),
                 new dojo.Color(symbolFillArr));
-                layer.setRenderer(new esri.renderer.SimpleRenderer(csvSymbol));
+                csvLayer.setRenderer(new esri.renderer.SimpleRenderer(csvSymbol));
 
                 // Add the layer to the map and zoom to it
-                csvLayers.push(layer);
-                app.map.addLayers(csvLayers);
-                zoomToData(layer);
+                app.map.addLayer(csvLayer);
+                
+                zoomToData(csvLayer);
 
                 // Enabled the remove xy button
                 $("#removeCSV").button("enable");
@@ -535,10 +535,8 @@ function requestFailed(error) {
 
 // Remove CSV layers from map
 function removeCSV() {
-    // Remove the feature layers
-    $.each(csvLayers, function () {
-        app.map.removeLayer(this);
-    });
+    // Remove the feature layer
+    app.map.removeLayer(csvLayer);
 
     // Reset file input field
     var inputControl = $("#inCSV");
@@ -546,7 +544,4 @@ function removeCSV() {
 
     //Disable the remove shapefiles button
     $("#removeCSV").prop("disabled", true);
-
-    // Reset array
-    csvLayers = [];
 }
