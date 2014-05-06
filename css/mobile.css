@@ -33,7 +33,7 @@
     margin-top:-10px;
     width: 100px; 
     height: 20px; 
-    z-index:1000;
+    z-index:100;
 }
 
 /* Application loading bar label  */
@@ -51,7 +51,7 @@
     font-weight: bold;
     color: #fff;
     text-shadow: 1px 1px 0 #000;
-    z-index:2000;
+    z-index:100;
   }
 
 /* Layers loading bar  */
@@ -63,7 +63,7 @@
     margin-top:-5px;
     width: 60px; 
     height: 10px; 
-    z-index:1000;
+    z-index:100;
 }
 
 /* General loading bar  */
@@ -332,6 +332,7 @@ hr
 
 /* Secure services login popup */
 .esriSignInDialog {
+  z-index:1000;
   background:#FFFFFF;
   color: #000000; 
   border:1px solid #bfbfbf;

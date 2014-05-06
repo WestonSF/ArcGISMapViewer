@@ -155,7 +155,7 @@ function initVariables() {
         // Enables the themes dropdown to switch between map configs
         usethemes: true,
         // Initial theme to load
-        initialtheme: "CityLink Bus Service",
+        initialtheme: "Public",
         // List and configure map themes
         themes: [
             {
@@ -293,59 +293,59 @@ function initVariables() {
                   { layerGroup: "Imagery", id: 'cacheLayer', name: 'Roads', visible: true, opacity: 0.7, layerList: false, legend: false, printLegend: false, secure: false, layerType: "esri.layers.ArcGISTiledMapServiceLayer", url: "http://gis.nrc.govt.nz/arcgis/rest/services/Transportation/Roads/MapServer" },
                   { layerGroup: "Imagery", id: 'cacheLayer2', name: 'Addresses', visible: true, opacity: 0.7, layerList: false, legend: false, printLegend: false, secure: false, layerType: "esri.layers.ArcGISDynamicMapServiceLayer", url: "http://gis.nrc.govt.nz/arcgis/rest/services/PropertyAndBoundaries/Addresses/MapServer" },
 
-                  { layerGroup: "Boundaries", id: 'Boundaries', name: 'Boundaries', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Boundaries", id: 'Wards', name: 'Wards', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Boundaries", id: 'Boundaries', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Boundaries", id: 'Wards', layerList: true, legend: true, printLegend: true, secure: false },
 
-                  { layerGroup: "Environment", id: 'Water', name: 'Water', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Environment", id: 'Coast', name: 'Coast', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Environment", id: 'Biodiversity', name: 'Biodiversity', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Environment", id: 'Biosecurity', name: 'Biosecurity', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Environment", id: 'Community', name: 'Community', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Environment", id: 'Consents', name: 'Consents', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Environment", id: 'Parcels', name: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false },
+                  { layerGroup: "Environment", id: 'WaterPublic', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Environment", id: 'CoastPublic', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Environment", id: 'BiodiversityPublic', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Environment", id: 'Biosecurity', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Environment", id: 'Community', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Environment", id: 'Consents', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Environment", id: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false },
 
-                  { layerGroup: "Environment (Internal)", id: 'WaterInternal', name: 'Water', layerList: true, legend: true, printLegend: true, secure: true },
-                  { layerGroup: "Environment (Internal)", id: 'CoastInternal', name: 'Coast', layerList: true, legend: true, printLegend: true, secure: true },
-                  { layerGroup: "Environment (Internal)", id: 'BiodiversityInternal', name: 'Biodiversity', layerList: true, legend: true, printLegend: true, secure: true },
-                  { layerGroup: "Environment (Internal)", id: 'Land', name: 'Land', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Environment (Internal)", id: 'Property', name: 'Property', layerList: true, legend: true, printLegend: true, secure: true },
-                  { layerGroup: "Environment (Internal)", id: 'Parcels', name: 'Parcels', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Environment (Internal)", id: 'WaterInternal', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Environment (Internal)", id: 'CoastInternal', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Environment (Internal)", id: 'BiodiversityInternal', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Environment (Internal)", id: 'Land', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Environment (Internal)", id: 'Property', layerList: true, legend: true, printLegend: true, secure: true },
+                  { layerGroup: "Environment (Internal)", id: 'Parcels', layerList: true, legend: true, printLegend: true, secure: false },
 
-                  { layerGroup: "Hazards", id: 'CoastalHazards', name: 'Coastal Hazards', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Hazards", id: 'LandHazards', name: 'Land Hazards', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Hazards", id: 'Parcels', name: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false },
+                  { layerGroup: "Hazards", id: 'CoastalHazards', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Hazards", id: 'LandHazards', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Hazards", id: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false },
 
-                  { layerGroup: "Planning", id: 'CoastalPlanning', name: 'Coastal Planning', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Planning", id: 'WaterSoil', name: 'Water and Soil', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Planning", id: 'AirQuality', name: 'Air Quality', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Planning", id: 'Parcels', name: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false },
+                  { layerGroup: "Planning", id: 'CoastalPlanning', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Planning", id: 'WaterSoil', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Planning", id: 'AirQuality', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Planning", id: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false },
 
-                  { layerGroup: "Public Transportation", id: 'BusRoutes', name: 'Bus Routes', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Public Transportation", id: 'BusStops', name: 'Bus Stops', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Public Transportation", id: 'BusRoutes', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Public Transportation", id: 'BusStops', layerList: true, legend: true, printLegend: true, secure: false },
 
-                  { layerGroup: "Regional Policy Statement", id: 'RegionalPolicyStatement', name: 'Proposed Regional Policy Statement Council Decision', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Regional Policy Statement", id: 'Parcels', name: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false },
+                  { layerGroup: "Regional Policy Statement", id: 'RegionalPolicyStatementPublic', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Regional Policy Statement", id: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false },
 
-                  { layerGroup: "Regional Policy Statement (Internal)", id: 'RegionalPolicyStatementInternal', name: 'Proposed Regional Policy Statement Council Decision', layerList: true, legend: true, printLegend: true, secure: true },
-                  { layerGroup: "Regional Policy Statement (Internal)", id: 'RegionalPolicyStatementSubmissions', name: 'Regional Policy Statement Submissions', layerList: true, legend: true, printLegend: true, secure: true },
-                  { layerGroup: "Regional Policy Statement (Internal)", id: 'Property', name: 'Property', layerList: true, legend: true, printLegend: false, secure: true },
-                  { layerGroup: "Regional Policy Statement (Internal)", id: 'Parcels', name: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false },
+                  { layerGroup: "Regional Policy Statement (Internal)", id: 'RegionalPolicyStatementInternal', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Regional Policy Statement (Internal)", id: 'RegionalPolicyStatementSubmissions', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Regional Policy Statement (Internal)", id: 'Property', layerList: true, legend: true, printLegend: false, secure: false },
+                  { layerGroup: "Regional Policy Statement (Internal)", id: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false },
 
-                  { layerGroup: "District Plan", id: 'DistrictPlanFNDC', name: 'District Plan - FNDC', layerList: true, legend: true, printLegend: true, secure: true },
-                  { layerGroup: "District Plan", id: 'DistrictPlanWDC', name: 'District Plan - WDC', layerList: true, legend: true, printLegend: true, secure: true },
-                  { layerGroup: "District Plan", id: 'DistrictPlanKDC', name: 'District Plan - KDC', layerList: true, legend: true, printLegend: true, secure: true },
-                  { layerGroup: "District Plan", id: 'Property', name: 'Property', layerList: true, legend: true, printLegend: false, secure: true },
-                  { layerGroup: "District Plan", id: 'Parcels', name: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false },
+                  { layerGroup: "District Plan", id: 'DistrictPlanFNDC', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "District Plan", id: 'DistrictPlanWDC', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "District Plan", id: 'DistrictPlanKDC', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "District Plan", id: 'Property', layerList: true, legend: true, printLegend: false, secure: false },
+                  { layerGroup: "District Plan", id: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false },
 
-                  { layerGroup: "Bathing Sites", id: 'BathingSites', name: 'Bathing Sites', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Bathing Sites", id: 'BathingSites', layerList: true, legend: true, printLegend: true, secure: false },
 
-                  { layerGroup: "Worksmart", id: 'Worksmart', name: 'Worksmart', layerList: true, legend: true, printLegend: true, secure: true },
-                  { layerGroup: "Worksmart", id: 'PropertyWorksmart', name: 'Property', layerList: true, legend: true, printLegend: false, secure: true },
-                  { layerGroup: "Worksmart", id: 'Parcels', name: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false },
+                  { layerGroup: "Worksmart", id: 'Worksmart', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Worksmart", id: 'PropertyWorksmart', layerList: true, legend: true, printLegend: false, secure: false },
+                  { layerGroup: "Worksmart", id: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false },
 
-                  { layerGroup: "Flood Hazards", id: 'FloodHazards100Year', name: 'Flood Hazards - 100 Year', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Flood Hazards", id: 'FloodHazards10Year', name: 'Flood Hazards - 10 Year', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Flood Hazards", id: 'Parcels', name: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false }
+                  { layerGroup: "Flood Hazards", id: 'FloodHazards100Year', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Flood Hazards", id: 'FloodHazards10Year', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Flood Hazards", id: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false }
         ],
         // Secure service login message
         secureserviceloginmessage: "<B>This area of the site is only available to Northland Regional Council staff. Contact the NRC GIS Administrator for login credentials.</B> <br\><br\>Server - ${server} <br\>Service - ${resource}",
@@ -356,7 +356,7 @@ function initVariables() {
         // Specify the locators and query task to use for searching
         searchParams: [
             {
-                url: "http://gis.nrc.govt.nz/arcgis/rest/services/Locators/NorthlandInternalLocator/GeocodeServer",
+                url: "http://utility.arcgis.com/usrsvcs/servers/375cd892fb2c42b681ce4c2a52a09eba/rest/services/Locators/NorthlandInternalLocator/GeocodeServer",
                 name: "All",
                 outFields: "*",
                 locatorName: "Internal",
@@ -402,19 +402,19 @@ function initVariables() {
                 searchField: "PAR_ID"
             },
             {
-                url: "http://gis.nrc.govt.nz/arcgis/rest/services/Locators/OwnerNameLocator/GeocodeServer",
+                url: "http://utility.arcgis.com/usrsvcs/servers/0e6166e276304eeda9501885fad49e5a/rest/services/Locators/OwnerNameLocator/GeocodeServer",
                 name: "Owner Name",
                 locatorName: "Owner",
                 singleLineFieldName: "Single Line Input",
-                queryTaskURL: "http://gis.nrc.govt.nz/arcgis/rest/services/PropertyAndBoundaries/Property/MapServer/0",
+                queryTaskURL: "http://utility.arcgis.com/usrsvcs/servers/44b4784af9104263acc294d15a2d6b05/rest/services/PropertyAndBoundaries/Property/MapServer/0",
                 searchField: "OWNERNAME"
             },
             {
-                url: "http://gis.nrc.govt.nz/arcgis/rest/services/Locators/AssessmentLocator/GeocodeServer",
+                url: "http://utility.arcgis.com/usrsvcs/servers/027c0ce273cd4e9c9254e3d983d2a640/rest/services/Locators/AssessmentLocator/GeocodeServer",
                 name: "Assessment ID",
                 locatorName: "Assessment",
                 singleLineFieldName: "Single Line Input",
-                queryTaskURL: "http://gis.nrc.govt.nz/arcgis/rest/services/PropertyAndBoundaries/Property/MapServer/0",
+                queryTaskURL: "http://utility.arcgis.com/usrsvcs/servers/44b4784af9104263acc294d15a2d6b05/rest/services/PropertyAndBoundaries/Property/MapServer/0",
                 searchField: "ASSESSMENT"
             },
             {
@@ -466,7 +466,7 @@ function initVariables() {
                         },
                         {
                             id: "Property",
-                            identifyTask: "http://gis.nrc.govt.nz/arcgis/rest/services/PropertyAndBoundaries/Property/MapServer",
+                            identifyTask: "http://utility.arcgis.com/usrsvcs/servers/44b4784af9104263acc294d15a2d6b05/rest/services/PropertyAndBoundaries/Property/MapServer",
                             tolerance: 5,
                             returnGeometry: true,
                             layerIds: [0], // layer ids in map service
@@ -503,7 +503,7 @@ function initVariables() {
                             ]
                         },
                         {
-                            id: "Biodiversity",
+                            id: "BiodiversityPublic",
                             identifyTask: "http://gis.nrc.govt.nz/arcgis/rest/services/Environment/BiodiversityPublic/MapServer",
                             tolerance: 10,
                             returnGeometry: true,
@@ -527,7 +527,7 @@ function initVariables() {
                             ]
                         },
                         {
-                            id: "Water",
+                            id: "WaterPublic",
                             identifyTask: "http://gis.nrc.govt.nz/arcgis/rest/services/Environment/WaterPublic/MapServer",
                             tolerance: 10,
                             returnGeometry: false,
@@ -543,7 +543,7 @@ function initVariables() {
                             ]
                         },
                         {
-                            id: "Coast",
+                            id: "CoastPublic",
                             identifyTask: "http://gis.nrc.govt.nz/arcgis/rest/services/Environment/CoastPublic/MapServer",
                             tolerance: 10,
                             returnGeometry: true,
@@ -562,7 +562,7 @@ function initVariables() {
                         // Environment (Internal)
                         {
                             id: "WaterInternal",
-                            identifyTask: "http://gis.nrc.govt.nz/arcgis/rest/services/Environment/WaterInternal/MapServer",
+                            identifyTask: "http://utility.arcgis.com/usrsvcs/servers/a5b3c0bc2acc47f88191d7e20331aba2/rest/services/Environment/WaterInternal/MapServer",
                             tolerance: 10,
                             returnGeometry: false,
                             layerIds: [2, 3, 6], // layer ids in map service
@@ -575,7 +575,7 @@ function initVariables() {
                         },
                         {
                             id: "Land",
-                            identifyTask: "http://gis.nrc.govt.nz/arcgis/rest/services/Environment/Land/MapServer",
+                            identifyTask: "http://utility.arcgis.com/usrsvcs/servers/c233d036c22c434cb3740f47b8c177ff/rest/services/Environment/Land/MapServer",
                             tolerance: 10,
                             returnGeometry: false,
                             layerIds: [0, 1], // layer ids in map service
@@ -598,6 +598,7 @@ function initVariables() {
                             identifyLayerAliases: [ // ids must not contain spaces // name = map service layer name // TODO - tabindex is repeated.  This could be moved into an array where it is not repeated.
                                 { tabName: "Flood Susceptible Land", tabindex: 1, layerName: "Flood Susceptible Land", displayFormat: "<B>Flood Susceptibility: [#FLOOD_SUSC#] </B>" },
                                 { tabName: "Catchments - Priority River", tabindex: 1, layerName: "Catchments - Priority Rivers ", displayFormat: "<B>Priority Catchment: [#PriorityCa#] <br/> Sub Catchment: [#NRC_SubCat#]</B> <br/> Area: [#Area_sqkm#] sq km" },
+                                { tabName: "Erosion Prone Land", tabindex: 1, layerName: "Erosion Prone Land", displayFormat: "<B>Soil Type: [#MAINSOIL#] </B> <br/><br/> Slope: [#SLOPE#] <br/> Erosion: [#EROSION#]" },
                                 { tabName: "Selected Land Use Site", tabindex: 1, layerName: "Selected Land Use Sites", displayFormat: "<B>ID: [#IRISID#] </B>" }
                             ]
                         },
@@ -683,15 +684,15 @@ function initVariables() {
 
                         // Regional Policy Statement
                         {
-                            id: "RegionalPolicyStatement",
+                            id: "RegionalPolicyStatementPublic",
                             identifyTask: "http://gis.nrc.govt.nz/arcgis/rest/services/Planning/RegionalPolicyStatementPublic/MapServer",
                             tolerance: 5,
                             returnGeometry: true,
-                            layerIds: [0, 1], // layer ids in map service
+                            layerIds: [0, 2], // layer ids in map service
                             layerOption: esri.tasks.IdentifyParameters.LAYER_OPTION_VISIBLE, // LAYER_OPTION_VISIBLE, LAYER_OPTION_TOP or LAYER_OPTION_ALL
                             identifyLayerAliases: [ // ids must not contain spaces // name = map service layer name // TODO - tabindex is repeated.  This could be moved into an array where it is not repeated.
-                                { tabName: "Outstanding Natural Landscape", tabindex: 1, layerName: "Outstanding Natural Landscape", displayFormat: "<B>Name: [#LandscapeN#] <br/> ID: [#ID#]</B>" },
-                                { tabName: "Outstanding Natural Feature", tabindex: 1, layerName: "Outstanding Natural Feature", displayFormat: "<B>Name: [#ONFS#] <br/> ID: [#ONF_ID#]</B>" }
+                                { tabName: "Outstanding Natural Landscape", tabindex: 1, layerName: "Outstanding Natural Landscape", displayFormat: "<B>Name: [#LandscapeN#]</B>" },
+                                { tabName: "Outstanding Natural Feature", tabindex: 1, layerName: "Outstanding Natural Feature", displayFormat: "<B>Name: [#ONFS#]</B>" }
                             ]
                         },
 
@@ -699,28 +700,28 @@ function initVariables() {
                         // Regional Policy Statement (Internal)
                         {
                             id: "RegionalPolicyStatementInternal",
-                            identifyTask: "http://gis.nrc.govt.nz/arcgis/rest/services/Planning/RegionalPolicyStatementInternal/MapServer",
+                            identifyTask: "http://utility.arcgis.com/usrsvcs/servers/37da0a116a1043f8b73923a8ac565f81/rest/services/Planning/RegionalPolicyStatementInternal/MapServer",
                             tolerance: 5,
                             returnGeometry: true,
-                            layerIds: [0, 1, 4, 5], // layer ids in map service
+                            layerIds: [0, 1, 6, 8], // layer ids in map service
                             layerOption: esri.tasks.IdentifyParameters.LAYER_OPTION_VISIBLE, // LAYER_OPTION_VISIBLE, LAYER_OPTION_TOP or LAYER_OPTION_ALL
                             identifyLayerAliases: [ // ids must not contain spaces // name = map service layer name // TODO - tabindex is repeated.  This could be moved into an array where it is not repeated.
-                                { tabName: "Draft RPS - Outstanding Natural Landscape", tabindex: 2, layerName: "Draft RPS - Outstanding Natural Landscape", displayFormat: "<B>Name: [#ONL#] <br/> ID: [#ONL_ID#]</B>" },
-                                { tabName: "Draft RPS - Outstanding Natural Feature", tabindex: 2, layerName: "Draft RPS - Outstanding Natural Feature", displayFormat: "<B>Name: [#ONFS#] <br/> ID: [#ONF_ID#]</B>" },
-                                { tabName: "Proposed RPS - Outstanding Natural Landscape", tabindex: 1, layerName: "Proposed RPS - Outstanding Natural Landscape", displayFormat: "<B>Name: [#LandscapeN#] <br/> ID: [#ID#]</B>" },
-                                { tabName: "Proposed RPS - Outstanding Natural Feature", tabindex: 1, layerName: "Proposed RPS - Outstanding Natural Feature", displayFormat: "<B>Name: [#ONFS#] <br/> ID: [#ONF_ID#]</B>" }
+                                { tabName: "Draft RPS - Outstanding Natural Landscape", tabindex: 2, layerName: "Draft RPS - Outstanding Natural Landscape", displayFormat: "<B>Name: [#ONL#]</B>" },
+                                { tabName: "Draft RPS - Outstanding Natural Feature", tabindex: 2, layerName: "Draft RPS - Outstanding Natural Feature", displayFormat: "<B>Name: [#ONFS#]</B>" },
+                                { tabName: "Proposed RPS - Outstanding Natural Landscape", tabindex: 1, layerName: "Proposed RPS - Outstanding Natural Landscape", displayFormat: "<B>Name: [#LandscapeN#]</B>" },
+                                { tabName: "Proposed RPS - Outstanding Natural Feature", tabindex: 1, layerName: "Proposed RPS - Outstanding Natural Feature", displayFormat: "<B>Name: [#ONFS#]</B>" }
                             ]
                         },
                         {
                             id: "RegionalPolicyStatementSubmissions",
-                            identifyTask: "http://gis.nrc.govt.nz/arcgis/rest/services/Planning/RegionalPolicyStatementSubmissions/MapServer",
+                            identifyTask: "http://utility.arcgis.com/usrsvcs/servers/0755e44f22c54ee5b215ed2c6af59ab6/rest/services/Planning/RegionalPolicyStatementSubmissions/MapServer",
                             tolerance: 10,
                             returnGeometry: true,
                             layerIds: [0, 1], // layer ids in map service
                             layerOption: esri.tasks.IdentifyParameters.LAYER_OPTION_VISIBLE, // LAYER_OPTION_VISIBLE, LAYER_OPTION_TOP or LAYER_OPTION_ALL
                             identifyLayerAliases: [ // ids must not contain spaces // name = map service layer name // TODO - tabindex is repeated.  This could be moved into an array where it is not repeated.
-                                { tabName: "Submission", tabindex: 1, layerName: "Submission", displayFormat: "<B>Submission: [#Submission#] <br/> Layer: [#Layer#]</B> <br/> Recommendation: [#Recommendation#] <br/> ID: [#SubmitterID#]" },
-                                { tabName: "Recommended Change", tabindex: 2, layerName: "Recommended Change", displayFormat: "<B>Submission: [#Submission#] <br/> Layer: [#Layer#]</B> <br/> Recommendation: [#Recommendation#] <br/> ID: [#SubmitterID#]" }
+                                { tabName: "Submission", tabindex: 1, layerName: "Submission", displayFormat: "<B>Submission: [#Submission#] <br/> Layer: [#Layer#]</B> <br/> Recommendation: [#Recommendation#]" },
+                                { tabName: "Recommended Change", tabindex: 2, layerName: "Recommended Change", displayFormat: "<B>Submission: [#Submission#] <br/> Layer: [#Layer#]</B> <br/> Recommendation: [#Recommendation#]" }
                             ]
                         },
 
@@ -728,7 +729,7 @@ function initVariables() {
                         // Worksmart
                         {
                             id: "Worksmart",
-                            identifyTask: "http://gis.nrc.govt.nz/arcgis/rest/services/Operational/Worksmart/MapServer",
+                            identifyTask: "http://utility.arcgis.com/usrsvcs/servers/dfb5199e1ca9479babbefceff5a9988a/rest/services/Operational/Worksmart/MapServer",
                             tolerance: 10,
                             returnGeometry: true,
                             layerIds: [0], // layer ids in map service

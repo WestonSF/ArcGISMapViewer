@@ -135,16 +135,17 @@ function doIdentify(evt, report) {
             $.each(configOptions.identifyParams, function () {
                 layerID = this.id
 
-
                 // If using ArcGIS Online web map
                 if (configOptions.useAGSOnlineWebMap == "true" || configOptions.useAGSOnlineWebMap == true) {
                     // For each layer
                     $.each(operationalLayers, function () {
                         operationalLayerID = this.id;
+                        // Get the ID by splitting as ArcGIS Online IDs add on _number.
+                        splitOperationalLayerId = operationalLayerID.split("_");
 
                         // Get the ID as ArcGIS Online set different IDs
-                        if (operationalLayerID.indexOf(layerID) != -1) {
-                            layerID = operationalLayerID
+                        if (layerID == splitOperationalLayerId[0]) {
+                            layerID = operationalLayerID;
                         }
                     });
                 }

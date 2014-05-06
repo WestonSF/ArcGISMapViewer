@@ -76,7 +76,7 @@ table {
     margin-top:-25px;
     width: 300px; 
     height: 50px; 
-    z-index:1000;
+    z-index:100;
 }
 
 /* Application loading bar label  */
@@ -94,7 +94,7 @@ table {
     font-weight: bold;
     color: #FFF;
     text-shadow: 2px 2px 0 #000;
-    z-index:2000;
+    z-index:100;
   }
 
 /* Layers loading bar  */
@@ -106,7 +106,7 @@ table {
     margin-top:-10px;
     width: 150px; 
     height: 20px; 
-    z-index:1000;
+    z-index:100;
 }
 
 /* Print loading bar  */
@@ -374,6 +374,7 @@ table {
 
 /* Secure services login popup */
 .soria .esriSignInDialog {
+  z-index:1000;
   background:#FFFFFF;
   color: #000000; 
   border:1px solid #bfbfbf;

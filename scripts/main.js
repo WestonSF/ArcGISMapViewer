@@ -1097,6 +1097,9 @@ function loadeventHandlers() {
     // Add listener for when map is clicked
     app.map.on("click", mapClick);
 
+    // CALL FUNCTION - Setup identity manager handler for security
+    setupIdentityManager();
+
     // Desktop version
     if (currentPage.indexOf("map") != -1) {
         // If the layer button is clicked
@@ -1422,9 +1425,6 @@ function initFunctionality() {
 
     // CALL FUNCTION - Setup basemap gallery
     createBasemapGallery();
-
-    // CALL FUNCTION - Setup identity manager handler for security
-    setupIdentityManager();
 
     // Desktop version
     if (currentPage.indexOf("map") != -1) {
@@ -3026,6 +3026,8 @@ function loadArcGISOnlineWebMap(webmapID) {
             if (!this.featureCollection) {
                 // Get layer ID
                 layerID = this.id;
+                // Get the ID by splitting as ArcGIS Online IDs add on _number.
+                splitLLayerId = layerID.split("_");
                 layerGroup = "";
 
                 // Get the layer type
@@ -3040,7 +3042,7 @@ function loadArcGISOnlineWebMap(webmapID) {
                     configID = this.id;
 
                     // If ID from configuration matches the current layer ID
-                    if (layerID.indexOf(configID) != -1) {
+                    if (configID == splitLLayerId[0]) {
                         // Set layer group
                         layerGroup = this.layerGroup;
 
@@ -3053,7 +3055,7 @@ function loadArcGISOnlineWebMap(webmapID) {
                 });
                 
                 // Push layer information into array
-                operationalLayers.push({ layerGroup: layerGroup, id: this.id, name: this.title, visible: this.visibility, opacity: this.opacity, layerList: layerList, legend: legend, printLegend: printLegend, secure: secure, layerType: layerType, url: this.url });
+                operationalLayers.push({ layerGroup: layerGroup, id: layerID, name: this.title, visible: this.visibility, opacity: this.opacity, layerList: layerList, legend: legend, printLegend: printLegend, secure: secure, layerType: layerType, url: this.url });
             }
         });
 
@@ -3248,8 +3250,8 @@ function setupIdentityManager() {
                     }
                 });
 
-                // If we are at the last login popup and cancel, go back to previous theme
-                if (secureLoginCount == secureLayersCount) {
+                // If we are at the last login popup or it's an ArcGIS online webmap and cancel clicked, go back to previous theme
+                if ((secureLoginCount == secureLayersCount) || (configOptions.useAGSOnlineWebMap == "true" || configOptions.useAGSOnlineWebMap == true)) {
                     document.getElementById("selectTheme").value = lastThemeUsed;
                     themeLoad();
                     // Reset login count
@@ -3270,8 +3272,8 @@ function setupIdentityManager() {
                     }
                 });
 
-                // If we are at the last login popup and cancel, go back to previous theme
-                if (secureLoginCount == secureLayersCount) {
+                // If we are at the last login popup or it's an ArcGIS online webmap and cancel clicked, go back to previous theme
+                if ((secureLoginCount == secureLayersCount) || (configOptions.useAGSOnlineWebMap == "true" || configOptions.useAGSOnlineWebMap == true)) {
                     $("#theme" + replaceAll(lastThemeUsed, ' ', '_')).prop("checked", true);
                     themeLoad();
                     // Reset login count
@@ -3294,8 +3296,8 @@ function setupIdentityManager() {
                         }
                     }
                 });
-                // If we are at the last login popup and cancel, go back to previous layer group
-                if (secureLoginCount == secureLayersCount) {
+                // If we are at the last login popup or it's an ArcGIS online webmap and cancel clicked, go back to previous layer group
+                if ((secureLoginCount == secureLayersCount) || (configOptions.useAGSOnlineWebMap == "true" || configOptions.useAGSOnlineWebMap == true)) {
                     document.getElementById("layerGroup" + replaceAll(lastLayerGroupUsed, ' ', '_')).checked = true;
                     layerGroupChanged(lastLayerGroupUsed);
                     // Reset login count
@@ -3316,8 +3318,8 @@ function setupIdentityManager() {
                     }
                 });
 
-                // If we are at the last login popup and cancel, go back to previous layer group
-                if (secureLoginCount == secureLayersCount) {
+                // If we are at the last login popup or it's an ArcGIS online webmap and cancel clicked, go back to previous layer group
+                if ((secureLoginCount == secureLayersCount) || (configOptions.useAGSOnlineWebMap == "true" || configOptions.useAGSOnlineWebMap == true)) {
                     $("#layerGroup" + replaceAll(lastLayerGroupUsed, ' ', '_')).prop("checked", true);
                     layerGroupChanged(lastLayerGroupUsed);
                     // Reset login count
