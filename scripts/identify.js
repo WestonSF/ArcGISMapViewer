@@ -187,6 +187,9 @@ function doIdentify(evt, report) {
 function addToMap(idResults, layerAliases, screenPoint, report, showChart, chartFields, identifySearch) {
     // Array of all results in this response, which may or may not contain results for more than one layer
     var allLayerResults = new Array;
+    // Tab number to select                    
+    var tabNumber;
+
     // If no results returned from property report
     if (idResults.length == 0 && report) {
         alert("No property at this location");
@@ -213,7 +216,6 @@ function addToMap(idResults, layerAliases, screenPoint, report, showChart, chart
         // For each of the results returned
         for (var i = 0; i < idResults.length; i++) {
             var idResult = idResults[i];
-
             console.log('Identify results returned for ' + idResult.layerName);
 
             // Add graphic to map of feature selected
@@ -254,25 +256,43 @@ function addToMap(idResults, layerAliases, screenPoint, report, showChart, chart
 
             // For all the layer aliases from the config
             for (var count = 0; count < layerAliases.length; ++count) {
-
                 // If layer name in config equals layer name returned from results
                 if (layerAliases[count].layerName === idResult.layerName) {
-
+                    
                     // Get the name for the tab from the config and create ID for it
                     var tabname = replaceAll(layerAliases[count].tabName, " ", "_") + 'Tab';
 
                     layerResults = { layerName: idResult.layerName, features: [] };
                     layerResults.features.push(idResult.feature);
 
+                    // If result for the layer
+                    if (i == 0) {
+                        // Create new tab for layer
+                        $("#identifyTabs ul").append("<li><a href='#" + tabname + "'>" + layerAliases[count].tabName + "</a></li>");
+                        $("#identifyTabs").append("<div id='" + tabname + "'></div>");
+                        // Refresh tabs
+                        $("#identifyTabs").tabs("refresh");
+                        // Activate first tab
+                        $("#identifyTabs").tabs({ active: 0 });
+
+                        // Set the tab order, if tab index is 1 in config then make sure this is the first tab
+                        if (layerAliases[count].tabindex == 1) {
+                            // Get the current tab position                       
+                            tabNumber = $("#identifyTabs").children("div").length - 1;
+
+                            // Activate the tab
+                            $("#identifyTabs").tabs({ active: tabNumber });
+                        }
+                    }
                     // If on the second result for a layer or more
-                    if (i > 0) {
+                    else {
                         var createdTab = false;
                         var tabs = new Array;
 
                         // Get an array of tabs created
-                        $('#identifyTabs div').each(function () {                           
+                        $('#identifyTabs div').each(function () {
                             // Push into array
-                            tabs.push(this.id);                      
+                            tabs.push(this.id);
                         })
                         // For each of the tabs
                         $.each(tabs, function () {
@@ -291,123 +311,20 @@ function addToMap(idResults, layerAliases, screenPoint, report, showChart, chart
                             $("#identifyTabs").tabs({ active: 0 });
                         }
                     }
-                    // Else if on the first result for the layer
-                    else {
-                        // Create new tab for layer
-                        $("#identifyTabs ul").append("<li><a href='#" + tabname + "'>" + layerAliases[count].tabName + "</a></li>");
-                        $("#identifyTabs").append("<div id='" + tabname + "'></div>");
-                        // Refresh tabs
-                        $("#identifyTabs").tabs("refresh");
-                        // Activate first tab
-                        $("#identifyTabs").tabs({ active: 0 });
-
-                        // Set the tab order, if tab index is 1 in config then make sure this is the first tab
-                        if (layerAliases[count].tabindex == 1) {
-                            // Get the current tab position                       
-                            var tabNumber = $("#identifyTabs").children("div").length - 1
-
-                            // Move any tabs in front of this tab to the back
-                            for (var i = 0, tabs = $("#identifyTabs").children("div").length - 1; i < tabs; i++) {
-                                $('#identifyTabs li:first').appendTo('#identifyTabs ul');
-                            }
-
-                            // Activate the tab
-                            $("#identifyTabs").tabs({ active: tabNumber });
-                        }
-                    }
 
                     // Load in results to the tab by calling the layerTabContent function
                     $('#' + tabname).append(layerTabContent(layerResults, layerAliases[count].layerName, layerAliases[count].displayFormat, report));
 
-                    // If chart is to be included in popup
-                    if (showChart === "true" || showChart === true) {
-                        // Load modules
-                        require([
-                            "dojox/charting/Chart2D",
-                            "dojox/charting/widget/Legend",
-                            "dojox/charting/themes/PrimaryColors"
-                        ], function () {
-                            // For all the features returned - Would normally be just one for charts
-                            for (var i = 0, il = layerResults.features.length; i < il; i++) {
-
-                                // For each of the fields from config
-                                for (var a in chartFields) {
-                                    // Get the value for the field and add into object
-                                    var value = layerResults.features[i].attributes[chartFields[a].field];
-                                    // Convert null values to zero
-                                    if (value === "Null" || value === "null") {
-                                        value = 0;
-                                    }
-                                    // Update the value field
-                                    chartFields[a].y = value;
-                                    // Update the legend field
-                                    chartFields[a].legend = chartFields[a].label + ": " + value;
-                                }
-
-                                // Clear previous divs
-                                var chartDiv = dijit.byId("chart");
-                                if (chartDiv) {
-                                    chartDiv.destroyRecursive(true);
-                                }
-                                var legendDiv = dijit.byId("legend");
-                                if (legendDiv) {
-                                    legendDiv.destroyRecursive(true);
-                                }
-
-                                // Setup the pie chart
-                                var chartDiv = dojo.create("div", {
-                                    id: "chart"
-                                }, dojo.create('div'));
-                                var legendDiv = dojo.create("div", {
-                                    id: "legend"
-                                }, dojo.create('div'));
-
-                                // Assign divs to tabs
-                                $('#' + tabname).append(chartDiv);
-                                $('#' + tabname).append(legendDiv);
-
-                                var chart = new dojox.charting.Chart2D(chartDiv);
-                                // Set the theme for the chart
-                                var theme = dojo.getObject("dojox.charting.themes.PrimaryColors");
-
-
-                                theme.chart.fill = "transparent";
-                                theme.plotarea.fill = "transparent";
-                                chart.setTheme(theme);
-
-                                // Add the type of chart
-                                chart.addPlot("default", {
-                                    title: "Production(Quantity)",
-                                    type: "Pie",
-                                    radius: 100,
-                                    font: "4pt arial, verdana, tahoma",
-                                    fontColor: "#000",
-                                    labelOffset: -20,
-                                    labelStyle: "rows",
-                                    labels: false
-                                });
-
-                                // Add the data and the series
-                                chart.addSeries("Data", chartFields);
-                                // Set the size of the chart
-                                chart.resize(200, 200)
-                                // Render the chart
-                                chart.render();
-
-                                // Setup legend for chart
-                                var legend = new dojox.charting.widget.Legend({ chart: chart, outline: true }, "legend");
-                            }
-                        });
-                    }
-
-                    break;
                 }
-
-
             }
         }
     }
-      
+
+    // Activate the default tab
+    if (tabNumber) {
+        $("#identifyTabs").tabs({ active: tabNumber });
+    }
+
     // Change back to identify - Desktop or embed version
     if ((currentPage.indexOf("desktop") != -1) || (currentPage.indexOf("embed") != -1)) {
         changeCursor('identify');

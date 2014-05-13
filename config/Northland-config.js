@@ -27,7 +27,7 @@ function initVariables() {
         // Refresh rate of zoom animation; default is 50
         panRate: 5,
 
-        // Proxy details
+        // Proxy details - Needs to be set to true when setup on web server.
         alwaysuseproxy: false,
         // Proxy page needs to be on same server as application and in root IIS directory. Required for tools to work in IE8/IE9.
         proxyurl: "http://gis.nrc.govt.nz/proxy/proxy.ashx",
