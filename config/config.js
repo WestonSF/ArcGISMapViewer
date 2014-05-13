@@ -943,7 +943,7 @@ function initVariables() {
             tokenURL: "https://www.arcgis.com/sharing",
             // Username/password for ArcGIS Online - Needs to be an organisation account to have access to the network services
             username: "EagleTechnologyNRC",
-            password: "n0rthl@nd"
+            password: "*****"
         },
         // Map service with features to be setup as facilities.
         facilitiesURL: "http://gis.nrc.govt.nz/arcgis/rest/services/Transportation/BusStops/MapServer/0",
