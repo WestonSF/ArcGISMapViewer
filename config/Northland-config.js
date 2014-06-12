@@ -4,9 +4,9 @@ function initVariables() {
     configOptions = {
         // --------------------------------------------------------------------------- General ---------------------------------------------------------------------------  
         // Title in the web window
-        webTitle: "Northland Regional Council Maps", 
+        webTitle: "Northland Regional Council Maps",
         // Images for splash screen and bottom right
-        logo: "<img src=\"images/logo/NRC_logo.JPG\" height=\"45\" width=\"125\">", 
+        logo: "<img src=\"images/logo/NRC_logo.JPG\" height=\"45\" width=\"125\">",
 
         // ArcGIS Javascript API address
         jsapiaddress: "http://gis.nrc.govt.nz/ArcGISJavascriptAPI/3.7compact",
@@ -27,7 +27,7 @@ function initVariables() {
         // Refresh rate of zoom animation; default is 50
         panRate: 5,
 
-        // Proxy details - Needs to be set to true when setup on web server.
+        // Proxy details
         alwaysuseproxy: false,
         // Proxy page needs to be on same server as application and in root IIS directory. Required for tools to work in IE8/IE9.
         proxyurl: "http://gis.nrc.govt.nz/proxy/proxy.ashx",
@@ -53,13 +53,13 @@ function initVariables() {
         // First loads
         initialExtent: { xmin: 1585000, xmax: 1813000, ymin: 5980000, ymax: 6127000 },
         // Shapefile extent
-        fullExtent: { xmin: 1585000, xmax: 1813000, ymin: 5980000, ymax: 6127000 }, 
+        fullExtent: { xmin: 1585000, xmax: 1813000, ymin: 5980000, ymax: 6127000 },
 
         spatialReference: { WKID: 2193, name: "NZTM", xlabel: "x", ylabel: "y" },
-        wraparound180: false, 
+        wraparound180: false,
 
         // Set the scales to be used in the application
-        setlods: true, 
+        setlods: true,
         lods: [
           {
               "level": 0,
@@ -139,18 +139,18 @@ function initVariables() {
 
 
         // --------------------------------------------------------------------------- Themes ---------------------------------------------------------------------------  
-	    // Use ArcGIS Online web map
-	    useAGSOnlineWebMap: true,
-	    webmapID: "",
+        // Use ArcGIS Online web map
+        useAGSOnlineWebMap: true,
+        webmapID: "",
 
         // Gallery portal 
         // The arcgis online group that contains the applications to display
-	    galleryGroup: {
-	        owner: "EagleTechnologyNRC",
-	        title: "Northland Regional Council Public Applications Portal"
-	    },
+        galleryGroup: {
+            owner: "EagleTechnologyNRC",
+            title: "Northland Regional Council Public Applications Portal"
+        },
         // The url of the portal
-	    galleryPortalUrl: "http://nrcgis.maps.arcgis.com",
+        galleryPortalUrl: "http://nrcgis.maps.arcgis.com",
 
         // Enables the themes dropdown to switch between map configs
         usethemes: true,
@@ -200,8 +200,7 @@ function initVariables() {
                 initialExtent: {},
                 layergroups: [
                     { name: "Hazards", description: "" },
-                    { name: "Flood Hazards", description: "" },
-                    { name: "Boundaries", description: "" }
+                    { name: "Emergency Services", description: "" }
                 ],
                 initiallayergroup: "Hazards",
                 searches: ["Public", "Address", "Road", "Legal", "Parcel", "Bus"]
@@ -275,7 +274,6 @@ function initVariables() {
         initiallayergroup: "Boundaries",
         // The groups and a description for each
         layergroups: [
-                        { name: "Boundaries", description: "" },
                         { name: "Environment", description: "" },
                         { name: "Environment (Internal)", description: "" },
                         { name: "Hazards", description: "" },
@@ -284,17 +282,17 @@ function initVariables() {
                         { name: "Regional Policy Statement", description: "" },
                         { name: "Regional Policy Statement (Internal)", description: "" },
                         { name: "District Plan", description: "" },
-                        { name: "Flood Hazards", description: "" },
                         { name: "Bathing Sites", description: "" },
-                        { name: "Worksmart", description: "" }
+                        { name: "Worksmart", description: "" },
+                        { name: "Flood Hazards", description: "" },
+                        { name: "Emergency Services", description: "" },
+                        { name: "Boundaries", description: "" }
         ],
         // Map services to setup and groupings to assign to - id: No spaces and used in code to identify layer, name: Can have any character and will appear to user. If using ArcGIS Online, just need layerGroup, id and optionally name
         operationalLayers: [
                   { layerGroup: "Imagery", id: 'cacheLayer', name: 'Roads', visible: true, opacity: 0.7, layerList: false, legend: false, printLegend: false, secure: false, layerType: "esri.layers.ArcGISTiledMapServiceLayer", url: "http://gis.nrc.govt.nz/arcgis/rest/services/Transportation/Roads/MapServer" },
                   { layerGroup: "Imagery", id: 'cacheLayer2', name: 'Addresses', visible: true, opacity: 0.7, layerList: false, legend: false, printLegend: false, secure: false, layerType: "esri.layers.ArcGISDynamicMapServiceLayer", url: "http://gis.nrc.govt.nz/arcgis/rest/services/PropertyAndBoundaries/Addresses/MapServer" },
 
-                  { layerGroup: "Boundaries", id: 'Boundaries', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Boundaries", id: 'Wards', layerList: true, legend: true, printLegend: true, secure: false },
 
                   { layerGroup: "Environment", id: 'WaterPublic', layerList: true, legend: true, printLegend: true, secure: false },
                   { layerGroup: "Environment", id: 'CoastPublic', layerList: true, legend: true, printLegend: true, secure: false },
@@ -302,50 +300,47 @@ function initVariables() {
                   { layerGroup: "Environment", id: 'Biosecurity', layerList: true, legend: true, printLegend: true, secure: false },
                   { layerGroup: "Environment", id: 'Community', layerList: true, legend: true, printLegend: true, secure: false },
                   { layerGroup: "Environment", id: 'Consents', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Environment", id: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false },
 
                   { layerGroup: "Environment (Internal)", id: 'WaterInternal', layerList: true, legend: true, printLegend: true, secure: false },
                   { layerGroup: "Environment (Internal)", id: 'CoastInternal', layerList: true, legend: true, printLegend: true, secure: false },
                   { layerGroup: "Environment (Internal)", id: 'BiodiversityInternal', layerList: true, legend: true, printLegend: true, secure: false },
                   { layerGroup: "Environment (Internal)", id: 'Land', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Environment (Internal)", id: 'Property', layerList: true, legend: true, printLegend: true, secure: true },
-                  { layerGroup: "Environment (Internal)", id: 'Parcels', layerList: true, legend: true, printLegend: true, secure: false },
 
                   { layerGroup: "Hazards", id: 'CoastalHazards', layerList: true, legend: true, printLegend: true, secure: false },
                   { layerGroup: "Hazards", id: 'LandHazards', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Hazards", id: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false },
+		          { layerGroup: "Hazards", id: 'TsunamiHazards', layerList: true, legend: true, printLegend: false, secure: false },
 
                   { layerGroup: "Planning", id: 'CoastalPlanning', layerList: true, legend: true, printLegend: true, secure: false },
                   { layerGroup: "Planning", id: 'WaterSoil', layerList: true, legend: true, printLegend: true, secure: false },
                   { layerGroup: "Planning", id: 'AirQuality', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Planning", id: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false },
 
                   { layerGroup: "Public Transportation", id: 'BusRoutes', layerList: true, legend: true, printLegend: true, secure: false },
                   { layerGroup: "Public Transportation", id: 'BusStops', layerList: true, legend: true, printLegend: true, secure: false },
 
                   { layerGroup: "Regional Policy Statement", id: 'RegionalPolicyStatementPublic', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Regional Policy Statement", id: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false },
 
                   { layerGroup: "Regional Policy Statement (Internal)", id: 'RegionalPolicyStatementInternal', layerList: true, legend: true, printLegend: true, secure: false },
                   { layerGroup: "Regional Policy Statement (Internal)", id: 'RegionalPolicyStatementSubmissions', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Regional Policy Statement (Internal)", id: 'Property', layerList: true, legend: true, printLegend: false, secure: false },
-                  { layerGroup: "Regional Policy Statement (Internal)", id: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false },
 
                   { layerGroup: "District Plan", id: 'DistrictPlanFNDC', layerList: true, legend: true, printLegend: true, secure: false },
                   { layerGroup: "District Plan", id: 'DistrictPlanWDC', layerList: true, legend: true, printLegend: true, secure: false },
                   { layerGroup: "District Plan", id: 'DistrictPlanKDC', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "District Plan", id: 'Property', layerList: true, legend: true, printLegend: false, secure: false },
-                  { layerGroup: "District Plan", id: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false },
 
                   { layerGroup: "Bathing Sites", id: 'BathingSites', layerList: true, legend: true, printLegend: true, secure: false },
 
                   { layerGroup: "Worksmart", id: 'Worksmart', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Worksmart", id: 'PropertyWorksmart', layerList: true, legend: true, printLegend: false, secure: false },
-                  { layerGroup: "Worksmart", id: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false },
 
-                  { layerGroup: "Flood Hazards", id: 'FloodHazards100Year', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Flood Hazards", id: 'FloodHazards10Year', layerList: true, legend: true, printLegend: true, secure: false },
-                  { layerGroup: "Flood Hazards", id: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false }
+		          { layerGroup: "Emergency Services", id: 'EmergencyServices', layerList: true, legend: true, printLegend: true, secure: false },
+
+                  { layerGroup: "Boundaries", id: 'Boundaries', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Boundaries", id: 'Wards', layerList: true, legend: true, printLegend: true, secure: false },
+
+                  { layerGroup: "Environment,Environment (Internal),Planning,Regional Policy Statement,Regional Policy Statement (Internal),District Plan,Worksmart,Flood Hazards", id: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false },
+
+                  { layerGroup: "Environment (Internal),Regional Policy Statement (Internal),District Plan,Worksmart", id: 'Property', layerList: true, legend: true, printLegend: true, secure: true },
+
+                  { layerGroup: "Hazards,Flood Hazards", id: 'FloodHazards10Year', layerList: true, legend: true, printLegend: true, secure: false },
+                  { layerGroup: "Hazards,Flood Hazards", id: 'FloodHazards100Year', layerList: true, legend: true, printLegend: true, secure: false }
         ],
         // Secure service login message
         secureserviceloginmessage: "<B>This area of the site is only available to Northland Regional Council staff. Contact the NRC GIS Administrator for login credentials.</B> <br\><br\>Server - ${server} <br\>Service - ${resource}",
@@ -673,7 +668,7 @@ function initVariables() {
                             identifyTask: "http://gis.nrc.govt.nz/arcgis/rest/services/Environment/BathingSites/MapServer",
                             tolerance: 10,
                             returnGeometry: true,
-                            layerIds: [0,1,2,3], // layer ids in map service
+                            layerIds: [0, 1, 2, 3], // layer ids in map service
                             layerOption: esri.tasks.IdentifyParameters.LAYER_OPTION_VISIBLE,
                             identifyLayerAliases: [ // ids must not contain spaces // name = map service layer name // TODO - tabindex is repeated.  This could be moved into an array where it is not repeated.
                                 { tabName: "Beach Swimming Water Quality 2013 to 2014 Season Median", tabindex: 2, layerName: "Beach Swimming Water Quality 2013/2014 Season Median", displayFormat: "<B>Site Number: [#SiteNo#] <br/>Description: [#SiteName#]</B>  <br/><br/> End of Season Median: Enterococci count is [#EOS_Median#]/100ml <br/> Compliance with MfE Guidelines: [#compliance#] <br/> Grade: [#MfE_grade#]" },
@@ -725,7 +720,6 @@ function initVariables() {
                             ]
                         },
 
-
                         // Worksmart
                         {
                             id: "Worksmart",
@@ -736,6 +730,24 @@ function initVariables() {
                             layerOption: esri.tasks.IdentifyParameters.LAYER_OPTION_VISIBLE, // LAYER_OPTION_VISIBLE, LAYER_OPTION_TOP or LAYER_OPTION_ALL
                             identifyLayerAliases: [ // ids must not contain spaces // name = map service layer name // TODO - tabindex is repeated.  This could be moved into an array where it is not repeated.
                                 { tabName: "Persons or Place of Interest", tabindex: 1, layerName: "Persons and Places of Interest", displayFormat: "<B>Worksmart Number: [#WS_NUMBER#]</B> <br/><br/> Group: [#GRP_CODE#] <br/> Description: [#SUBT_DESC#] <br/> Status: [#STAT_DESC#]" }
+                            ]
+                        },
+
+                        // Emergency Services
+                        {
+                            id: "EmergencyServices",
+                            identifyTask: "http://gis.nrc.govt.nz/arcgis/rest/services/CivilDefence/EmergencyServices/MapServer",
+                            tolerance: 10,
+                            returnGeometry: true,
+                            layerIds: [0,1,2,3,4,5], // layer ids in map service
+                            layerOption: esri.tasks.IdentifyParameters.LAYER_OPTION_VISIBLE, // LAYER_OPTION_VISIBLE, LAYER_OPTION_TOP or LAYER_OPTION_ALL
+                            identifyLayerAliases: [ // ids must not contain spaces // name = map service layer name // TODO - tabindex is repeated.  This could be moved into an array where it is not repeated.
+                                { tabName: "Ambulance Station", tabindex: 1, layerName: "Ambulance Stations", displayFormat: "<B>Site: [#Site#] </B> <br/><br/> Address: [#StreetAddress#]" },
+                                { tabName: "Civil Defence Welfare Centre", tabindex: 1, layerName: "Civil Defence Welfare Centres", displayFormat: "<B>Welfare Centre: [#WelfareCentre#] </B> <br/><br/> Location: [#Location#] <br/> Status: [#Status#] <br/> <font size=\"2\"><a href=\"[#StreetView#]\"  style=\"color:blue\" target=\"_blank\">Google StreetView</a></font> <br/><br/> Coordinator: [#Co_ordinator#] <br/>Welfare Centre Contact: [#To_Open_as_a_Welfare_Centre_Contact#] <br/> Centre Phone Number: [#Centre_Phone_Number#] <br><br/> Accommodation Facilities: [#Accommodation_Facilities#] <br/> Catering Facilities: [#Catering_Facilities#] <br/> Toilet Facilities: [#Toilet_Facilities#] <br/> Parking: [#Parking#] <br/> Building Capacity: [#Building_Capacity#] <br/><br/> Notes: [#Notes#]" },
+                                { tabName: "Community Response Plan", tabindex: 1, layerName: "Community Response Plans", displayFormat: "<B>Name: [#NAME#] </B> <br/><br/> <font size=\"2\"><a href=\"[#URL#]\"  style=\"color:blue\" target=\"_blank\">View Plan</a></font>" },
+                                { tabName: "Fire Station", tabindex: 1, layerName: "Fire Stations", displayFormat: "<B>Site: [#Site#] </B> <br/><br/> Address: [#StreetAddress#]" },
+                                { tabName: "Hospital", tabindex: 1, layerName: "Hospitals", displayFormat: "<B>Site: [#Site#] </B> <br/><br/> Address: [#StreetAddress#]" },
+                                { tabName: "Police Station", tabindex: 1, layerName: "Police Stations", displayFormat: "<B>Site: [#Site#] </B> <br/><br/> Address: [#StreetAddress#]" }
                             ]
                         }
         ],

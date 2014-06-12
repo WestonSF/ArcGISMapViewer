@@ -2176,17 +2176,31 @@ function buildLayerGroups() {
 
     // Add layers to array for layer grouping
     $.each(operationalLayers, function () {
+        var layer = this;
+
         // Layer group in URL
         if (layergroupInURL == true) {
             if (urlParam_layerGroup == replaceAll(this.layerGroup, '_', ' ')) {
-                opLayers.push(getLayerInformation(this));
+            // Split the layer groups to account for multiple
+            layerGroupSplit = layer.layerGroup.split(",");
+            $.each(layerGroupSplit, function () {
+                if (initiallayergroup == this) {
+                    // Add layers to array for layer grouping
+                    opLayers.push(getLayerInformation(layer));
+                }
+            });
             }
         }
-            // Layer group in config
+        // Layer group in config
         else {
-            if (initiallayergroup == this.layerGroup) {
-                opLayers.push(getLayerInformation(this));
-            }
+            // Split the layer groups to account for multiple
+            layerGroupSplit = layer.layerGroup.split(",");
+            $.each(layerGroupSplit, function () {
+                if (initiallayergroup == this) {
+                    // Add layers to array for layer grouping
+                    opLayers.push(getLayerInformation(layer));
+                }
+            });
         }
     });
 
@@ -2247,13 +2261,18 @@ function layerGroupChanged(layerGroupSelected) {
 
     // For each of the operational layers
     $.each(operationalLayers, function () {
-        // If the layer is in the selected group
-        if (replaceAll(this.layerGroup, ' ', '_') == selectedgroup) {
-            if (!app.map.getLayer(this.id)) {
-                // Add layers to array for layer grouping
-                opLayers.push(getLayerInformation(this));
+        var layer = this;
+        // Split the layer groups to account for multiple
+        layerGroupSplit = layer.layerGroup.split(",");
+        $.each(layerGroupSplit, function () {
+            // If the layer is in the selected group
+            if (selectedgroup == replaceAll(this, ' ', '_')) {
+                if (!app.map.getLayer(layer.id)) {
+                    // Add layers to array for layer grouping
+                    opLayers.push(getLayerInformation(layer));
+                }
             }
-        }
+        });
     });
 
     // For each of the operational layers, check it has loaded before adding it to the layer list
@@ -2337,7 +2356,6 @@ function buildLayerList(layer, layerMode) {
     else {
 
     }
-
 
     // Get layer visiblity and name from config
     $.each(operationalLayers, function () {
@@ -2908,10 +2926,18 @@ function addImageryLayers() {
 
     // For each of the operational layers in the config
     $.each(configOptions.operationalLayers, function () {
-        // If there are layers specified as imagery
-        if (replaceAll(this.layerGroup, ' ', '_') == selectedgroup) {
-            opLayers.push(getLayerInformation(this));
-        }
+        var layer = this;
+        // Split the layer groups to account for multiple
+        layerGroupSplit = layer.layerGroup.split(",");
+        $.each(layerGroupSplit, function () {
+            // If there are layers specified as imagery
+            if (selectedgroup == replaceAll(this, ' ', '_')) {
+                if (!app.map.getLayer(layer.id)) {
+                    // Add layers to array for layer grouping
+                    opLayers.push(getLayerInformation(layer));
+                }
+            }
+        });
     });
 
     // For each of the imagery layers
@@ -2933,10 +2959,18 @@ function removeImageryLayers() {
 
     // For each of the operational layers in the config
     $.each(configOptions.operationalLayers, function () {
-        // If there are layers specified as imagery
-        if (replaceAll(this.layerGroup, ' ', '_') == selectedgroup) {
-            opLayers.push(getLayerInformation(this));
-        }
+        var layer = this;
+        // Split the layer groups to account for multiple
+        layerGroupSplit = layer.layerGroup.split(",");
+        $.each(layerGroupSplit, function () {
+            // If there are layers specified as imagery
+            if (selectedgroup == replaceAll(this, ' ', '_')) {
+                if (!app.map.getLayer(layer.id)) {
+                    // Add layers to array for layer grouping
+                    opLayers.push(getLayerInformation(layer));
+                }
+            }
+        });
     });
 
     // For each of the imagery layers
@@ -3034,13 +3068,11 @@ function loadArcGISOnlineWebMap(webmapID) {
                 layerType = "esri.layers.ArcGISDynamicMapServiceLayer";
                 if (this.resourceInfo.singleFusedMapCache == true) {
                     layerType = "esri.layers.ArcGISTiledMapServiceLayer";
-                }
-
+                }               
                 // Look at the config to set layer group and name
                 $.each(configOptions.operationalLayers, function () {
                     // Get layer ID
-                    configID = this.id;
-
+                    configID = this.id;                 
                     // If ID from configuration matches the current layer ID
                     if (configID == splitLLayerId[0]) {
                         // Set layer group
