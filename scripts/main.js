@@ -29,8 +29,6 @@ var operationalLayers;
 // List of layer groups used
 var layerGroupsUsed = [];
 var lastLayerGroupUsed;
-// Layer added to map handler
-var layerAddedHandler;
 // Layers added counter
 var layersAdded = 0;
 // Count for number of times secure login has appeared
@@ -1539,17 +1537,26 @@ function initFunctionality() {
                 autoUpdate: true,
                 respectCurrentMapScale: true
             }, "legendTab");
+
+            // Startup legend
+            legend.startup();
         }
         // Using AGS Online map
         else {
             // Get legend layers from ags map
             var legendLayers = esri.arcgis.utils.getLegendLayers(agsOnlineMap);
-
-            // Delete previous legend widget if necessary
-            var legendTab = dijit.byId("legendTab");
-            if (legendTab) {
-                legendTab.destroyRecursive(true);
+            // Clear previous widget
+            var legendWidget = dijit.byId("legendTab");
+            if (legendWidget) {
+                legendWidget.destroyRecursive(true);
             }
+
+            // Recreate legend tab
+            $('#legendTab').remove();
+            $('#layerTabs').append($('<div id="legendTab"></div>'));
+
+            // Refresh tabs
+            $("#layerTabs").tabs("refresh");
 
             // Setup the legend widget
             legend = new esri.dijit.Legend({
@@ -1558,6 +1565,9 @@ function initFunctionality() {
                 autoUpdate: true,
                 respectCurrentMapScale: true
             }, "legendTab");
+
+            // Startup legend
+            legend.startup();
         }
 
         // Delete previous bookmarks widget if necessary
@@ -1724,6 +1734,10 @@ function initFunctionality() {
             if (legendWidget) {
                 legendWidget.destroyRecursive(true);
             }
+
+            // Recreate legend tab
+            $('#legendTab').remove();
+            $('#layerTabs').append($('<div id="legendTab"></div>'));
 
             // Setup the legend widget
             legend = new esri.dijit.Legend({
@@ -2029,9 +2043,6 @@ function buildLayerGroups() {
         $('#layers').html("");
     }
 
-    // Disconnect previous layer add handler
-    dojo.disconnect(layerAddedHandler);
-
     var layergroups;
     var initiallayergroup;
     // If using themes, then display only certain layers for the theme selected
@@ -2080,10 +2091,10 @@ function buildLayerGroups() {
         }
     });
 
-    var opLayers = [];
     var TOChtml = "";
     var checked = "";
     var id = "";
+    layerGroupLayers = [];
 
     // Setup layer groups - Desktop version
     if (currentPage.indexOf("desktop") != -1) {
@@ -2172,7 +2183,7 @@ function buildLayerGroups() {
         }
     }
 
-    opLayers = [];
+    layerGroupLayers = [];
 
     // Add layers to array for layer grouping
     $.each(operationalLayers, function () {
@@ -2186,7 +2197,7 @@ function buildLayerGroups() {
             $.each(layerGroupSplit, function () {
                 if (initiallayergroup == this) {
                     // Add layers to array for layer grouping
-                    opLayers.push(getLayerInformation(layer));
+                    layerGroupLayers.push(getLayerInformation(layer));
                 }
             });
             }
@@ -2198,27 +2209,21 @@ function buildLayerGroups() {
             $.each(layerGroupSplit, function () {
                 if (initiallayergroup == this) {
                     // Add layers to array for layer grouping
-                    opLayers.push(getLayerInformation(layer));
+                    layerGroupLayers.push(getLayerInformation(layer));
                 }
             });
         }
     });
 
     // For each of the operational layers, check it has loaded before adding it to the layer list
-    for (var c = 0; opLayers.length > c; c++) {
-        var layer = opLayers[c];
+    for (var c = 0; layerGroupLayers.length > c; c++) {
+        var layer = layerGroupLayers[c];
         // Add listener for when layer is loaded - Add layer to layer list
         dojo.connect(layer, "onLoad", function (layer) {
             // CALL FUNCTION - Build the layer list
             buildLayerList(layer, "Simple");
         });
     }
-
-    // When a layer is added to the map
-    layerAddedHandler = dojo.connect(app.map, 'onLayerAddResult', function (layer) {
-        layerAdded($.trim($("input:radio[name='tocgroup']:checked").val()), layer);
-    });
-
 
     // When the layer group is changed
     $("input:radio[name=tocgroup]").change(function () {
@@ -2250,7 +2255,7 @@ function layerGroupChanged(layerGroupSelected) {
 
     // Get the selected group and trim whitespace at end
     var selectedgroup = $.trim(layerGroupSelected);
-    var opLayers = [];
+    layerGroupLayers = [];
 
     var basemapSelected = basemapGallery.getSelected();
     if (basemapSelected !== null) {
@@ -2269,15 +2274,15 @@ function layerGroupChanged(layerGroupSelected) {
             if (selectedgroup == replaceAll(this, ' ', '_')) {
                 if (!app.map.getLayer(layer.id)) {
                     // Add layers to array for layer grouping
-                    opLayers.push(getLayerInformation(layer));
+                    layerGroupLayers.push(getLayerInformation(layer));
                 }
             }
         });
     });
 
     // For each of the operational layers, check it has loaded before adding it to the layer list
-    for (var a = 0; opLayers.length > a; a++) {
-        var layer = opLayers[a];
+    for (var a = 0; layerGroupLayers.length > a; a++) {
+        var layer = layerGroupLayers[a];
 
         // Add listener for when layer is loaded - Add layer to layer list
         dojo.connect(layer, "onLoad", function (layer) {
@@ -2289,7 +2294,7 @@ function layerGroupChanged(layerGroupSelected) {
 
 // Build all layers for the advanced layer mode
 function buildAllLayers() {
-    var opLayers = [];
+    layerGroupLayers = [];
     // For each of the operational layers
     $.each(operationalLayers, function () {
         if (!app.map.getLayer(this.id)) {
@@ -2297,8 +2302,8 @@ function buildAllLayers() {
             if (this.secure !== "true" && this.secure !== true) {
                 // If layer name hasn't already been added
                 var layerAlreadyAdded = false;
-                for (var a = 0; opLayers.length > a; a++) {
-                    if (opLayers[a].name == this.name) {
+                for (var a = 0; layerGroupLayers.length > a; a++) {
+                    if (layerGroupLayers[a].name == this.name) {
                         var layerAlreadyAdded = true;
                     }
                 }
@@ -2307,14 +2312,14 @@ function buildAllLayers() {
                     var layerInfo = new Array();
                     layerInfo["layer"] = getLayerInformation(this);
                     layerInfo["name"] = this.name;
-                    opLayers.push(layerInfo);
+                    layerGroupLayers.push(layerInfo);
                 }
             }
         }
     });
     // For each of the operational layers, check it has loaded before adding it to the layer list
-    for (var a = 0; opLayers.length > a; a++) {
-        var layer = opLayers[a].layer;
+    for (var a = 0; layerGroupLayers.length > a; a++) {
+        var layer = layerGroupLayers[a].layer;
 
         // Add listener for when layer is loaded - Add layer to layer list
         dojo.connect(layer, "onLoad", function (layer) {
@@ -2326,119 +2331,30 @@ function buildAllLayers() {
 
 // Build the individual layers for the layers tab and add them to the map
 function buildLayerList(layer, layerMode) {
-    // Setup sub layers (layers within map service)
-    var subLayers = layer.layerInfos;
-    var subLayer;
-    var checked = "";
-    var layerType;
-    var layerName;
-    var layerOpacity;
-    var layersTab;
-
-    // Set tab to be updated depending on layer mode
-    if (layerMode === "Simple") {
-        layersTab = "#layersTab";
-    }
-    else {
-        layersTab = "#layersTabAll";
-    }
-    // Setup individual layers - Mobile version
-    if (currentPage.indexOf("mobile") != -1) {
-        layersTab = "#layers";
-    }
-
-    // Get the operational layers for this map
-    // If not using AGS Online web map
-    if (configOptions.useAGSOnlineWebMap == "false" || configOptions.useAGSOnlineWebMap == false) {
-
-    }
-    // Using AGS Online map
-    else {
-
-    }
-
-    // Get layer visiblity and name from config
-    $.each(operationalLayers, function () {
-        // Get the layer details by id
-        if (this.id == layer.id) {
-            // Set dynamic layer boolean
-            layerType = this.layerType;
-            // Set layer name
-            layerName = this.name;
-            // Set layer opacity
-            layerOpacity = this.opacity;
-            // Get default layer visiblity
-            if (this.visible == true) {
-                checked = ' checked="true" ';
-                layer.setVisibility(true);
-            }
-            else {
-                checked = "";
-                layer.setVisibility(false);
-            }
-        }
-    });
-
-    // Add layer (map service) to layers tab array
-    // Add html to layers tab
-    $(layersTab).append("<input type='checkbox' class='layers'" + checked + "' id='layer" + layer.id + "' title='" + layer.id + " ' onclick='updateLayerVisibility(this);' /><B><font size=\"2\">" + layerName + "</font></B>");
-
-    // Setup the opacity slider and event handler - Desktop version
-    if (currentPage.indexOf("desktop") != -1) {
-        $(layersTab).append("<br\><I>Opacity</I><br/>");
-
-        var slider = $('<div style="width:50%;" id="layerSlider' + layer.id + '"></div>');
-        $(slider).slider({
-            min: 0,
-            max: 100,
-            value: layerOpacity * 100,
-            range: "min",
-            // Opacity change handler
-            change: function (event, ui) {
-                // Change the opacity of the layer to the specified value
-                var layer = app.map.getLayer(replaceAll(this.id, 'layerSlider', ''));
-                layer.setOpacity(ui.value / 100);
+    var selectedlayerGroup = $.trim($("input:radio[name='tocgroup']:checked").val());
+    // Get the number of operational layers for this group that need to be added
+    var OperationalLayersToAdd = 0;
+    $.each(operationalLayers, function (index,value) {
+        var layer = value;
+        // Split the layer groups to account for multiple
+        layerGroupSplit = layer.layerGroup.split(",");
+        $.each(layerGroupSplit, function (index, value) {
+            // If the layer is in the selected group
+            if (replaceAll(value, ' ', '_') == selectedlayerGroup) {
+                // Add to operational layers
+                OperationalLayersToAdd++;
             }
         });
-        // Add html to layers tab
-        $(layersTab).append(slider);
-    }
+    });
 
-    // If layer id dynamic then add in subLayers. For tiled, don't
-    if (layerType == "esri.layers.ArcGISDynamicMapServiceLayer") {
-        // Indent the sub layers
-        // Add gtml to layers tab
-        $(layersTab).append("<dl>");
-        // For each sub layer within this layer
-        for (var i = 0; i < subLayers.length; i++) {
-            subLayer = subLayers[i];
-            // If the sub layer is set as visible then make that layer visible
-            if (subLayer.defaultVisibility) {
-                visible.push(subLayer.id);
-            }
-            // Add to sub layers to layers tab array
-            // Add html to layers tab
-            if (subLayer.defaultVisibility == true) {
-                checked = ' checked="true" ';
-            }
-            else {
-                checked = "";
-            }
-
-            $(layersTab).append("<dd><input type='checkbox' class='mapserviceLayers'" + checked + "id='subLayer" + layer.id + subLayer.id + "' title='" + subLayer.name + "' name='" + layer.id + "' value='" + subLayer.id + "' onclick='updateIndividualLayerVisibility(this);' />" + subLayer.name + "</dd><br\>");
-        }
-        // Add html to layers tab
-        $(layersTab).append("</dl>");
+    // If the layer added is an operational layer then add to count - Not extra cache layer or basemap
+    if (layer.id.indexOf("layer") === -1 && layer.id != "cacheLayer" && layer.id != "cacheLayer2") {
+        layersAdded++;
     }
 
     // Add layer to map
     console.log("Adding operational layer to map - " + layer.id);
     app.map.addLayer(layer);
-
-    // Setup the loading progress bar
-    $("#layerLoadBar").progressbar({
-        value: false
-    });
 
     // Add handlers for when layer starts loading and ends loading
     dojo.connect(layer, "onUpdateStart", function () {
@@ -2451,8 +2367,167 @@ function buildLayerList(layer, layerMode) {
         $("#layerLoadBar").hide();
     });
 
-    // Update the available layers
-    updateEnabledLayers();
+    // If all layers have been added for this layer group
+    if (OperationalLayersToAdd == layersAdded) {
+        console.log("All layers added for layer group - " + selectedlayerGroup);
+        // Reset the layers added counter
+        layersAdded = 0;
+
+        // Get what layer mode is checked
+        var layerMode = $("input:radio[name='layerMode']:checked").val();
+
+        var legendLayers = [];
+        // Load all the layers into the layers tab
+        $.each(operationalLayers.reverse(), function (index, value) {
+            // Setup as a layer
+            var layer2 = getLayerInformation(value);
+            var layer2Info = value;
+
+            // Split the layer groups to account for multiple
+            layerGroupSplit = value.layerGroup.split(",");
+            $.each(layerGroupSplit, function (index, value) {
+                // If the layer is in the selected group
+                if (replaceAll(value, ' ', '_') == selectedlayerGroup) {
+                    // Setup sub layers (layers within map service)
+                    var subLayers = layer2.layerInfos;
+                    var subLayer;
+                    var checked = "";
+                    var layerType;
+                    var layerName;
+                    var layerOpacity;
+                    var layersTab;
+                    var layerList;
+                    var layerListOrder;
+
+                    // Set tab to be updated depending on layer mode
+                    // If layer mode is provided and equals advanced
+                    if ((layerMode) && (layerMode.toLowerCase() === "advanced")) {
+                        layersTab = "#layersTabAll";
+                    }
+                    else {
+                        layersTab = "#layersTab";
+                    }
+
+                    // Setup individual layers - Mobile version
+                    if (currentPage.indexOf("mobile") != -1) {
+                        layersTab = "#layers";
+                    }
+                    // Set dynamic layer boolean
+                    layerType = layer2Info.layerType;
+                    // Set layer name
+                    layerName = layer2Info.name;
+                    // Set layer opacity
+                    layerOpacity = layer2.opacity;
+                    // Get default layer visiblity
+                    if (layer2.visible == true) {
+                        checked = ' checked="true" ';
+                        layer2.setVisibility(true);
+                    }
+                    else {
+                        checked = "";
+                        layer2.setVisibility(false);
+                    }
+                    layerList = layer2Info.layerList;
+
+                    // Add layer (map service) to layers tab array if neccessary
+                    // Add html to layers tab
+                    if (layerList === "true" || layerList === true) {
+                        $(layersTab).append("<input type='checkbox' class='layers'" + checked + "' id='layer" + layer2.id + "' title='" + layer2.id + " ' onclick='updateLayerVisibility(this);' /><B><font size=\"2\">" + layerName + "</font></B>");
+
+                        // Setup the opacity slider and event handler - Desktop version
+                        if (currentPage.indexOf("desktop") != -1) {
+                            $(layersTab).append("<br\><I>Opacity</I><br/>");
+
+                            var slider = $('<div style="width:50%;" id="layerSlider' + layer2.id + '"></div>');
+                            $(slider).slider({
+                                min: 0,
+                                max: 100,
+                                value: layerOpacity * 100,
+                                range: "min",
+                                // Opacity change handler
+                                change: function (event, ui) {
+                                    // Change the opacity of the layer to the specified value
+                                    var layer = app.map.getLayer(replaceAll(this.id, 'layerSlider', ''));
+                                    layer.setOpacity(ui.value / 100);
+                                }
+                            });
+                            // Add html to layers tab
+                            $(layersTab).append(slider);
+                        }
+
+                        // If layer id dynamic then add in subLayers. For tiled, don't
+                        if (layerType == "esri.layers.ArcGISDynamicMapServiceLayer") {
+                            // Indent the sub layers
+                            // Add gtml to layers tab
+                            $(layersTab).append("<dl>");
+                            // For each sub layer within this layer
+                            for (var i = 0; i < subLayers.length; i++) {
+                                subLayer = subLayers[i];
+
+                                // If search layer, don't add it
+                                if (subLayer.name.toLowerCase().indexOf("search") === -1) {
+                                    // If the sub layer is set as visible then make that layer visible
+                                    if (subLayer.defaultVisibility) {
+                                        visible.push(subLayer.id);
+                                    }
+                                    // Add to sub layers to layers tab array
+                                    // Add html to layers tab
+                                    if (subLayer.defaultVisibility == true) {
+                                        checked = ' checked="true" ';
+                                    }
+                                    else {
+                                        checked = "";
+                                    }
+
+                                    $(layersTab).append("<dd><input type='checkbox' class='mapserviceLayers'" + checked + "id='subLayer" + layer2.id + subLayer.id + "' title='" + subLayer.name + "' name='" + layer2.id + "' value='" + subLayer.id + "' onclick='updateIndividualLayerVisibility(this);' />" + subLayer.name + "</dd><br\>");
+                                }
+                            }
+                            // Add html to layers tab
+                            $(layersTab).append("</dl>");
+                        }
+                    }
+
+                    // Update the legend layers
+                    // Get the layer mode
+                    // If layer mode is provided and equals advanced
+                    if ((layerMode) && (layerMode.toLowerCase() === "advanced")) {
+                        // If the layer legend is equal to true           
+                        if (layer2Info.legend === "true" || layer2Info.legend === true) {
+                            // Add to array to be added into legend
+                            var legendLayer = {
+                                layer: app.map.getLayer(layer2.id),
+                                title: layer2.id
+                            };
+                            legendLayers.push(legendLayer);
+                        }
+                    }
+                    else {
+                        // If the legend is equal to true           
+                        if (layer2Info.legend === "true" || layer2Info.legend === true) {
+                            // Add to array to be added into legend
+                            var legendLayer = {
+                                layer: app.map.getLayer(layer2.id),
+                                title: layer2.id
+                            };
+                            legendLayers.push(legendLayer);
+                        }
+                    }
+
+                }
+            });
+        });
+
+        // Refresh the legend
+        legend.refresh(legendLayers);
+
+        // Update the available layers
+        updateEnabledLayers();
+    }
+
+    // Setup the loading progress bar
+    $("#layerLoadBar").progressbar({
+        value: false
+    });
 }
 
 // When layers checked on/off
@@ -2650,7 +2725,7 @@ function updateEnabledLayers() {
 
 // Get the layer details
 function getLayerInformation(operationalLayer) {
-    console.log("Get operational layer details from config and create layer (" + operationalLayer.id + " - " + operationalLayer.layerType + ": " + operationalLayer.visible + ", " + operationalLayer.opacity + ", " + operationalLayer.layerList + ", " + operationalLayer.legend + ")");
+    console.log("Get operational layer details from config and create layer (" + operationalLayer.id + " - " + operationalLayer.layerType + ": " + operationalLayer.visible + ", " + operationalLayer.opacity + ", " + operationalLayer.layerList + ", " + operationalLayer.layerListOrder + ", " + operationalLayer.legend + ")");
 
     var layer = app.map.getLayer(operationalLayer.id);
 
@@ -2660,10 +2735,10 @@ function getLayerInformation(operationalLayer) {
         console.log("Layer Doesn't exist - creating");
         switch (operationalLayer.layerType) {
             case "esri.layers.ArcGISDynamicMapServiceLayer":
-                layer = new esri.layers.ArcGISDynamicMapServiceLayer(operationalLayer.url, { "id": operationalLayer.id, "name": operationalLayer.name, "visible": operationalLayer.visible, "opacity": operationalLayer.opacity, "layerList": operationalLayer.layerList, "legend": operationalLayer.legend });
+                layer = new esri.layers.ArcGISDynamicMapServiceLayer(operationalLayer.url, { "id": operationalLayer.id, "name": operationalLayer.name, "visible": operationalLayer.visible, "opacity": operationalLayer.opacity });
                 break;
             case "esri.layers.ArcGISTiledMapServiceLayer":
-                layer = new esri.layers.ArcGISTiledMapServiceLayer(operationalLayer.url, { "id": operationalLayer.id, "name": operationalLayer.name, "visible": operationalLayer.visible, "opacity": operationalLayer.opacity, "layerList": operationalLayer.layerList, "legend": operationalLayer.legend });
+                layer = new esri.layers.ArcGISTiledMapServiceLayer(operationalLayer.url, { "id": operationalLayer.id, "name": operationalLayer.name, "visible": operationalLayer.visible, "opacity": operationalLayer.opacity });
                 break;
             default:
                 console.error("Unexpected layerType: " + operationalLayer.layerType);
@@ -2671,63 +2746,6 @@ function getLayerInformation(operationalLayer) {
         }
     }
     return layer;
-}
-
-// When layer added to map - Refresh legend
-function layerAdded(selectedlayerGroup, layer) {
-    // Get the number of operational layers for this group that need to be added
-    var OperationalLayersToAdd = 0;
-    $.each(operationalLayers, function () {
-        // If the layer is in the selected group
-        if (replaceAll(this.layerGroup, ' ', '_') == selectedlayerGroup) {
-            // Add to operational layers
-            OperationalLayersToAdd++;
-        }
-    });
-
-    // If the layer added is an operational layer then add to count - Not extra cache layer or basemap
-    if (layer.id.indexOf("layer") === -1 && layer.id != "cacheLayer" && layer.id != "cacheLayer2") {
-        layersAdded++;
-    }
-
-    // If all layers have been added
-    if (OperationalLayersToAdd == layersAdded) {
-        console.log("All layers added for layer group - " + selectedlayerGroup + ", new legend generated");
-        // Reset counter
-        layersAdded = 0;
-
-        var legendLayers = [];
-        // For each of the operational layers
-        $.each(operationalLayers, function () {
-            // Get the layer mode
-            var layerMode = $("input:radio[name='layerMode']:checked").val();
-            // If layer mode is provided and equals advanced
-            if ((layerMode) && (layerMode === "advanced")) {
-                // If the layer legend is equal to true           
-                if (this.legend === "true" || this.legend === true) {
-                    // Add to array to be added into legend
-                    var legendLayer = {
-                        layer: app.map.getLayer(this.id),
-                        title: this.id
-                    };
-                    legendLayers.push(legendLayer);
-                }
-            }
-            else {
-                // If the layer is in the selected group and legend is equal to true           
-                if ((selectedlayerGroup == replaceAll(this.layerGroup, ' ', '_')) && ((this.legend === "true" || this.legend === true))) {
-                    // Add to array to be added into legend
-                    var legendLayer = {
-                        layer: app.map.getLayer(this.id),
-                        title: this.id
-                    };
-                    legendLayers.push(legendLayer);
-                }
-            }
-        });
-        // Refresh the legend
-        legend.refresh(legendLayers);
-    }
 }
 
 // Create the basemaps
@@ -2921,8 +2939,8 @@ function removeOperationalLayers() {
 
 // Function for when basemap loads, turn on dynamic layers over top of imagery
 function addImageryLayers() {
-    var opLayers = [];
     var selectedgroup = "Imagery";
+    layerGroupLayers = [];
 
     // For each of the operational layers in the config
     $.each(configOptions.operationalLayers, function () {
@@ -2934,14 +2952,14 @@ function addImageryLayers() {
             if (selectedgroup == replaceAll(this, ' ', '_')) {
                 if (!app.map.getLayer(layer.id)) {
                     // Add layers to array for layer grouping
-                    opLayers.push(getLayerInformation(layer));
+                    layerGroupLayers.push(getLayerInformation(layer));
                 }
             }
         });
     });
 
     // For each of the imagery layers
-    $.each(opLayers, function () {
+    $.each(layerGroupLayers, function () {
         var layer = app.map.getLayer(this.id);
         // If layers are already added, make visible, otherwise add to map
         if (layer) {
@@ -2954,8 +2972,8 @@ function addImageryLayers() {
 
 // Function for when basemap loads, turn off dynamic layers over top of imagery
 function removeImageryLayers() {
-    var opLayers = [];
     var selectedgroup = "Imagery";
+    layerGroupLayers = [];
 
     // For each of the operational layers in the config
     $.each(configOptions.operationalLayers, function () {
@@ -2967,14 +2985,14 @@ function removeImageryLayers() {
             if (selectedgroup == replaceAll(this, ' ', '_')) {
                 if (!app.map.getLayer(layer.id)) {
                     // Add layers to array for layer grouping
-                    opLayers.push(getLayerInformation(layer));
+                    layerGroupLayers.push(getLayerInformation(layer));
                 }
             }
         });
     });
 
     // For each of the imagery layers
-    $.each(opLayers, function () {
+    $.each(layerGroupLayers, function () {
         // Hide the layers if available
         var layer = app.map.getLayer(this.id);
         if (layer) {
@@ -3056,39 +3074,43 @@ function loadArcGISOnlineWebMap(webmapID) {
         operationalLayers = [];
 
         // For each layer
+        var operationalLayerCount = response.itemInfo.itemData.operationalLayers.length;
         $.each(response.itemInfo.itemData.operationalLayers, function () {
-            if (!this.featureCollection) {
+            // Get layer ID
+            layerID = this.id;
+            // Get the ID by splitting as ArcGIS Online IDs add on _number.
+            splitLLayerId = layerID.split("_");
+            layerGroup = "";
+
+            // Get the layer type
+            layerType = "esri.layers.ArcGISDynamicMapServiceLayer";
+            if (this.resourceInfo.singleFusedMapCache == true) {
+                layerType = "esri.layers.ArcGISTiledMapServiceLayer";
+            }               
+            // Look at the config to set layer group and name
+            $.each(configOptions.operationalLayers, function () {
                 // Get layer ID
-                layerID = this.id;
-                // Get the ID by splitting as ArcGIS Online IDs add on _number.
-                splitLLayerId = layerID.split("_");
-                layerGroup = "";
+                configID = this.id;                 
+                // If ID from configuration matches the current layer ID
+                if (configID == splitLLayerId[0]) {
+                    // Set layer group
+                    layerGroup = this.layerGroup;
 
-                // Get the layer type
-                layerType = "esri.layers.ArcGISDynamicMapServiceLayer";
-                if (this.resourceInfo.singleFusedMapCache == true) {
-                    layerType = "esri.layers.ArcGISTiledMapServiceLayer";
-                }               
-                // Look at the config to set layer group and name
-                $.each(configOptions.operationalLayers, function () {
-                    // Get layer ID
-                    configID = this.id;                 
-                    // If ID from configuration matches the current layer ID
-                    if (configID == splitLLayerId[0]) {
-                        // Set layer group
-                        layerGroup = this.layerGroup;
+                    // Get config info
+                    layerList = this.layerList;
+                    legend = this.legend;
+                    printLegend = this.printLegend;
+                    secure = this.secure;
+                }
+            });
+ 
+            // Set the layer order number from the web map
+            layerListOrder = operationalLayerCount;
 
-                        // Get config info
-                        layerList = this.layerList;
-                        legend = this.legend;
-                        printLegend = this.printLegend;
-                        secure = this.secure;
-                    }
-                });
-                
-                // Push layer information into array
-                operationalLayers.push({ layerGroup: layerGroup, id: layerID, name: this.title, visible: this.visibility, opacity: this.opacity, layerList: layerList, legend: legend, printLegend: printLegend, secure: secure, layerType: layerType, url: this.url });
-            }
+            // Push layer information into array
+            operationalLayers.push({ layerGroup: layerGroup, id: layerID, name: this.title, visible: this.visibility, opacity: this.opacity, layerList: layerList, layerListOrder: layerListOrder, legend: legend, printLegend: printLegend, secure: secure, layerType: layerType, url: this.url });        
+
+            operationalLayerCount--;
         });
 
         // CALL FUNCTION - Setup UI functionality
@@ -3256,7 +3278,7 @@ function setupIdentityManager() {
     dojo.connect(esri.id, "onDialogCancel", function (info) {
         secureLoginCount++;
 
-        // Reset the layers added counter for the legend
+        // Reset the layers added counter
         layersAdded = 0;
 
         // If it's the first login popup - Get last theme used

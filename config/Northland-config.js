@@ -290,9 +290,8 @@ function initVariables() {
         ],
         // Map services to setup and groupings to assign to - id: No spaces and used in code to identify layer, name: Can have any character and will appear to user. If using ArcGIS Online, just need layerGroup, id and optionally name
         operationalLayers: [
-                  { layerGroup: "Imagery", id: 'cacheLayer', name: 'Roads', visible: true, opacity: 0.7, layerList: false, legend: false, printLegend: false, secure: false, layerType: "esri.layers.ArcGISTiledMapServiceLayer", url: "http://gis.nrc.govt.nz/arcgis/rest/services/Transportation/Roads/MapServer" },
-                  { layerGroup: "Imagery", id: 'cacheLayer2', name: 'Addresses', visible: true, opacity: 0.7, layerList: false, legend: false, printLegend: false, secure: false, layerType: "esri.layers.ArcGISDynamicMapServiceLayer", url: "http://gis.nrc.govt.nz/arcgis/rest/services/PropertyAndBoundaries/Addresses/MapServer" },
-
+                  { layerGroup: "Imagery", id: 'cacheLayer', name: 'Addresses', visible: true, opacity: 0.7, layerList: false, layerListOrder: 1, legend: false, printLegend: false, secure: false, layerType: "esri.layers.ArcGISDynamicMapServiceLayer", url: "http://gis.nrc.govt.nz/arcgis/rest/services/PropertyAndBoundaries/Addresses/MapServer" },
+                  { layerGroup: "Imagery", id: 'cacheLayer2', name: 'Roads', visible: true, opacity: 0.7, layerList: false, layerListOrder: 2, legend: false, printLegend: false, secure: false, layerType: "esri.layers.ArcGISTiledMapServiceLayer", url: "http://gis.nrc.govt.nz/arcgis/rest/services/Transportation/Roads/MapServer" },
 
                   { layerGroup: "Environment", id: 'WaterPublic', layerList: true, legend: true, printLegend: true, secure: false },
                   { layerGroup: "Environment", id: 'CoastPublic', layerList: true, legend: true, printLegend: true, secure: false },
@@ -335,9 +334,9 @@ function initVariables() {
                   { layerGroup: "Boundaries", id: 'Boundaries', layerList: true, legend: true, printLegend: true, secure: false },
                   { layerGroup: "Boundaries", id: 'Wards', layerList: true, legend: true, printLegend: true, secure: false },
 
-                  { layerGroup: "Environment,Environment (Internal),Planning,Regional Policy Statement,Regional Policy Statement (Internal),District Plan,Worksmart,Flood Hazards", id: 'Parcels', layerList: true, legend: true, printLegend: false, secure: false },
+                  { layerGroup: "Environment,Environment (Internal),Planning,Regional Policy Statement,Regional Policy Statement (Internal),District Plan,Worksmart,Flood Hazards", id: 'Parcels', layerList: true, legend: false, printLegend: false, secure: false },
 
-                  { layerGroup: "Environment (Internal),Regional Policy Statement (Internal),District Plan,Worksmart", id: 'Property', layerList: true, legend: true, printLegend: true, secure: true },
+                  { layerGroup: "Environment (Internal),Regional Policy Statement (Internal),District Plan,Worksmart", id: 'Property', layerList: true, legend: false, printLegend: false, secure: true },
 
                   { layerGroup: "Hazards,Flood Hazards", id: 'FloodHazards10Year', layerList: true, legend: true, printLegend: true, secure: false },
                   { layerGroup: "Hazards,Flood Hazards", id: 'FloodHazards100Year', layerList: true, legend: true, printLegend: true, secure: false }
