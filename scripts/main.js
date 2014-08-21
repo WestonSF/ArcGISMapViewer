@@ -2458,7 +2458,7 @@ function buildLayerList(layer, layerMode) {
                         // If layer id dynamic then add in subLayers. For tiled, don't
                         if (layerType == "esri.layers.ArcGISDynamicMapServiceLayer") {
                             // Indent the sub layers
-                            // Add gtml to layers tab
+                            // Add html to layers tab
                             $(layersTab).append("<dl>");
                             // For each sub layer within this layer
                             for (var i = 0; i < subLayers.length; i++) {
@@ -2557,7 +2557,7 @@ function updateIndividualLayerVisibility(layerClicked) {
         if (layerClicked.name == checkboxes[a].name) {
             // If checkbox checked, push into array
             if (checkboxes[a].checked) {
-                visibleLayers.push(checkboxes[a].value);
+                visibleLayers.push(parseInt(checkboxes[a].value));
             }
         }
     }

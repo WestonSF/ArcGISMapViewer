@@ -119,19 +119,45 @@ function doPrint() {
         dpi: printdpi
     };
 
-    // Setup the legend for the web export       
-    var legendLayers = new Array(new esri.tasks.LegendLayer());
+    // For each of the operational layers in the map
+    var layer, legendLayer, legendLayers = [];
+    for (var i = 0, l = app.map.layerIds.length; i < l; i += 1) {
+        // Get the layer ID
+        layer = app.map.getLayer(app.map.layerIds[i]);
 
-    // For each of the operational layers
-    var count = 0
-    $.each(configOptions.operationalLayers, function () {
-        // Put layer into print legend if print legend config is true
-        if (this.printLegend == true) {
-            legendLayers[count] = new esri.tasks.LegendLayer();
-            legendLayers[count].layerId = this.id;
-            count = count + 1;
+        // Get layer ID
+        layerID = layer.id;
+
+        // If using AGS Online web map
+        if (configOptions.useAGSOnlineWebMap == "true" || configOptions.useAGSOnlineWebMap == true) {
+            // Get the ID by splitting as ArcGIS Online IDs add on _number.
+            splitLLayerId = layerID.split("_");
+            layerID = splitLLayerId[0];
         }
-    });
+
+        // If the layer is visible
+        if (layer.visible && layer.visibleAtMapScale) {
+            // For each of the operational layers in the config
+            $.each(configOptions.operationalLayers, function () {
+                // For this layer ID
+                if (this.id == layerID) {
+                    // If including this layer in the print legend
+                    if (this.printLegend == true) {
+                        // Create the legend layer
+                        legendLayer = new esri.tasks.LegendLayer();
+                        legendLayer.layerId = layer.id;
+                        // Add visible sub layers
+                        if (layer.visibleLayers) {
+                            legendLayer.subLayerIds = layer.visibleLayers;
+                        }
+
+                        // Push into legend layers array
+                        legendLayers.push(legendLayer);
+                    }
+                }
+            });
+        }
+    }
 
     template.layoutOptions = {
         "legendLayers": legendLayers,
