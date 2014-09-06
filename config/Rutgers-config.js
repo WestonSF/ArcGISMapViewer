@@ -4,15 +4,15 @@ function initVariables() {
     configOptions = {
         // --------------------------------------------------------------------------- General ---------------------------------------------------------------------------  
         // Title in the web window
-        webTitle: "Northland Regional Council Maps",
+        webTitle: "TOGETHER NORTH JERSEY",
         // Images for splash screen and bottom right
-        logo: "<img src=\"images/logo/NRC_logo.JPG\" height=\"45\" width=\"125\">",
+        logo: "<img src=\"images/logo/TNJ_Logo.JPG\" height=\"75\" width=\"125\">",
 
         // ArcGIS Javascript API address
-        jsapiaddress: "http://gis.nrc.govt.nz/ArcGISJavascriptAPI/3.7compact",
+        jsapiaddress: "http://172.19.25.80/ArcGISJavascriptAPI/3.7/",
 
         // ID from google analytics
-        googleanalyticsID: "UA-36942574-1",
+        googleanalyticsID: "",
 
         // Specify the url to a geometry service 
         geometryserviceurl: "http://gis.nrc.govt.nz/arcgis/rest/services/Utilities/Geometry/GeometryServer",
@@ -30,14 +30,14 @@ function initVariables() {
         // Proxy details
         alwaysuseproxy: false,
         // Proxy page needs to be on same server as application and in root IIS directory. Required for tools to work in IE8/IE9.
-        proxyurl: "http://gis.nrc.govt.nz/proxy/proxy.ashx",
+        proxyurl: "http://172.19.25.80/proxy/proxy.ashx",
 
         // Display help button
         displayhelp: false,
         helpUrl: "",
 
         // Text to show in error message alert
-        errorMessageText: "The following error has occurred, please try again and/or contact gissupport@eagle.co.nz \n\n",
+        errorMessageText: "The following error has occurred, please try again and/or contact info@togethernorthjersey.com \n\n",
 
         // Default click mode when application starts e.g. "identify","pan","zoomin","zoomout"
         clickDefault: "identify",
@@ -49,13 +49,13 @@ function initVariables() {
 
         // --------------------------------------------------------------------------- Extent & Scales ---------------------------------------------------------------------------  
         // Max extent
-        extentBounds: { xmin: 1585000, xmax: 1813000, ymin: 5980000, ymax: 6127000 },
+        extentBounds: { xmin: -8406979, xmax: -8232361, ymin: 4712060, ymax:  4995265 },
         // First loads
-        initialExtent: { xmin: 1585000, xmax: 1813000, ymin: 5980000, ymax: 6127000 },
+        initialExtent: { xmin: -8406979, xmax: -8232361, ymin: 4712060, ymax:  4995265 },
         // Shapefile extent
-        fullExtent: { xmin: 1585000, xmax: 1813000, ymin: 5980000, ymax: 6127000 },
+        fullExtent: { xmin: -8406979, xmax: -8232361, ymin: 4712060, ymax:  4995265 },
 
-        spatialReference: { WKID: 2193, name: "NZTM", xlabel: "x", ylabel: "y" },
+        spatialReference: { WKID: 102100, name: "", xlabel: "x", ylabel: "y" },
         wraparound180: false,
 
         // Set the scales to be used in the application
@@ -146,28 +146,26 @@ function initVariables() {
         // Gallery portal 
         // The arcgis online group that contains the applications to display
         galleryGroup: {
-            owner: "EagleTechnologyNRC",
-            title: "Northland Regional Council Public Applications Portal"
+            owner: "RutgersTNJ",
+            title: "Coastal Portal"
         },
         // The url of the portal
-        galleryPortalUrl: "http://nrcgis.maps.arcgis.com",
+        galleryPortalUrl: "http://rutgers.maps.arcgis.com",
 
         // Enables the themes dropdown to switch between map configs
         usethemes: true,
         // Initial theme to load
-        initialtheme: "Public",
+        initialtheme: "Transportation",
         // List and configure map themes
         themes: [
             {
-                theme: "Public", // Name of theme
-                webmapID: "8737b6b8573c4395bc7e2baa4888a89e", // ID of web map to use
+                theme: "Transportation", // Name of theme
+                webmapID: "033fbc2080d24d1f981f1ebaed1dc90d", // ID of web map to use
                 initialExtent: {}, // Extent to go to, leave blank to not use
                 layergroups: [
-                    { name: "Environment", description: "" },
-                    { name: "Hazards", description: "" },
-                    { name: "Planning", description: "" },
-                    { name: "Public Transportation", description: "" },
-                    { name: "Boundaries", description: "" }
+                    { name: "NJ Transit Rail Stations", description: "" },
+                    { name: "NJ Transit Rail", description: "" },
+                    
                 ], // Layer groups to include - looks at layerGroups
                 initiallayergroup: "Environment", //  Initial layer group to show
                 searches: ["Public", "Address", "Road", "Legal", "Parcel", "Bus"] // Searches to include - looks at locatorName from searchParams
@@ -249,11 +247,11 @@ function initVariables() {
         // The arcgis online group that contains the basemaps to display
         useAGSOnlineBasemaps: true,
         basemapsGroup: {
-            owner: "EagleTechnologyNRC",
-            title: "Northland Regional Council Basemaps"
+            owner: "Together North Jersey",
+            title: "New Jersey Basemaps"
         },
         // The url of the portal
-        basemapsPortalUrl: "http://nrcgis.maps.arcgis.com",
+        basemapsPortalUrl: "http://rutgers.maps.arcgis.com",
 
         initialbasemap: "",
         // Basemaps available for selection
@@ -793,7 +791,7 @@ function initVariables() {
         cookieLifeCycle: 0,
         // Text to go into the splash screen
         splashscreentitletext: "<H2>Northland Regional Council (NRC)<br/> Online Maps Terms of Use</H2>",
-        splashscreentext: "<p align=\"justify\"><B>License to Use</B><br/>Northland Regional Council (NRC) makes the NRC Online Maps Service available for use on a Creative Commons Attribution 3.0 New Zealand (CC BY 3.0) licence. These terms of use apply to all users of the \"NRC Online Maps\" service or any part of it (Service). If you use the Service, it will be assumed that you have agreed to these terms, without qualification. If you do not agree to be bound by these terms of use, please do not use the Service.</p>        <p align=\"justify\"><B>Intellectual Property</B><br/>NRC owns or is authorised to use the copyright, trademarks and all other intellectual property rights (IP Rights) in the maps, information, software, text, graphics and other material (Content) displayed or available through the Service. NRC acknowledges the Service is provided from Eagle Technology Ltd hosted environment using licensed technology from Environmental Systems Research Institute (ESRI).</p>        <p align=\"justify\"><B>NRC also acknowledges that;</B> <br/>- The map services contain layers sourced from Land Information New Zealand data. Crown Copyright Reserved. <br/>- The layers \"River Catchments\" and \"Priority Rivers Catchments\" are partially derived from the NIWA River Environments Classification dataset. <br/>- The layers \"Erosion Prone Land\" and \"Flood Susceptible Land\" are derived from the Fundamental Soils Layer and the NZLRI boundaries respectively from Landcare Research Ltd.</p>       <p align=\"justify\"><B>Liability</B> <br/>NRC will not be liable for the use you make chose to make of the Service. You will indemnify and hold NRC harmless from any and all claims relating to your use of the Service or use of them by any person on your behalf.</p>      <p align=\"justify\"><B>Information</B> <br/>NRC will not be responsible for the availability, accuracy, completeness, currency or reliability of the information or maps made available via the Service. Any decision that you make after using the Service must be based solely on your own evaluation of the information available to you, your circumstances and objectives. To the extent that liability cannot, by law, be disclaimed, by using the Service you agree to limit NRC's liability in contract, tort or otherwise at law to the sum of one dollar ($1.00).</p>",
+        splashscreentext: "<p align=\"justify\"><B>License to Use</B><br/>Northland Regional Council (NRC) makes the NRC Online Maps Service available for use on a Creative Commons Attribution 3.0 New Zealand (CC BY 3.0) licence. These terms of use apply to all users of the \"NRC Online Maps\" service or any part of it (Service). If you use the Service, it will be assumed that you have agreed to these terms, without qualification. If you do not agree to be bound by these terms of use, please do not use the Service.</p>        <p align=\"justify\"><B>Intellectual Property</B><br/>NRC owns or is authorised to use the copyright, trademarks and all other intellectual property rights (IP Rights) in the maps, information, software, text, graphics and other material (Content) displayed or available through the Service. NRC acknowledges the Service is provided from Splice Group Ltd hosted environment using licensed technology from Environmental Systems Research Institute (ESRI) and SpliceMaps.</p>        <p align=\"justify\"><B>NRC also acknowledges that;</B> <br/>- The map services contain layers sourced from Land Information New Zealand data. Crown Copyright Reserved. <br/>- The layers \"River Catchments\" and \"Priority Rivers Catchments\" are partially derived from the NIWA River Environments Classification dataset. <br/>- The layers \"Erosion Prone Land\" and \"Flood Susceptible Land\" are derived from the Fundamental Soils Layer and the NZLRI boundaries respectively from Landcare Research Ltd.</p>       <p align=\"justify\"><B>Liability</B> <br/>NRC will not be liable for the use you make chose to make of the Service. You will indemnify and hold NRC harmless from any and all claims relating to your use of the Service or use of them by any person on your behalf.</p>      <p align=\"justify\"><B>Information</B> <br/>NRC will not be responsible for the availability, accuracy, completeness, currency or reliability of the information or maps made available via the Service. Any decision that you make after using the Service must be based solely on your own evaluation of the information available to you, your circumstances and objectives. To the extent that liability cannot, by law, be disclaimed, by using the Service you agree to limit NRC's liability in contract, tort or otherwise at law to the sum of one dollar ($1.00).</p>",
 
         // Preset bookmarks
         bookmarks_list: [{

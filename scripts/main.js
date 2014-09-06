@@ -657,14 +657,6 @@ function init() {
             $("#layerTabs").tabs("refresh");
             // Activate first tab
             $("#layerTabs").tabs({ active: 0 });
-
-            // Display the print tool
-            if (configOptions.displayprint === "true" || configOptions.displayprint === true) {
-                // Set jQuery radio buttons
-                $("#printformat").buttonset();
-                $("#printquality").buttonset();
-                $("#printScaleOption").buttonset();
-            }
         }
 
         // Get the window height and set the accordian dragger         
@@ -724,7 +716,7 @@ function init() {
         // If not using AGS Online web map
         if (configOptions.useAGSOnlineWebMap == "false" || configOptions.useAGSOnlineWebMap == false) {
             var initialExtent
-            // If parameters provided via URL, use these
+            // If extent parameters provided via URL, use these
             if (urlParam_xmin >= configOptions.extentBounds.xmin && urlParam_ymin >= configOptions.extentBounds.ymin && urlParam_xmax <= configOptions.extentBounds.xmax && urlParam_ymax <= configOptions.extentBounds.ymax) // TODO - need to update these values so the area is wider     
             {
                 initialExtent = new esri.geometry.Extent({
@@ -737,7 +729,7 @@ function init() {
                     }
                 });
             }
-                // Otherwise use config file
+            // Otherwise use extent parmaters from config file
             else {
                 initialExtent = new esri.geometry.Extent({
                     "xmin": configOptions.initialExtent.xmin,
@@ -1285,7 +1277,7 @@ function loadeventHandlers() {
             var mobileURL = '<a href="' + emailURL + '">Email link</a><br/><br/><font size="1">' + getURL() + '</font>';
             var sPath = window.location.pathname;
             var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
-            var shareURL = replaceAll(mobileURL, sPage, 'map.html');
+            var shareURL = replaceAll(mobileURL, sPage, 'desktop.html');
 
             $("#shareMap").html(shareURL);
 
@@ -1880,15 +1872,6 @@ function initFunctionality() {
         }
     }
 
-    // Set basemap if provided in URL
-    if (urlParam_baseMap) {
-        basemapGallery.select(urlParam_baseMap);
-        // Minimise basemap window - Desktop version
-        if (currentPage.indexOf("desktop") != -1) {
-            $("#basemapsWrapper").accordion("option", "active", false);
-        }
-    }
-
     // Resize the map if the screen is resized
     app.map.resize();
     app.map.reposition();
@@ -1903,6 +1886,24 @@ function initFunctionality() {
             app.map.reposition();
         }, 500);
     });
+
+    // If using AGS Online web map and extent parameters provided in URL and application hasn't loaded yet
+    if ((configOptions.useAGSOnlineWebMap == "true" || configOptions.useAGSOnlineWebMap == true) && (urlParam_xmin && urlParam_ymin && urlParam_xmax && urlParam_ymax) && (initialLoad == false)) {
+        // Set the initial extent
+        var initialExtent = new esri.geometry.Extent({
+            "xmin": urlParam_xmin,
+            "ymin": urlParam_ymin,
+            "xmax": urlParam_xmax,
+            "ymax": urlParam_ymax,
+            "spatialReference": {
+                "wkid": parseInt(configOptions.spatialReference.WKID)
+            }
+        });
+
+        // Zoom to the extent
+        app.map.setExtent(initialExtent);
+    }
+
 
     // Set the default click/cursor mode
     // Desktop version
@@ -2076,7 +2077,7 @@ function buildLayerGroups() {
             }
         }
     }
-        // Else use layer groups config
+    // Else use layer groups config
     else {
         // Assign layer groups and initial layer
         layergroups = configOptions.layergroups;
@@ -2085,11 +2086,14 @@ function buildLayerGroups() {
 
     // Check if layer group is in URL
     var layergroupInURL = false;
-    $.each(configOptions.layergroups, function () {
-        if (urlParam_layerGroup == replaceAll(this.name, '_', ' ')) {
-            layergroupInURL = true;
-        }
-    });
+    // If application hasn't loaded yet
+    if (initialLoad == false) {
+        $.each(configOptions.layergroups, function () {
+            if (urlParam_layerGroup == replaceAll(this.name, '_', ' ')) {
+                layergroupInURL = true;
+            }
+        });
+    }
 
     var TOChtml = "";
     var checked = "";
@@ -2101,13 +2105,13 @@ function buildLayerGroups() {
         TOChtml += '<span style="font-size:1em;">';
         // For each of the layer groupings
         $.each(layergroups, function () {
-            // If layer group is specified in URL
-            if (urlParam_layerGroup && replaceAll(this.name, '_', ' ') == urlParam_layerGroup) {
+            // If layer group is specified in URL and is in config and application hasn't loaded yet
+            if (urlParam_layerGroup && (replaceAll(this.name, '_', ' ') == urlParam_layerGroup) && (initialLoad == false)) {
                 checked = ' checked="true" ';
                 // Add layer group to layer groups used array
                 layerGroupsUsed.push(this.name);
             }
-                // If layer group not in URL then use config
+            // If layer group not in URL then use config
             else if ((this.name == initiallayergroup) && (layergroupInURL == false)) {
                 checked = ' checked="true" ';
                 // Add layer group to layer groups used array
@@ -2131,8 +2135,8 @@ function buildLayerGroups() {
     if (currentPage.indexOf("mobile") != -1) {
         TOChtml += '<fieldset data-role="controlgroup" data-type="vertical">';
         $.each(layergroups, function () {
-            // If layer group is specified in URL
-            if (urlParam_layerGroup && replaceAll(this.name, '_', ' ') == urlParam_layerGroup) {
+            // If layer group is specified in URL and is in config and application hasn't loaded yet
+            if (urlParam_layerGroup && (replaceAll(this.name, '_', ' ') == urlParam_layerGroup) && (initialLoad == false)) {
                 checked = ' checked="true" ';
                 // Add layer group to layer groups used array
                 layerGroupsUsed.push(this.name);
@@ -2191,16 +2195,14 @@ function buildLayerGroups() {
 
         // Layer group in URL
         if (layergroupInURL == true) {
-            if (urlParam_layerGroup == replaceAll(this.layerGroup, '_', ' ')) {
             // Split the layer groups to account for multiple
             layerGroupSplit = layer.layerGroup.split(",");
             $.each(layerGroupSplit, function () {
-                if (initiallayergroup == this) {
+                if (urlParam_layerGroup == this) {
                     // Add layers to array for layer grouping
                     layerGroupLayers.push(getLayerInformation(layer));
                 }
             });
-            }
         }
         // Layer group in config
         else {
@@ -2883,8 +2885,15 @@ function createBasemapGallery() {
 
         // If not using AGS Online web map
         if (configOptions.useAGSOnlineWebMap == "false" || configOptions.useAGSOnlineWebMap == false) {
-            // Set the initial basemap from config and select it
-            basemapGallery.select(configOptions.initialbasemap);
+            // Set basemap if provided in URL
+            if (urlParam_baseMap) {
+                basemapGallery.select(urlParam_baseMap);
+            }
+            // Otherwise set from config
+            else {
+                // Set the initial basemap from config and select it
+                basemapGallery.select(configOptions.initialbasemap);
+            }
         }
         // Using AGS Online map
         else {
@@ -2895,8 +2904,15 @@ function createBasemapGallery() {
                 webmapBasemap = agsOnlineMap.itemInfo.itemData.baseMap.title;
                 basemapGalleryMap = this.title;
                 if (basemapGalleryMap.indexOf(webmapBasemap) != -1) {
-                    // Set the initial basemap
-                    basemapGallery.select(this.id);
+                    // Set basemap if provided in URL
+                    if (urlParam_baseMap) {
+                        basemapGallery.select(urlParam_baseMap);
+                    }
+                    // Otherwise set from webmap
+                    else {
+                        // Set the initial basemap
+                        basemapGallery.select(this.id);
+                    }
                 }
             });
         }
@@ -2950,10 +2966,8 @@ function addImageryLayers() {
         $.each(layerGroupSplit, function () {
             // If there are layers specified as imagery
             if (selectedgroup == replaceAll(this, ' ', '_')) {
-                if (!app.map.getLayer(layer.id)) {
-                    // Add layers to array for layer grouping
-                    layerGroupLayers.push(getLayerInformation(layer));
-                }
+                // Add layers to array for layer grouping
+                layerGroupLayers.push(getLayerInformation(layer));         
             }
         });
     });
@@ -2983,10 +2997,8 @@ function removeImageryLayers() {
         $.each(layerGroupSplit, function () {
             // If there are layers specified as imagery
             if (selectedgroup == replaceAll(this, ' ', '_')) {
-                if (!app.map.getLayer(layer.id)) {
-                    // Add layers to array for layer grouping
-                    layerGroupLayers.push(getLayerInformation(layer));
-                }
+                // Add layers to array for layer grouping
+                layerGroupLayers.push(getLayerInformation(layer));
             }
         });
     });
@@ -3113,26 +3125,23 @@ function loadArcGISOnlineWebMap(webmapID) {
             operationalLayerCount--;
         });
 
-        // CALL FUNCTION - Setup UI functionality
+        // CALL FUNCTION - Setup map functionality
         initFunctionality();
 
-        // Set the initial basemap
-        // For each of the basemaps in the group
-        $.each(basemapGallery.basemaps, function () {
-            // If the current basemap is in the group
-            webmapBasemap = agsOnlineMap.itemInfo.itemData.baseMap.title;
-            basemapGalleryMap = this.title;
-            if (basemapGalleryMap.indexOf(webmapBasemap) != -1) {
-
-                // Set the radio button - Mobile version - NOT WORKING FOR SOME REASON!!!
-                if (currentPage.indexOf("mobile") != -1) {
-                    $("#" + this.id).prop("checked", true);
+        // If application has loaded
+        if (initialLoad == true) {
+            // Set the initial basemap
+            // For each of the basemaps in the group
+            $.each(basemapGallery.basemaps, function () {
+                // If the current basemap is in the group
+                webmapBasemap = agsOnlineMap.itemInfo.itemData.baseMap.title;
+                basemapGalleryMap = this.title;
+                if (basemapGalleryMap.indexOf(webmapBasemap) != -1) {
+                    // Set the initial basemap from webmap
+                    basemapGallery.select(this.id);
                 }
-
-                // Set the initial basemap
-                basemapGallery.select(this.id);
-            }
-        });
+            });
+        }
     });
 }
 

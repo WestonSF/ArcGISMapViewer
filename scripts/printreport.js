@@ -9,57 +9,61 @@ function initPrint() {
     if (initialLoad == false) {
         if (configOptions.printPreserveScale === "true" || configOptions.printPreserveScale === true) {
             // Check the scale radio button
-            $('#currentScale').prop("checked", true);
+            $('#currentScale').prop('checked', true);
         }
         else {
-            $('#currentExtent').prop("checked", true);
+            $('#currentExtent').prop('checked', true);
         }
 
         $("#btnPrint").css('display', 'inline');
         $("#mapTitle").val(configOptions.printedmaptitle);
         $("#titlePanePrint").css('display', 'inline');
 
-        $.each(configOptions.printlayouts, function () {
-            $("#printlayout").append($("<option style='width:115px;'></option>").attr("value", this.layout).text(this.label));
+        $.each(configOptions.printLayouts, function () {
+            $("#printLayout").append($("<option style='width:115px;'></option>").attr("value", this.layout).text(this.label));
         });
 
-        var printformats = '<p><label>Format: </label>';
-        $.each(configOptions.printformats, function () {
+        var printFormats = '<p><label>Format: </label>';
+        $.each(configOptions.printFormats, function () {
             if (this.value == "PDF") {
-                printformats += '<input type="radio" checked="checked" name="outputformat" id="' + this.value + '" value="' + this.value + '"/><label for="' + this.value + '">' + this.label + "</label>";
+                printFormats += '<input type="radio" checked="checked" name="outputformat" id="' + this.value + '" value="' + this.value + '"/><label for="' + this.value + '">' + this.label + "</label>";
             }
             else {
-                printformats += '<input type="radio" name="outputformat" id="' + this.value + '" value="' + this.value + '"/><label for="' + this.value + '">' + this.label + "</label>";
+                printFormats += '<input type="radio" name="outputformat" id="' + this.value + '" value="' + this.value + '"/><label for="' + this.value + '">' + this.label + "</label>";
             }
         });
-        printformats += '</p>';
+        printFormats += '</p>';
 
-        $("#printformat").append(printformats);
+        $("#printFormat").append(printFormats);
 
-        var printquality = '<p><label>Print Quality: </label>';
-        $.each(configOptions.printquality, function () {
+        var printQuality = '<p><label>Print Quality: </label>';
+        $.each(configOptions.printQuality, function () {
             if (this.label == "Med") {
-                printquality += '<input type="radio" checked="checked" name="printquality" id="' + this.dpi + '" value="' + this.dpi + '"/><label for="' + this.dpi + '">' + this.label + "</label>";
+                printQuality += '<input type="radio" checked="checked" name="printQuality" id="' + this.dpi + '" value="' + this.dpi + '"/><label for="' + this.dpi + '">' + this.label + "</label>";
             }
             else {
-                printquality += '<input type="radio" name="printquality" id="' + this.dpi + '" value="' + this.dpi + '"/><label for="' + this.dpi + '">' + this.label + "</label>";
+                printQuality += '<input type="radio" name="printQuality" id="' + this.dpi + '" value="' + this.dpi + '"/><label for="' + this.dpi + '">' + this.label + "</label>";
             }
         });
-        printquality += '</p>';
+        printQuality += '</p>';
+        $("#printQuality").append(printQuality);
 
-        $("#printquality").append(printquality);
+        // Set jQuery radio buttons
+        $("#printFormat").buttonset();
+        $("#printQuality").buttonset();
+        $("#printScaleOption").buttonset();
 
         // Handler for when print quality is changed in the print tool
-        $("#printlayout").change(function () {
-            var selectedOutput = $("#printlayout").val();
+        $("#printLayout").change(function () {
+            var selectedOutput = $("#printLayout").val();
             // Hide print quality radio buttons
             if (selectedOutput == "MAP_ONLY") {
-                document.getElementById('printquality').style.display = 'none';
-                document.getElementById('printtitle').style.display = 'none';
+                document.getElementById('printQuality').style.display = 'none';
+                document.getElementById('printTitle').style.display = 'none';
             }
             else {
-                document.getElementById('printquality').style.display = 'block';
-                document.getElementById('printtitle').style.display = 'block';
+                document.getElementById('printQuality').style.display = 'block';
+                document.getElementById('printTitle').style.display = 'block';
             }
         });
 
@@ -90,12 +94,12 @@ function doPrint() {
 
     var mapwidth = app.map.width;
     var mapheight = app.map.height;
-    var printdpi = parseInt($("input:radio[name='printquality']:checked").val());
+    var printdpi = parseInt($("input:radio[name='printQuality']:checked").val());
 
     // Setup template
     var template = new esri.tasks.PrintTemplate();
     template.format = $("input:radio[name='outputformat']:checked").val();
-    template.layout = $("#printlayout").val();
+    template.layout = $("#printLayout").val();
 
     // If set scale checkbox is checked then preserve scale otherwise extent
     if ($("#currentScale").prop('checked') == true) {

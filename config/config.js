@@ -869,19 +869,19 @@ function initVariables() {
         printedmaptitle: "",
         printedmapauthortext: "", // If in the print service mxd
         printedmapcopyrighttext: "",  // If in the print service mxd
-        printquality: [ // label: "....", dpi: "..."
+        printQuality: [ // label: "....", dpi: "..."
                         { label: "Low", dpi: "60" },
                         { label: "Med", dpi: "96" },
                         { label: "High", dpi: "200" }
         ],
-        printlayouts: [
+        printLayouts: [
                         { label: 'A4 Landscape', layout: 'A4 Landscape' },
                         { label: 'A3 Landscape', layout: 'A3 Landscape' },
                         { label: 'A4 Portrait', layout: 'A4 Portrait' },
                         { label: 'A3 Portrait', layout: 'A3 Portrait' },
                         { label: 'Map Only', layout: 'MAP_ONLY' }
         ],
-        printformats: [
+        printFormats: [
                         { label: "PDF", value: "PDF" },
                         { label: "JPG", value: "JPG" },
                         { label: "PNG", value: "PNG32" }
