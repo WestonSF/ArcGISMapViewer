@@ -28,7 +28,7 @@ function initVariables() {
         panRate: 5,
 
         // Proxy details
-        alwaysuseproxy: false,
+        alwaysuseproxy: true,
         // Proxy page needs to be on same server as application and in root IIS directory. Required for tools to work in IE8/IE9.
         proxyurl: "http://gis.nrc.govt.nz/proxy/proxy.ashx",
 
@@ -667,7 +667,7 @@ function initVariables() {
                             identifyTask: "http://gis.nrc.govt.nz/arcgis/rest/services/Environment/BathingSites/MapServer",
                             tolerance: 10,
                             returnGeometry: true,
-                            layerIds: [0, 1, 2, 3], // layer ids in map service
+                            layerIds: [0, 1], // layer ids in map service
                             layerOption: esri.tasks.IdentifyParameters.LAYER_OPTION_VISIBLE,
                             identifyLayerAliases: [ // ids must not contain spaces // name = map service layer name // TODO - tabindex is repeated.  This could be moved into an array where it is not repeated.
                                 { tabName: "Beach Swimming Water Quality 2013 to 2014 Season Median", tabindex: 2, layerName: "Beach Swimming Water Quality 2013/2014 Season Median", displayFormat: "<B>Site Number: [#SiteNo#] <br/>Description: [#SiteName#]</B>  <br/><br/> End of Season Median: Enterococci count is [#EOS_Median#]/100ml <br/> Compliance with MfE Guidelines: [#compliance#] <br/> Grade: [#MfE_grade#]" },
@@ -741,12 +741,12 @@ function initVariables() {
                             layerIds: [0,1,2,3,4,5], // layer ids in map service
                             layerOption: esri.tasks.IdentifyParameters.LAYER_OPTION_VISIBLE, // LAYER_OPTION_VISIBLE, LAYER_OPTION_TOP or LAYER_OPTION_ALL
                             identifyLayerAliases: [ // ids must not contain spaces // name = map service layer name // TODO - tabindex is repeated.  This could be moved into an array where it is not repeated.
-                                { tabName: "Ambulance Station", tabindex: 1, layerName: "Ambulance Stations", displayFormat: "<B>Site: [#Site#] </B> <br/><br/> Address: [#StreetAddress#]" },
-                                { tabName: "Civil Defence Welfare Centre", tabindex: 1, layerName: "Civil Defence Welfare Centres", displayFormat: "<B>Welfare Centre: [#WelfareCentre#] </B> <br/><br/> Location: [#Location#] <br/> Status: [#Status#] <br/> <font size=\"2\"><a href=\"[#StreetView#]\"  style=\"color:blue\" target=\"_blank\">Google StreetView</a></font> <br/><br/> Coordinator: [#Co_ordinator#] <br/>Welfare Centre Contact: [#To_Open_as_a_Welfare_Centre_Contact#] <br/> Centre Phone Number: [#Centre_Phone_Number#] <br><br/> Accommodation Facilities: [#Accommodation_Facilities#] <br/> Catering Facilities: [#Catering_Facilities#] <br/> Toilet Facilities: [#Toilet_Facilities#] <br/> Parking: [#Parking#] <br/> Building Capacity: [#Building_Capacity#] <br/><br/> Notes: [#Notes#]" },
-                                { tabName: "Community Response Plan", tabindex: 1, layerName: "Community Response Plans", displayFormat: "<B>Name: [#NAME#] </B> <br/><br/> <font size=\"2\"><a href=\"[#URL#]\"  style=\"color:blue\" target=\"_blank\">View Plan</a></font>" },
-                                { tabName: "Fire Station", tabindex: 1, layerName: "Fire Stations", displayFormat: "<B>Site: [#Site#] </B> <br/><br/> Address: [#StreetAddress#]" },
-                                { tabName: "Hospital", tabindex: 1, layerName: "Hospitals", displayFormat: "<B>Site: [#Site#] </B> <br/><br/> Address: [#StreetAddress#]" },
-                                { tabName: "Police Station", tabindex: 1, layerName: "Police Stations", displayFormat: "<B>Site: [#Site#] </B> <br/><br/> Address: [#StreetAddress#]" }
+                                { tabName: "Ambulance Station", tabindex: 1, layerName: "Ambulance Station", displayFormat: "<B>Name: [#NAME#] </B> <br/><br/> Address: [#ADDRESS#] <br/> Phone: [#PHONE#] <br/> Hours: [#HOURS#] <br/><br/> <font size=\"2\"><a href=\"[#WEBSITE#]\"  style=\"color:blue\" target=\"_blank\">Website</a></font>" },
+                                { tabName: "Civil Defence Centre", tabindex: 1, layerName: "Civil Defence Centre", displayFormat: "<B>Welfare Centre: [#WelfareCentre#] </B> <br/><br/> Location: [#Location#] <br/> Status: [#Status#] <br/> <font size=\"2\"><a href=\"[#StreetView#]\"  style=\"color:blue\" target=\"_blank\">Google StreetView</a></font> <br/><br/> Coordinator: [#Co_ordinator#] <br/>Welfare Centre Contact: [#To_Open_as_a_Welfare_Centre_Contact#] <br/> Centre Phone Number: [#Centre_Phone_Number#] <br><br/> Accommodation Facilities: [#Accommodation_Facilities#] <br/> Catering Facilities: [#Catering_Facilities#] <br/> Toilet Facilities: [#Toilet_Facilities#] <br/> Parking: [#Parking#] <br/> Building Capacity: [#Building_Capacity#] <br/><br/> Notes: [#Notes#]" },
+                                { tabName: "Community Response Plan", tabindex: 1, layerName: "Community Response Plan", displayFormat: "<B>Name: [#NAME#] </B> <br/><br/> <font size=\"2\"><a href=\"[#URL#]\"  style=\"color:blue\" target=\"_blank\">View Plan</a></font>" },
+                                { tabName: "Fire Station", tabindex: 1, layerName: "Fire Station", displayFormat: "<B>Name: [#NAME#] </B> <br/><br/> Address: [#ADDRESS#] <br/> Phone: [#PHONE#] <br/> Hours: [#HOURS#] <br/><br/> <font size=\"2\"><a href=\"[#WEBSITE#]\"  style=\"color:blue\" target=\"_blank\">Website</a></font>" },
+                                { tabName: "Hospital", tabindex: 1, layerName: "Hospital", displayFormat: "<B>Site: [#Site#] </B> <br/><br/> Address: [#StreetAddress#]" },
+                                { tabName: "Police Station", tabindex: 1, layerName: "Police Station", displayFormat: "<B>Name: [#NAME#] </B> <br/><br/> Address: [#ADDRESS#] <br/> Phone: [#PHONE#] <br/> Hours: [#HOURS#] <br/><br/> <font size=\"2\"><a href=\"[#WEBSITE#]\"  style=\"color:blue\" target=\"_blank\">Website</a></font>" }
                             ]
                         }
         ],
