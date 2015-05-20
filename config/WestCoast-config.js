@@ -254,7 +254,7 @@ function initVariables() {
                 locatorName: "Address", // Name of locator in composite locator
                 singleLineFieldName: "Single Line Input", // Name of field in locator for single line search
                 queryTaskURL: "http://gis.wcrc.govt.nz/arcgis/rest/services/PropertyAndBoundaries/Addresses/MapServer/0", // URL of map service to search after locator
-                searchField: "FULLADD" // Name of field to search in map service
+                searchField: "FULLADDRESS" // Name of field to search in map service
             },
             {
                 url: "http://gis.wcrc.govt.nz/arcgis/rest/services/Locators/RoadLocator/GeocodeServer",
@@ -329,7 +329,7 @@ function initVariables() {
                             layerOption: esri.tasks.IdentifyParameters.LAYER_OPTION_VISIBLE, // LAYER_OPTION_VISIBLE, LAYER_OPTION_TOP or LAYER_OPTION_ALL
                             identifyLayerAliases: [ // ids must not contain spaces // name = map service layer name // TODO - tabindex is repeated.  This could be moved into an array where it is not repeated.
                                 { tabName: "Property - West Coast", tabindex: 1, layerName: "Property (West Coast)", displayFormat: "<B>Location: [#Street_Address#], [#Suburb_Town#]</B> <br/><br/> Valuation Reference: [#Valuation_Reference#] <br/> Assessment Number: [#Assessment_Number#] <br/> Legal Description: [#Title#] <br/> Capital Value: [#Capital_Value#] <br/> Land Value: [#Land_Value#] <br/><br/> <a href='http://rates.wcrc.netprod.datacomcc.com/wcrc_property_report3.asp?VNZ=[#Valuation_Reference#]' target='_blank' style=\"color:blue\">Detailed Rates Information</a>  <br/><br/>  <a id='showReport' style=\"color:blue; cursor:pointer\" onclick='generatePropertyReport(&quot;[#Valuation_Reference#]&quot;);'>View Report</a> <div id='propertyReportLoadBar'></div>" },
-                                { tabName: "Property - Buller", tabindex: 1, layerName: "Property (Buller)", displayFormat: "<B>Location: [#Location#]</B> <br/><br/> Valuation No: [#Valuation_No#] <br/> Legal Description: [#Property_Legal_Description#] <br/> Hectares: [#Hectares#] <br/> Rates: [#Total_Rates_for_This_Year#] <br/> Capital Value: [#Capital_Value#] <br/> Land Value: [#Land_Value#] <br/> Improvements Value: [#Improvements_Value#] <br/><br/> <a href='http://public.bullerdc.govt.nz/cgi-bin/rating/rapp?pp&KK1&[#Valuation_No#]' target='_blank' style=\"color:blue\">Detailed Rates Information</a> <br/><br/> <a id='showReport' style=\"color:blue; cursor:pointer\" onclick='generatePropertyReport(&quot;[#Valuation_No#]&quot;);'>View Report</a> <div id='propertyReportLoadBar'></div>" }
+                                { tabName: "Property - Buller", tabindex: 1, layerName: "Property (Buller)", displayFormat: "<B>Location: [#Location#]</B> <br/><br/> Valuation No: [#Valuation_ID#] <br/> Legal Description: [#Legal#] <br/> Hectares: [#Hectares#] <br/> Rates: [#Total_Rates_For_This_Year#] <br/> Capital Value: [#Capital_Value#] <br/> Land Value: [#Land_Value#] <br/> Improvements Value: [#Improvements_Value#] <br/><br/> <a href='http://public.bullerdc.govt.nz/cgi-bin/rating/rapp?pp&KK1&[#Valuation_ID#]' target='_blank' style=\"color:blue\">Detailed Rates Information</a> <br/><br/> <a id='showReport' style=\"color:blue; cursor:pointer\" onclick='generatePropertyReport(&quot;[#Valuation_ID#]&quot;);'>View Report</a> <div id='propertyReportLoadBar'></div>" }
                             ]
                         },
 
@@ -502,19 +502,19 @@ function initVariables() {
         printedmaptitle: "",
         printedmapauthortext: "", // If in the print service mxd
         printedmapcopyrighttext: "",  // If in the print service mxd
-        printQuality: [
+        printquality: [
                         { label: "Low", dpi: "60" },
                         { label: "Med", dpi: "96" },
                         { label: "High", dpi: "200" }
         ],
-        printLayouts: [
+        printlayouts: [
                         { label: 'A4 Landscape', layout: 'A4 Landscape' },
                         { label: 'A3 Landscape', layout: 'A3 Landscape' },
                         { label: 'A4 Portrait', layout: 'A4 Portrait' },
                         { label: 'A3 Portrait', layout: 'A3 Portrait' },
                         { label: 'Map Only', layout: 'MAP_ONLY' }
         ],
-        printFormats: [
+        printformats: [
                         { label: "PDF", value: "PDF" },
                         { label: "JPG", value: "JPG" },
                         { label: "PNG", value: "PNG32" }
